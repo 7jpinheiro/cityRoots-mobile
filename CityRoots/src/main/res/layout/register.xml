@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,7 +11,9 @@
         android:text="Nome"
         android:ems="10"
         android:id="@+id/nome"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_above="@+id/sobrenome"
+        android:layout_alignLeft="@+id/sobrenome" />
 
     <EditText
         android:layout_width="252dp"
@@ -20,7 +22,9 @@
         android:text="Sobrenome"
         android:ems="10"
         android:id="@+id/sobrenome"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_above="@+id/editText3"
+        android:layout_alignLeft="@+id/editText3" />
 
     <EditText
         android:layout_width="252dp"
@@ -29,7 +33,9 @@
         android:ems="10"
         android:id="@+id/editText3"
         android:layout_gravity="center_horizontal"
-        android:text="E-mail" />
+        android:text="E-mail"
+        android:layout_above="@+id/pass"
+        android:layout_alignLeft="@+id/pass" />
 
     <EditText
         android:layout_width="252dp"
@@ -38,7 +44,9 @@
         android:ems="10"
         android:id="@+id/pass"
         android:layout_gravity="center_horizontal"
-        android:hint="Password" />
+        android:hint="Password"
+        android:layout_above="@+id/pass2"
+        android:layout_alignLeft="@+id/pass2" />
 
     <EditText
         android:layout_width="252dp"
@@ -47,12 +55,18 @@
         android:ems="100"
         android:id="@+id/pass2"
         android:layout_gravity="center_horizontal"
-        android:hint="Confirmar Password" />
+        android:hint="Confirmar Password"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
         android:text="Registar"
         android:id="@+id/button"
-        android:layout_gravity="center_horizontal" />
-</LinearLayout>
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/pass2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp" />
+
+</RelativeLayout>
