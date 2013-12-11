@@ -62,4 +62,12 @@ public class Login extends ActionBarActivity {
         }
     }
 
+    public void login(View view) {
+        // Do something in response to button click
+    }
+
+    public void registar(View view) {
+        setContentView(R.layout.register);
+    }
+
 }
