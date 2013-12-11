@@ -1,5 +1,6 @@
 package com.uminho.uce15.cityroots;
 
+import android.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 //import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 //import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
@@ -16,6 +19,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
@@ -57,8 +61,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.login, container, false);
-            return rootView;
+            return inflater.inflate(R.layout.login, container, false);
         }
     }
 
