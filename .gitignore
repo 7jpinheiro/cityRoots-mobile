@@ -27,3 +27,9 @@ proguard/
 *.ipr
 *.iws
 .idea/
+
+# Default IntelliJ ignore files
+.gradle
+/local.properties
+/.idea/workspace.xml
+.DS_Store
