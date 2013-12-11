@@ -8,34 +8,34 @@
         android:layout_width="252dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Nome"
         android:ems="10"
         android:id="@+id/nome"
         android:layout_gravity="center_horizontal"
         android:layout_above="@+id/sobrenome"
-        android:layout_alignLeft="@+id/sobrenome" />
+        android:layout_alignLeft="@+id/sobrenome"
+        android:hint="Nome" />
 
     <EditText
         android:layout_width="252dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Sobrenome"
         android:ems="10"
         android:id="@+id/sobrenome"
         android:layout_gravity="center_horizontal"
-        android:layout_above="@+id/editText3"
-        android:layout_alignLeft="@+id/editText3" />
+        android:layout_above="@+id/email"
+        android:layout_alignLeft="@+id/email"
+        android:hint="Sobrenome" />
 
     <EditText
         android:layout_width="252dp"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editText3"
+        android:id="@+id/email"
         android:layout_gravity="center_horizontal"
-        android:text="E-mail"
         android:layout_above="@+id/pass"
-        android:layout_alignLeft="@+id/pass" />
+        android:layout_alignLeft="@+id/pass"
+        android:hint="E-mail" />
 
     <EditText
         android:layout_width="252dp"
