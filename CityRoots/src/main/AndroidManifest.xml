@@ -23,11 +23,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.uminho.uce15.cityroots.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
-        </activity>
-        <activity
             android:name="com.uminho.uce15.cityroots.Register"
             android:label="@string/title_activity_register" >
         </activity>
@@ -50,6 +45,10 @@
         <activity
             android:name="com.uminho.uce15.cityroots.ListarRotas"
             android:label="@string/title_activity_listar_rotas" >
+        </activity>
+        <activity
+            android:name="com.uminho.uce15.cityroots.Login"
+            android:label="@string/title_activity_login" >
         </activity>
     </application>
 
