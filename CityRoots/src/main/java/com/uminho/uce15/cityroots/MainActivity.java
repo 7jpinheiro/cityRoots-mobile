@@ -1,8 +1,6 @@
 package com.uminho.uce15.cityroots;
 
-import android.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-//import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,9 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-//import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -27,7 +22,6 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
 
 
