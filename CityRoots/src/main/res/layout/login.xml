@@ -20,7 +20,10 @@
         android:hint="E-mail"
         android:inputType="textEmailAddress"
         android:layout_above="@+id/email_address"
-        android:layout_alignLeft="@+id/email_address" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/email_address"
+        android:layout_alignEnd="@+id/email_address" />
 
     <EditText
         android:id="@+id/email_address"
@@ -29,8 +32,11 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:layout_above="@+id/button2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="26dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="82dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="@dimen/abc_action_bar_stacked_tab_max_width"
@@ -38,7 +44,7 @@
         android:text="Entrar"
         android:onClick="login"
         android:id="@+id/button2"
-        android:layout_above="@+id/button"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -48,8 +54,8 @@
         android:onClick="registar"
         android:layout_gravity="center_horizontal"
         android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="26dp" />
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/email_address"
+        android:layout_alignEnd="@+id/email_address" />
 
 </RelativeLayout>

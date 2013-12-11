@@ -27,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
 
 
@@ -71,5 +72,8 @@ public class MainActivity extends ActionBarActivity {
 
     public void registar(View view) {
         setContentView(R.layout.register);
+    }
+
+    public void registo(View view) {
     }
 }

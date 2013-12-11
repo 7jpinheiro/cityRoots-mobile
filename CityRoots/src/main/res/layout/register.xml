@@ -2,7 +2,8 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/logo">
 
     <EditText
         android:layout_width="252dp"
@@ -19,7 +20,6 @@
         android:layout_width="252dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/sobrenome"
         android:layout_gravity="center_horizontal"
         android:layout_above="@+id/email"
@@ -30,7 +30,6 @@
         android:layout_width="252dp"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:ems="10"
         android:id="@+id/email"
         android:layout_gravity="center_horizontal"
         android:layout_above="@+id/pass"
@@ -41,18 +40,17 @@
         android:layout_width="252dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:ems="10"
         android:id="@+id/pass"
         android:layout_gravity="center_horizontal"
         android:hint="Password"
         android:layout_above="@+id/pass2"
-        android:layout_alignLeft="@+id/pass2" />
+        android:layout_alignLeft="@+id/pass2"
+        android:layout_alignStart="@+id/pass2" />
 
     <EditText
         android:layout_width="252dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:ems="100"
         android:id="@+id/pass2"
         android:layout_gravity="center_horizontal"
         android:hint="Confirmar Password"
@@ -65,9 +63,8 @@
         android:text="Registar"
         android:id="@+id/button"
         android:layout_gravity="center_horizontal"
+        android:onClick="registo"
         android:layout_below="@+id/pass2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
-        android:onClick="registar"/>
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
