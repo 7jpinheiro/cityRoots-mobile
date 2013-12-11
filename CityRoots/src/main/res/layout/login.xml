@@ -48,4 +48,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="26dp" />
 
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/logo"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/email_address"
+        android:layout_centerHorizontal="true"
+        />
+
 </RelativeLayout>
