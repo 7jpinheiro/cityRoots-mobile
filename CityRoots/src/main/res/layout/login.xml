@@ -9,6 +9,8 @@
     tools:context=".MainActivity$PlaceholderFragment">
 
 
+
+
     <EditText
         android:id="@+id/email_address"
         android:layout_width="@dimen/abc_panel_menu_list_width"
