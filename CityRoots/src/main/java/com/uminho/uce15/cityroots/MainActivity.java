@@ -18,6 +18,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -63,10 +64,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void login(View view) {
-        // Do something in response to button click
+
     }
 
     public void registar(View view) {
-        // Do something in response to button click
+        setContentView(R.layout.register);
     }
 }
