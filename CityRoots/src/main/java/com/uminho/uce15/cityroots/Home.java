@@ -2,28 +2,19 @@ package com.uminho.uce15.cityroots;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 
 public class Home extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_home);
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
     }
 
 
@@ -47,29 +38,15 @@ public class Home extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-            return rootView;
-        }
-    }
 
     public void onClickCities(View view){
-
+        Intent intent = new Intent(this, CidadesActivity.class);
+        startActivity(intent);
     }
 
     public void onClickRoutes(View view){
         Intent intent = new Intent(this, ListarRotas.class);
-        startActivityForResult(intent, 0);
+        startActivity(intent);
     }
 
     public void onClickPoI(View view){
@@ -78,12 +55,13 @@ public class Home extends ActionBarActivity {
     }
 
     public void onClickEvents(View view){
-        Intent myIntent = new Intent(this, ListarEventos.class);
-        this.startActivity(myIntent);
+        Intent intent = new Intent(this, ListarEventos.class);
+        startActivity(intent);
     }
 
     public void onClickToVisit(View view){
-
+        Intent intent = new Intent(this, ToVisitActivity.class);
+        startActivity(intent);
     }
 
 

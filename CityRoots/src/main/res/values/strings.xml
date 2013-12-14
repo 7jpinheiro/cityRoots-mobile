@@ -16,5 +16,9 @@
     <string name="PontosDeInteresse">Pontos de Interesse</string>
     <string name="Eventos">Eventos</string>
     <string name="ToVisitList">ToVisitList</string>
+    <string name="title_activity_to_visit">ToVisitActivity</string>
+    <string name="title_activity_cidades">CidadesActivity</string>
+    <string name="tovisittitle">To Visit information list</string>
+    <string name="listcidades">Listar cidade disponíveis</string>
 
 </resources>

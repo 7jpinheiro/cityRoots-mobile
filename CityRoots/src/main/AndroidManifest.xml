@@ -50,6 +50,14 @@
             android:name="com.uminho.uce15.cityroots.Login"
             android:label="@string/title_activity_login" >
         </activity>
+        <activity
+            android:name="com.uminho.uce15.cityroots.ToVisitActivity"
+            android:label="@string/title_activity_to_visit" >
+        </activity>
+        <activity
+            android:name="com.uminho.uce15.cityroots.CidadesActivity"
+            android:label="@string/title_activity_cidades" >
+        </activity>
     </application>
 
 </manifest>
