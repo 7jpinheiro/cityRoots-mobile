@@ -62,4 +62,7 @@ public class Register extends ActionBarActivity {
         }
     }
 
+    public void registo(View view) {
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.uminho.uce15.cityroots;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -10,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.content.Intent;
+import android.widget.EditText;
 
 public class Login extends ActionBarActivity {
 
@@ -64,10 +68,16 @@ public class Login extends ActionBarActivity {
 
     public void login(View view) {
         // Do something in response to button click
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Login.this);
+        prefs.edit().putString("username", ((EditText)findViewById(R.id.email_address)).getText().toString()).commit();
+
     }
 
     public void registar(View view) {
-        setContentView(R.layout.register);
+        Intent myIntent = new Intent(Login.this, Register.class);
+        //myIntent.putExtra("key", value); //Optional parameters
+        Login.this.startActivity(myIntent);
+        //setContentView(R.layout.fragment_register);
     }
 
 }
