@@ -1,5 +1,6 @@
 package com.uminho.uce15.cityroots;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -61,5 +62,29 @@ public class Home extends ActionBarActivity {
             return rootView;
         }
     }
+
+    public void onClickCities(View view){
+
+    }
+
+    public void onClickRoutes(View view){
+        Intent intent = new Intent(this, ListarRotas.class);
+        startActivityForResult(intent, 0);
+    }
+
+    public void onClickPoI(View view){
+        Intent intent = new Intent(this, ListarPOIs.class);
+        startActivity(intent);
+    }
+
+    public void onClickEvents(View view){
+        Intent myIntent = new Intent(this, ListarEventos.class);
+        this.startActivity(myIntent);
+    }
+
+    public void onClickToVisit(View view){
+
+    }
+
 
 }

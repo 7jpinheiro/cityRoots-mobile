@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffffff</color>
+
+    <color name="cidades">#ff00ffff</color>
+    <color name="cidadeslight">#ffebffff</color>
+
+    <color name="roteiros">#ff1EC417</color>
+    <color name="roteiroslight">#ffABF5A8</color>
+
+    <color name="pontos">#ff990000</color>
+    <color name="pontoslight">#ffffc2c2</color>
+
+    <color name="eventos">#ffff9900</color>
+    <color name="eventoslight">#ffffe2b8</color>
+
+    <color name="tovisit">#ffC200B1</color>
+    <color name="tovisitlight">#ffFFB8F9</color>
+
+    <color name="black">#ff000000</color>
+</resources>

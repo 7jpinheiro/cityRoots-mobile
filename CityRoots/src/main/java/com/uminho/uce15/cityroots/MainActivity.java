@@ -8,9 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -51,7 +48,7 @@ public class MainActivity extends ActionBarActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
         }
@@ -59,20 +56,12 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-            String username = prefs.getString("username", "");
-            if (username.endsWith("")){
-                return inflater.inflate(R.layout.fragment_login, container, false);
-            }
-            else {
-                return inflater.inflate(R.layout.fragment_register, container, false);
-            }
-            //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-
+            return inflater.inflate(R.layout.login, container, false);
         }
     }
 
 
 
-
+    public void registo(View view) {
+    }
 }

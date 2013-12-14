@@ -11,5 +11,10 @@
     <string name="title_activity_listar_eventos">ListarEventos</string>
     <string name="title_activity_listar_rotas">ListarRotas</string>
     <string name="title_activity_login">Login</string>
+    <string name="cidades">Cidades</string>
+    <string name="Roteiros">Roteiros</string>
+    <string name="PontosDeInteresse">Pontos de Interesse</string>
+    <string name="Eventos">Eventos</string>
+    <string name="ToVisitList">ToVisitList</string>
 
 </resources>
