@@ -1,28 +1,57 @@
 package com.uminho.uce15.cityroots;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
 
 public class ListarPOIs extends ActionBarActivity {
 
+    private ListView list;
+    private Lista adapter;
+
+    String[] web = {
+            "buaahaha",
+            "buaahaha",
+            "buaahaha",
+            "buaahaha",
+            "buaahaha",
+            "buaahaha",
+            "buaahaha",
+            "buaahaha"
+
+
+    } ;
+    Integer[] imageId = {
+            R.drawable.images,
+            R.drawable.images,
+            R.drawable.images,
+            R.drawable.images,
+            R.drawable.images,
+            R.drawable.images,
+            R.drawable.images,
+            R.drawable.images
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_pois);
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+
+        list=(ListView)findViewById(R.id.list);
+        list.setEmptyView(findViewById(android.R.id.empty));
+
+        adapter = new Lista(this, web, imageId);
+        list.setAdapter(adapter);
+
+
     }
 
 
