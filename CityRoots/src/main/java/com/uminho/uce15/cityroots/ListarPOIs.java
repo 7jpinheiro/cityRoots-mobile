@@ -42,9 +42,10 @@ public class ListarPOIs extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_listar_pois);
-
-
+        
         list=(ListView)findViewById(R.id.list);
         list.setEmptyView(findViewById(android.R.id.empty));
 
