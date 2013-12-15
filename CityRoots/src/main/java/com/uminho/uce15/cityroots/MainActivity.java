@@ -1,5 +1,8 @@
 package com.uminho.uce15.cityroots;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -13,6 +16,9 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String user = prefs.getString("username", "");
+        Intent intent;
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
@@ -21,6 +27,17 @@ public class MainActivity extends ActionBarActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
+        }
+
+        if (user.equals("")){
+            intent = new Intent(this, Login.class);
+            MainActivity.this.startActivity(intent);
+        }
+        else {
+            intent = new Intent(this, Home.class);
+            MainActivity.this.startActivity(intent);
+            //return inflater.inflate(R.layout.activity_home, container, false);
+            //return inflater.inflate(R.layout.activity_register, container, false);
         }
     }
 
@@ -56,12 +73,11 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
+
+
             return inflater.inflate(R.layout.activity_main, container, false);
+
         }
     }
 
-
-
-    public void registo(View view) {
-    }
 }

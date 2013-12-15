@@ -69,14 +69,13 @@ public class Login extends ActionBarActivity {
     public void login(View view) {
         // Do something in response to button click
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Login.this);
-        prefs.edit().putString("username", ((EditText)findViewById(R.id.email_address)).getText().toString()).commit();
-
+        prefs.edit().putString("username", ((EditText) findViewById(R.id.email_address)).getText().toString()).commit(); 
     }
 
     public void registar(View view) {
-        Intent myIntent = new Intent(Login.this, Register.class);
+        Intent intent = new Intent(this, Register.class);
         //myIntent.putExtra("key", value); //Optional parameters
-        Login.this.startActivity(myIntent);
+        Login.this.startActivity(intent);
         //setContentView(R.layout.fragment_register);
     }
 
