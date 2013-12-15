@@ -31,11 +31,11 @@ public class MainActivity extends ActionBarActivity {
 
         if (user.equals("")){
             intent = new Intent(this, Login.class);
-            MainActivity.this.startActivity(intent);
+            this.startActivity(intent);
         }
         else {
             intent = new Intent(this, Home.class);
-            MainActivity.this.startActivity(intent);
+            this.startActivity(intent);
             //return inflater.inflate(R.layout.activity_home, container, false);
             //return inflater.inflate(R.layout.activity_register, container, false);
         }
