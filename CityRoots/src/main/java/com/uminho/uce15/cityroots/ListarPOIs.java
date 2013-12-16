@@ -1,5 +1,6 @@
 package com.uminho.uce15.cityroots;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -76,6 +77,10 @@ public class ListarPOIs extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void onClickPOI(View view){
+        Intent intent = new Intent(this, DetalhesPOI.class);
+        startActivity(intent);
+    }
     /**
      * A placeholder fragment containing a simple view.
      */
