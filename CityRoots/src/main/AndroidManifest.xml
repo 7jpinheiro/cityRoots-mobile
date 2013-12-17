@@ -17,9 +17,17 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <!-- chave marco -->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyA1zGN0pbdggubT0-S1oKtkkz8u8_KnqLY"/>
+
+         <!-- chave fabio (?) -->
+         <!--
             <meta-data
-                android:name="com.google.android.maps.v2.API_KEY"
-                android:value="AIzaSyDooBm6zcQfeIC1X7dgphhfc0kw5YqlAiE"/>
+             android:name="com.google.android.maps.v2.API_KEY"
+             android:value="AIzaSyDooBm6zcQfeIC1X7dgphhfc0kw5YqlAiE" />
+         -->
 
         <activity
             android:name="com.uminho.uce15.cityroots.MainActivity"
@@ -31,10 +39,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="com.uminho.uce15.cityroots.Register"
             android:label="@string/title_activity_register" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="com.uminho.uce15.cityroots.Home"
             android:label="@string/title_activity_home" >
         </activity>
@@ -55,6 +65,7 @@
             android:label="@string/title_activity_listar_rotas" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name="com.uminho.uce15.cityroots.Login"
             android:label="@string/title_activity_login" >
         </activity>
@@ -80,8 +91,5 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true"/>
-    <uses-library
-        android:name="com.google.android.maps"
-        android:required="false" />
 
 </manifest>
