@@ -1,11 +1,15 @@
 package com.uminho.uce15.cityroots;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class Home extends ActionBarActivity {
 
