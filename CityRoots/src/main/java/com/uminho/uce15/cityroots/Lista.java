@@ -45,8 +45,8 @@ public class Lista extends ArrayAdapter<String> {
             e.printStackTrace();
         }*/
         txtTitle.setText(web[position]);
-        imageView.setImageResource(imageId[position]);
-
+        //imageView.setImageResource(imageId[position]);
+        imageView.setImageResource(R.drawable.images);
         return rowView;
     }
 }

@@ -41,7 +41,8 @@
                 android:id="@+id/mapa"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                class="com.google.android.gms.maps.SupportMapFragment"/>
+                class="com.google.android.gms.maps.SupportMapFragment"
+               />
         </FrameLayout>
 
     </android.support.v4.widget.SlidingPaneLayout>

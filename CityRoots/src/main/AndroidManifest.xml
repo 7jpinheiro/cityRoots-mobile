@@ -19,7 +19,7 @@
 
             <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"
-                android:value="AIzaSyDooBm6zcQfeIC1X7dgphhfc0kw5YqlAiE"/>
+                android:value="AIzaSyDigLQy28w1eY_7j_W_5g8WXtXDvhVBJiE"/>
 
         <activity
             android:name="com.uminho.uce15.cityroots.MainActivity"
