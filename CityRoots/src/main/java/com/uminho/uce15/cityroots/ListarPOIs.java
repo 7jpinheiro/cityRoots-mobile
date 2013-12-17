@@ -12,6 +12,25 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
 
 public class ListarPOIs extends ActionBarActivity {
 
@@ -50,10 +69,47 @@ public class ListarPOIs extends ActionBarActivity {
         list=(ListView)findViewById(R.id.list);
         list.setEmptyView(findViewById(android.R.id.empty));
 
-        adapter = new Lista(this, web, imageId);
+        /*String readBD = readBD();
+
+        JSONArray jsonArray = null;
+        try {
+            jsonArray = new JSONArray(readBD);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+*/
+
+        adapter = new Lista(this,web,imageId);
         list.setAdapter(adapter);
 
 
+    }
+
+    public String readBD() {
+        StringBuilder builder = new StringBuilder();
+        HttpClient client = new DefaultHttpClient();
+        HttpGet httpGet = new HttpGet("http://193.136.19.202:8080/attractions.json");
+        try {
+            HttpResponse response = client.execute(httpGet);
+            StatusLine statusLine = response.getStatusLine();
+            int statusCode = statusLine.getStatusCode();
+            if (statusCode == 200) {
+                HttpEntity entity = response.getEntity();
+                InputStream content = entity.getContent();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    builder.append(line);
+                }
+            } else {
+                Log.e(ListarPOIs.class.toString(), "Failed to download file");
+            }
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return builder.toString();
     }
 
 

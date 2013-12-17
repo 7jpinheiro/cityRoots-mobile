@@ -4,10 +4,6 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="19" />
@@ -21,18 +17,9 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <!-- chave marco -->
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyA1zGN0pbdggubT0-S1oKtkkz8u8_KnqLY"/>
-
-        <!-- chave fabio (?) -->
-        <!--
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDooBm6zcQfeIC1X7dgphhfc0kw5YqlAiE" />
-        -->
-
+            <meta-data
+                android:name="com.google.android.maps.v2.API_KEY"
+                android:value="AIzaSyDooBm6zcQfeIC1X7dgphhfc0kw5YqlAiE"/>
 
         <activity
             android:name="com.uminho.uce15.cityroots.MainActivity"
@@ -78,10 +65,6 @@
         <activity
             android:name="com.uminho.uce15.cityroots.CidadesActivity"
             android:label="@string/title_activity_cidades" >
-        </activity>
-        <activity
-            android:name="com.uminho.uce15.cityroots.MapsActivity"
-            android:label="@string/title_activity_maps" >
         </activity>
     </application>
 

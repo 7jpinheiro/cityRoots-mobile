@@ -11,18 +11,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.List;
+
 public class Lista extends ArrayAdapter<String> {
 
         private final Activity context;
-        private final String[] web;
-        private final Integer[] imageId;
+        //private final JSONArray jsonArray;
+        private Integer[] imageId;
+        private String[] web;
 
-        public Lista(Activity context,String[] web, Integer[] imageId) {
+        public Lista(Activity context,String[] web,Integer[] imageId) {
 
             super(context, R.layout.elemento_lista, web);
             this.context = context;
-            this.web = web;
+            //this.jsonArray = jsonArray;
             this.imageId = imageId;
+            this.web = web;
         }
 
     @Override
@@ -32,8 +39,14 @@ public class Lista extends ArrayAdapter<String> {
         View rowView= inflater.inflate(R.layout.elemento_lista, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
+        /*try {
+            txtTitle.setText(jsonArray.getJSONObject(position).getString("Name"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
         txtTitle.setText(web[position]);
         imageView.setImageResource(imageId[position]);
+
         return rowView;
     }
 }
