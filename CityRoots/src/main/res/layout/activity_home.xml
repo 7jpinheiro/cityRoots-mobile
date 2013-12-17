@@ -19,16 +19,17 @@
             android:clickable="true"
             android:onClick="onClickCities"
             android:orientation="horizontal"
+            android:background="@color/cidadeslight"
             android:layout_weight=".2">
-
             <ImageView
-                android:layout_width="0px"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:background="@color/cidades"
-                android:layout_weight=".16"
+                android:layout_weight=".2"
                 android:id="@+id/imgHomeCities"
-                android:scaleType="fitXY"
-                android:src="@drawable/homecities"/>
+                android:src="@drawable/homecities"
+                android:layout_alignParentBottom="true" />
+
 
             <TextView
                 android:layout_width="0dp"
@@ -49,6 +50,7 @@
             android:clickable="true"
             android:onClick="onClickRoutes"
             android:orientation="horizontal"
+            android:background="@color/roteiroslight"
             android:layout_weight=".2">
 
             <ImageView
@@ -57,7 +59,6 @@
                 android:background="@color/roteiros"
                 android:layout_weight=".2"
                 android:id="@+id/imgHomeRoteiros"
-                android:scaleType="fitXY"
                 android:src="@drawable/homeroutes"/>
             <TextView
                 android:layout_width="0dp"
@@ -78,6 +79,7 @@
             android:clickable="true"
             android:onClick="onClickPoI"
             android:orientation="horizontal"
+            android:background="@color/pontoslight"
             android:layout_weight=".2">
 
             <ImageView
@@ -86,7 +88,6 @@
                 android:background="@color/pontos"
                 android:layout_weight=".2"
                 android:id="@+id/imgHomePoI"
-                android:scaleType="fitXY"
                 android:src="@drawable/homepoi"/>
             <TextView
                 android:layout_width="0dp"
@@ -106,6 +107,7 @@
             android:clickable="true"
             android:onClick="onClickEvents"
             android:orientation="horizontal"
+            android:background="@color/eventoslight"
             android:layout_weight=".2">
 
             <ImageView
@@ -114,7 +116,6 @@
                 android:background="@color/eventos"
                 android:layout_weight=".2"
                 android:id="@+id/imgHomeEventos"
-                android:scaleType="fitXY"
                 android:src="@drawable/homeevents"/>
             <TextView
                 android:layout_width="0dp"
@@ -135,6 +136,7 @@
             android:clickable="true"
             android:onClick="onClickToVisit"
             android:orientation="horizontal"
+            android:background="@color/tovisitlight"
             android:layout_weight=".2">
 
             <ImageView
@@ -143,7 +145,6 @@
                 android:background="@color/tovisit"
                 android:layout_weight=".2"
                 android:id="@+id/imgHomeToVisit"
-                android:scaleType="fitXY"
                 android:src="@drawable/hometovisit"/>
             <TextView
                 android:layout_width="0dp"

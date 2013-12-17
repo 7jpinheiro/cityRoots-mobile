@@ -44,9 +44,7 @@ public class Home extends ActionBarActivity {
 
 
     public void onClickCities(View view){
-        //Intent intent = new Intent(this, CidadesActivity.class);
-        //startActivity(intent);
-        Intent intent = new Intent(this, MapsActivity.class);
+        Intent intent = new Intent(this, CidadesActivity.class);
         startActivity(intent);
     }
 
