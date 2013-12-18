@@ -9,12 +9,12 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_gravity="left|top|right|bottom">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:clickable="true"
             android:onClick="onClickCities"
@@ -45,7 +45,7 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:clickable="true"
             android:onClick="onClickRoutes"
@@ -55,7 +55,7 @@
 
             <ImageView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:background="@color/roteiros"
                 android:layout_weight=".2"
                 android:id="@+id/imgHomeRoteiros"
@@ -74,7 +74,7 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:clickable="true"
             android:onClick="onClickPoI"
@@ -84,7 +84,7 @@
 
             <ImageView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:background="@color/pontos"
                 android:layout_weight=".2"
                 android:id="@+id/imgHomePoI"
@@ -102,7 +102,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:clickable="true"
             android:onClick="onClickEvents"
@@ -112,7 +112,7 @@
 
             <ImageView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:background="@color/eventos"
                 android:layout_weight=".2"
                 android:id="@+id/imgHomeEventos"
@@ -131,7 +131,7 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:clickable="true"
             android:onClick="onClickToVisit"
@@ -141,7 +141,7 @@
 
             <ImageView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:background="@color/tovisit"
                 android:layout_weight=".2"
                 android:id="@+id/imgHomeToVisit"
