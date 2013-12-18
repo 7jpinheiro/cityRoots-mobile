@@ -18,16 +18,17 @@
             android:value="@integer/google_play_services_version" />
 
         <!-- chave marco -->
-        <meta-data
+        <!--<meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyA1zGN0pbdggubT0-S1oKtkkz8u8_KnqLY"/>
-
+        -->
          <!-- chave fabio (?) -->
          <!--
             <meta-data
              android:name="com.google.android.maps.v2.API_KEY"
              android:value="AIzaSyDooBm6zcQfeIC1X7dgphhfc0kw5YqlAiE" />
          -->
+        <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"
                 android:value="AIzaSyDigLQy28w1eY_7j_W_5g8WXtXDvhVBJiE"/>
 
@@ -59,6 +60,10 @@
             android:label="@string/title_activity_detalhes_poi" >
         </activity>
         <activity
+            android:name="com.uminho.uce15.cityroots.DetalhesEventos"
+            android:label="@string/title_activity_detalhes_eventos" >
+        </activity>
+        <activity
             android:name="com.uminho.uce15.cityroots.ListarEventos"
             android:label="@string/title_activity_listar_eventos" >
         </activity>
@@ -78,6 +83,10 @@
         <activity
             android:name="com.uminho.uce15.cityroots.CidadesActivity"
             android:label="@string/title_activity_cidades" >
+        </activity>
+        <activity
+            android:name="com.uminho.uce15.cityroots.SimplePlaceMapActivity"
+            android:label="@string/title_simple_map" >
         </activity>
     </application>
 

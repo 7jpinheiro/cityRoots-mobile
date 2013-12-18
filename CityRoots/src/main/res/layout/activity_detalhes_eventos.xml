@@ -123,6 +123,39 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
+        <!-- Organization Value -->
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="10dip"
+            android:text="Organização:"
+            android:textStyle="bold" />
+
+        <!-- Organization Value -->
+
+        <TextView
+            android:id="@+id/organization"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+
+        <!-- Program Value -->
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="10dip"
+            android:text="Programa:"
+            android:textStyle="bold" />
+
+        <!-- Program Value -->
+
+        <TextView
+            android:id="@+id/program"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
         <!-- Price Value -->
         <TextView
             android:layout_width="fill_parent"

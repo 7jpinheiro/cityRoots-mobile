@@ -1,5 +1,8 @@
 package com.uminho.uce15.cityroots;
 
+/**
+ * Created by John on 18-12-2013.
+ */
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -30,7 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.util.Log;
 
-public class DetalhesPOI extends ActionBarActivity {
+public class DetalhesEventos extends ActionBarActivity {
 
     // flag for Internet connection status
     Boolean isInternetPresent = false;
@@ -42,7 +45,7 @@ public class DetalhesPOI extends ActionBarActivity {
     ProgressDialog pDialog;
 
     // KEY Strings
-   public static String Ref= null; // id of the place
+    public static String Ref= null; // id of the place
 
     // Button
     Button btnShowPlaceOnMap;
@@ -50,7 +53,7 @@ public class DetalhesPOI extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalhes_poi);
+        setContentView(R.layout.activity_detalhes_eventos);
 
         /*if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -69,7 +72,7 @@ public class DetalhesPOI extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.detalhes_poi, menu);
         return true;
@@ -97,7 +100,7 @@ public class DetalhesPOI extends ActionBarActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_detalhes_poi, container, false);
             return rootView;
         }
@@ -112,7 +115,7 @@ public class DetalhesPOI extends ActionBarActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(DetalhesPOI.this);
+            pDialog = new ProgressDialog(DetalhesEventos.this);
             pDialog.setMessage("Loading profile ...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
@@ -142,10 +145,11 @@ public class DetalhesPOI extends ActionBarActivity {
                     String description = "";
                     String schedule = "";
                     String address = "";
+                    String organization = "";
                     String price = "";
+                    String program = "";
                     String latitude = "";
                     String longitude = "";
-
 
                     try{
                         JSONObject ponto= new JSONObject(Ref);
@@ -153,7 +157,9 @@ public class DetalhesPOI extends ActionBarActivity {
                         description = ponto.getString("description");
                         schedule = ponto.getString("schedule");
                         address = ponto.getString("address");
+                        organization = ponto.getString("organization");
                         price = ponto.getString("price");
+                        program = ponto.getString("program");
                         latitude = ponto.getString("latitude");
                         longitude = ponto.getString("longitude");
                     }
@@ -176,7 +182,9 @@ public class DetalhesPOI extends ActionBarActivity {
                     TextView lbl_description = (TextView) findViewById(R.id.description);
                     TextView lbl_schedule = (TextView) findViewById(R.id.schedule);
                     TextView lbl_address = (TextView) findViewById(R.id.address);
+                    TextView lbl_organization = (TextView) findViewById(R.id.organization);
                     TextView lbl_price = (TextView) findViewById(R.id.price);
+                    TextView lbl_program = (TextView) findViewById(R.id.program);
                     TextView lbl_location = (TextView) findViewById(R.id.location);
 
                     // Check for null data from google
@@ -184,7 +192,9 @@ public class DetalhesPOI extends ActionBarActivity {
                     name = name == null ? "Not present" : name; // if name is null display as "Not present"
                     description = description == null ? "Not present" : description;
                     schedule = schedule == null ? "Not present" : schedule;
+                    organization = organization == null ? "Not present" : organization;
                     price = price == null ? "Not present" : price;
+                    program = program == null ? "Not present" : program; // if name is null display as "Not present"
                     address = address == null ? "Not present" : address;
                     latitude = latitude == null ? "Not present" : latitude;
                     longitude = longitude == null ? "Not present" : longitude;
@@ -196,7 +206,9 @@ public class DetalhesPOI extends ActionBarActivity {
                     lbl_address.setText(address);
                     lbl_description.setText(description);
                     lbl_schedule.setText(schedule);
+                    lbl_organization.setText(organization);
                     lbl_price.setText(price);
+                    lbl_program.setText(program);
                     lbl_location.setText(Html.fromHtml("<b>Latitude:</b> " + latitude + ", <b>Longitude:</b> " + longitude));
 
                     btnShowPlaceOnMap = (Button) findViewById(R.id.placebutton);
@@ -204,20 +216,21 @@ public class DetalhesPOI extends ActionBarActivity {
                     /** Button click event for shown on map */
                     btnShowPlaceOnMap.setOnClickListener(new View.OnClickListener() {
 
-                                   @Override
-                                    public void onClick(View arg0) {
+                        @Override
+                        public void onClick(View arg0) {
 
-                                        Intent i = new Intent(getApplicationContext(),SimplePlaceMapActivity.class);
+                            // Intent i = new Intent(getApplicationContext(),SimplePlaceMapActivity.class);
 
-                                         //Sending user current geo location
-                                        i.putExtra("place_latitude", lat1);
-                                        i.putExtra("place_longitude", lng1);
+                            // Sending user current geo location
+                            //i.putExtra("place_latitude", lat1);
+                            //i.putExtra("place_longitude", lng1);
 
-                                        // passing near places to map activity
-                                       //i.putExtra("near_places", nem);
-                                        // staring activity
-                                        startActivity(i);
-                                    }
+                            // passing near places to map activity
+                            //  i.putExtra("near_places", nem);
+                            // staring activity
+
+                            //startActivity(i);
+                        }
                     });
 
                 }

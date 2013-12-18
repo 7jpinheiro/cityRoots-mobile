@@ -57,6 +57,12 @@ import org.json.JSONObject;
 import android.util.Log;
 import android.widget.ListView;
 
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
+import android.widget.TableRow;
+
 public class ListarEventos extends ActionBarActivity {
 
     private LocationManager locMan;
@@ -71,6 +77,7 @@ public class ListarEventos extends ActionBarActivity {
     private ListView list;
     private Lista adapter;
 
+    JSONObject[] pontos=null;
     String[] web =null;
     Integer[] imageId = {
             R.drawable.images,
@@ -124,6 +131,26 @@ public class ListarEventos extends ActionBarActivity {
 */
         //adapter = new Lista(this,web,imageId);
         //list.setAdapter(adapter);
+
+       /* list.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // getting values from selected ListItem
+
+                // Starting new intent
+
+
+                Intent intent = new Intent(ListarEventos.this, DetalhesEventos.class);
+                intent.putExtra("id",pontos[position].toString());
+                //intent.putExtra("id",pos.toString());
+
+                // Sending place refrence id to single place activity
+                // place refrence id used to get "Place full details"
+                startActivity(intent);
+            }
+        });*/
 
 
     }
@@ -331,6 +358,7 @@ public class ListarEventos extends ActionBarActivity {
                 JSONArray placesArray = new JSONArray(result);
                 //get "results" array
                 //marker options for each place returned
+                pontos=new JSONObject[placesArray.length()];
                 web=new String[placesArray.length()];
                 places = new MarkerOptions[placesArray.length()];
                 //loop through places
@@ -356,6 +384,7 @@ public class ListarEventos extends ActionBarActivity {
                         //name
                         placeName = placeObject.getString("name");
                         web[p]=placeObject.getString("name");
+                        pontos[p]=placeObject;
                     }
                     catch(JSONException jse){
                         Log.v("PLACES", "missing value");

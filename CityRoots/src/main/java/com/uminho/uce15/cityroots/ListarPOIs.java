@@ -71,6 +71,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.util.Log;
 
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
+import android.widget.TableRow;
+
 public class ListarPOIs extends ActionBarActivity {
 
     private LocationManager locMan;
@@ -85,7 +91,9 @@ public class ListarPOIs extends ActionBarActivity {
     private ListView list;
     private Lista adapter;
 
+    JSONObject[] pontos=null;
     String[] web =null;
+    //String[] web= {"1","2","3","4"};
     Integer[] imageId = {
             R.drawable.images,
             R.drawable.images,
@@ -138,8 +146,28 @@ public class ListarPOIs extends ActionBarActivity {
         //adapter = new Lista(this,web,imageId);
         //list.setAdapter(adapter);
 
+        list.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // getting values from selected ListItem
+
+                // Starting new intent
+
+
+                Intent intent = new Intent(ListarPOIs.this, DetalhesPOI.class);
+                intent.putExtra("id",pontos[position].toString());
+                //intent.putExtra("id",pos.toString());
+
+                // Sending place refrence id to single place activity
+                // place refrence id used to get "Place full details"
+                startActivity(intent);
+            }
+        });
 
     }
+
 
     private void updatePlaces(){
         if(userMarker!=null) userMarker.remove();
@@ -235,6 +263,7 @@ public class ListarPOIs extends ActionBarActivity {
                 }
             }
             return placesBuilder.toString();
+            //return "{\"attraction\":[{\"id\":1,\"name\":\"Bom Jesus\",\"description\":\"A Igreja do Bom Jesus foi desenhada pelo arquitecto Carlos Amarante, por encomenda do Arcebispo D. Gaspar de Bragança, para substituir uma primitiva igreja, mandada construir por D. Rodrigo de Moura Teles que se encontrava em ruínas. As obras começaram em 1 de Junho de 1784, tendo ficado concluídas em 1811.\\nÉ um dos primeiros edifícios neoclássicos em Portugal, e a fachada é ladeada por duas torres e termina num frontão triangular.\",\"schedule\":null,\"site\":\"www.estanciadobomjesus.com\",\"email\":\"geral@estanciadobomjesus.com\",\"address\":\"Monte do Bom Jesus 4715-056 Braga\",\"latitude\":41.5263,\"longitude\":-8.39647,\"transport\":null,\"active\":true,\"timestamp\":1387218092,\"reference_point\":true,\"price\":null,\"attraction_type_id\":5,\"city_id\":3,\"web_user_id\":1},{\"id\":2,\"name\":\"Sé de Braga\",\"description\":\"A Sé Catedral é considerada como um centro de irradiação episcopal e um dos mais importantes templos do românico português, a sua história remonta à obra do primeiro bispo, D. Pedro de Braga, correspondendo à restauração da Sé episcopal em 1070, de que não se conservam vestígios.\\nNesta catedral encontram-se os túmulos de Henrique de Borgonha e sua mulher, Teresa de Leão, os condes do Condado Portucalense, pais do rei D. Afonso Henriques.\",\"schedule\":null,\"site\":\"www.se-braga.pt\",\"email\":\"info@se-braga.pt, tmsb.educar@gmail.com\",\"address\":\"Monte do Bom Jesus 4715-056 Braga\",\"latitude\":41.5438,\"longitude\":-8.43046,\"transport\":null,\"active\":true,\"timestamp\":1387218092,\"reference_point\":true,\"price\":null,\"attraction_type_id\":5,\"city_id\":3,\"web_user_id\":1},{\"id\":3,\"name\":\"Tesouro - Museu da Sé de Braga\",\"description\":\"As coleções do Tesouro-Museu da Sé de Braga (TMSB) testemunham, no seu conjunto, mais de XV séculos da história da Arte e da vida da Igreja em Braga. Em formação desde a sua fundação, em 1930, o TMSB acolhe um valioso espólio, constituído por coleções de cerâmica, escultura, medalhística, mobiliário, numismática, ourivesaria, pintura, têxtil.\\nA Exposição Permanente, Raízes de Eternidade. Jesus Cristo – Uma Igreja, consagrada à arte sacra, permite, através dos diferentes núcleos, revisitar a vida de Jesus Cristo e a história da Igreja em Braga. Esta é contada tomando como referência alguns arcebispos, desde o século V até ao século XX. A narração é complementada com os núcleos dedicados à paramentaria e ourivesaria.\",\"schedule\":\"De 3ª feira a domingo\\nEncerra à 2ª feira.\\n09h00-12h30 | 14h00-17h30 (18h30 no Verão)\",\"site\":\"www.se-braga.pt/tesouro_museu.php\",\"email\":\"catedralbraga@hotmail.com,tmsb.educar@gmail.com\",\"address\":\"Tesouro-Museu da Sé de Braga\\nR. D. Paio Mendes, s/n 4700-424 Braga\",\"latitude\":41.5474,\"longitude\":-8.42085,\"transport\":null,\"active\":true,\"timestamp\":1387218092,\"reference_point\":false,\"price\":\"Adultos e crianças a partir dos 10 anos: 3 €\\nCrianças de 6 a 10 anos: 50% de desconto\\nCrianças e jovens integrados em visitas escolares e acompanhantes: 50% de desconto\\nCrianças com menos de 6 anos: gratuito\",\"attraction_type_id\":6,\"city_id\":3,\"web_user_id\":1},{\"id\":4,\"name\":\"Santuário do Sameiro\",\"description\":\"O Santuário de Nossa Senhora do Sameiro é um santuário mariano localizado em Braga, Portugal, cuja construção se iniciou a 14 de Julho de 1863. O fundador deste santuário foi o vigário de Braga, Padre Martinho António Pereira da Silva.\",\"schedule\":null,\"site\":null,\"email\":null,\"address\":null,\"latitude\":41.554,\"longitude\":8.376,\"transport\":null,\"active\":true,\"timestamp\":1387218092,\"reference_point\":true,\"price\":\"\",\"attraction_type_id\":5,\"city_id\":3,\"web_user_id\":1},{\"id\":5,\"name\":\"Mosteiro de S. Martinho de Tibães\",\"description\":\"O Mosteiro de S. Martinho de Tibães, antiga Casa-Mãe da Congregação Beneditina Portuguesa, situa-se na região norte de Portugal, a 6 kms a noroeste de Braga.\",\"schedule\":\"todos os dias - 09.30 às 18.00 horas exceto-  1 de Janeiro, Dia de Páscoa, 1 de Maio e 25 de Dezembro\",\"site\":\"http://www.mosteirodetibaes.org/\",\"email\":\"msmtibaes@culturanorte.pt\",\"address\":\"Rua do Mosteiro 4700-565 Mire de Tibães\",\"latitude\":41.566,\"longitude\":8.477,\"transport\":null,\"active\":true,\"timestamp\":1387218092,\"reference_point\":true,\"price\":\"Bilhete normal € 4,00 Bilhete com 50% de desconto (Reformados e jovens entre os 15 e os 25 anos) Aos Domingos de manhã a entrada é gratuita\",\"attraction_type_id\":5,\"city_id\":3,\"web_user_id\":1},{\"id\":6,\"name\":\"Museu dos Biscainhos\",\"description\":\"O Palácio dos Biscainhos localiza-se na freguesia da Sé, cidade e concelho de Braga.\",\"schedule\":\"10.00h-12h15m / 14.00h-17h30m\",\"site\":null,\"email\":null,\"address\":\"Rua dos Biscaínhos, 4700-415 Braga\",\"latitude\":41.566,\"longitude\":8.477,\"transport\":null,\"active\":true,\"timestamp\":1387218092,\"reference_point\":false,\"price\":\"\",\"attraction_type_id\":6,\"city_id\":3,\"web_user_id\":1},{\"id\":7,\"name\":\"Museu Pio XII\",\"description\":\"O Museu Pio XII é um museu dedicado à Arte Sacra e Arqueologia.\",\"schedule\":\"09:30–12:30, 14:30–18:00\",\"site\":null,\"email\":null,\"address\":\"Largo de San Tiago 47, 4704-532 Braga\",\"latitude\":41.566,\"longitude\":8.477,\"transport\":null,\"active\":true,\"timestamp\":1387218092,\"reference_point\":false,\"price\":\"\",\"attraction_type_id\":6,\"city_id\":3,\"web_user_id\":1},{\"id\":8,\"name\":\"Museu dos Cordofones\",\"description\":\"O Museu dos Cordofones pertence ao artesão Domingos Machado, foi inaugurado a 22 de Setembro de 1995. É um museu de referência em Portugal sobre os cordofones.\",\"schedule\":null,\"site\":null,\"email\":null,\"address\":\"Rua de Santo António 3, 4705-630 Tebosa - Braga\",\"latitude\":41.586,\"longitude\":8.577,\"transport\":null,\"active\":true,\"timestamp\":1387218092,\"reference_point\":false,\"price\":\"\",\"attraction_type_id\":6,\"city_id\":3,\"web_user_id\":1}],\"photo_attraction\":[{\"id\":1,\"url\":\"http://static4.depositphotos.com/1000160/276/i/950/depositphotos_2763524-Bom-Jesus-de-Braga-in-Portugal.jpg\",\"name\":\"amet,\",\"description\":null,\"extension\":\"jpg\",\"attraction_id\":1},{\"id\":2,\"url\":\"http://fotos.sapo.pt/topazio1950/pic/0004c6z0\",\"name\":\"amet,\",\"description\":null,\"extension\":\"jpg\",\"attraction_id\":2},{\"id\":3,\"url\":\"http://fotos.sapo.pt/topazio1950/pic/0004c6z0\",\"name\":\"amet,\",\"description\":null,\"extension\":\"jpg\",\"attraction_id\":3}]}";
         }
         //process data retrieved from doInBackground
 		/*protected void onPostExecute(String result) {
@@ -341,9 +370,11 @@ public class ListarPOIs extends ActionBarActivity {
                 //parse JSON
 
                 //create JSONObject, pass stinrg returned from doInBackground
-                JSONArray placesArray = new JSONArray(result);
+                JSONObject placesobj=new JSONObject(result);
+                JSONArray placesArray = placesobj.getJSONArray("attraction");
                 //get "results" array
                 //marker options for each place returned
+                pontos=new JSONObject[placesArray.length()];
                 web=new String[placesArray.length()];
                 places = new MarkerOptions[placesArray.length()];
                 //loop through places
@@ -369,6 +400,7 @@ public class ListarPOIs extends ActionBarActivity {
                         //name
                         placeName = placeObject.getString("name");
                         web[p]=placeObject.getString("name");
+                        pontos[p]=placeObject;
                     }
                     catch(JSONException jse){
                         Log.v("PLACES", "missing value");
@@ -449,10 +481,13 @@ public class ListarPOIs extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClickPOI(View view){
+    /*public void onClickPOI(View view){
+        //Integer pos=list.getSelectedItemPosition();
         Intent intent = new Intent(this, DetalhesPOI.class);
+        intent.putExtra("id",pontos[0].toString());
+        //intent.putExtra("id",pos.toString());
         startActivity(intent);
-    }
+    }*/
     /**
      * A placeholder fragment containing a simple view.
      */
