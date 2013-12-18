@@ -83,6 +83,10 @@
             android:name="com.uminho.uce15.cityroots.CidadesActivity"
             android:label="@string/title_activity_cidades" >
         </activity>
+        <activity
+            android:name="com.uminho.uce15.cityroots.SimplePlaceMapActivity"
+            android:label="@string/title_activity_simple_map" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>

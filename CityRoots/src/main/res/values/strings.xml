@@ -23,5 +23,7 @@
     <string name="tovisittitle">To Visit information list</string>
     <string name="listcidades">Listar cidade disponíveis</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_simple_map">Simple map</string>
+    <string name="loadinglist">Loading list</string>
 
 </resources>
