@@ -3,6 +3,7 @@ package com.uminho.uce15.cityroots;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -110,6 +111,28 @@ public class ListarPOIs extends ActionBarActivity {
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_listar_pois);
+        SlidingPaneLayout slidingPaneLayout = (SlidingPaneLayout)findViewById(R.id.pane);
+        final ListView listView = (ListView) findViewById(R.id.list);
+        final SupportMapFragment supportMapFragment = (SupportMapFragment)
+                this.getSupportFragmentManager().findFragmentById(R.id.map);
+
+        slidingPaneLayout.setPanelSlideListener(new SlidingPaneLayout.PanelSlideListener() {
+            @Override
+            public void onPanelSlide(View view, float v) {
+                view.invalidate();
+                listView.invalidate();
+            }
+
+            @Override
+            public void onPanelOpened(View view) {
+
+            }
+
+            @Override
+            public void onPanelClosed(View view) {
+
+            }
+        });
 
         userIcon = R.drawable.mark_blue;
         //foodIcon = R.drawable.red_point;
@@ -120,7 +143,7 @@ public class ListarPOIs extends ActionBarActivity {
         if(theMap==null){
             //map not instantiated yet
             SupportMapFragment mapFrag=
-                    (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.mapa);
+                    (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
             theMap=mapFrag.getMap();
 
         }
