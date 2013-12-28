@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CityRoots</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_listar_pois">ListarPOIs</string>
+    <string name="title_activity_detalhes_poi">DetalhesPOI</string>
+    <string name="title_activity_detalhes_eventos">DetalhesEventos</string>
+    <string name="title_activity_listar_eventos">ListarEventos</string>
+    <string name="title_activity_listar_rotas">ListarRotas</string>
+    <string name="title_simple_map">MapaSimples</string>
+    <string name="title_activity_login">Login</string>
+
+    <!--Menu Strings-->
+
+    <string name="poi">Points of Interest</string>
+    <string name="routes">Routes</string>
+    <string name="events">Events</string>
+    <string name="TPA">Traditional Products  \u0026 Art</string>
+    <string name="gastronomy">Gastronomy</string>
+    <string name="activities">Activities  \u0026 Fun</string>
+    <string name="outdoor">Outdoor</string>
+    <string name="nightlife">Nightlife</string>
+    <string name="hotels">Hotels</string>
+    <string name="transport">Transport</string>
+    <string name="afd">Accessibility for Disabled</string>
+    <string name="contacts">Useful Contacts</string>
+
+    <!--**********************-->
+
+    <string name="title_activity_to_visit">ToVisitActivity</string>
+    <string name="title_activity_cidades">CidadesActivity</string>
+    <string name="tovisittitle">To Visit information list</string>
+    <string name="listcidades">Listar cidade disponíveis</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_simple_map">Simple map</string>
+    <string name="loadinglist">Loading list</string>
+
+</resources>
