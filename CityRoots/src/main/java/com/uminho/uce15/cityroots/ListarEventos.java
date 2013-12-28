@@ -98,9 +98,6 @@ public class ListarEventos extends ActionBarActivity {
         setContentView(R.layout.activity_listar_eventos);
 
         userIcon = R.drawable.mark_blue;
-        //foodIcon = R.drawable.red_point;
-        //drinkIcon = R.drawable.blue_point;
-        //shopIcon = R.drawable.green_point;
         otherIcon = R.drawable.yellow_point;
 
         if(theMap==null){
@@ -120,39 +117,16 @@ public class ListarEventos extends ActionBarActivity {
         list=(ListView)findViewById(R.id.list);
         list.setEmptyView(findViewById(android.R.id.empty));
 
-        /*String readBD = readBD();
-
-        JSONArray jsonArray = null;
-        try {
-            jsonArray = new JSONArray(readBD);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-*/
-        //adapter = new Lista(this,web,imageId);
-        //list.setAdapter(adapter);
-
-       /* list.setOnItemClickListener(new OnItemClickListener() {
-
+        list.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // getting values from selected ListItem
-
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 // Starting new intent
-
-
                 Intent intent = new Intent(ListarEventos.this, DetalhesEventos.class);
                 intent.putExtra("id",pontos[position].toString());
                 //intent.putExtra("id",pos.toString());
-
-                // Sending place refrence id to single place activity
-                // place refrence id used to get "Place full details"
                 startActivity(intent);
             }
-        });*/
-
-
+        });
     }
 
     private void updatePlaces(){
@@ -181,12 +155,9 @@ public class ListarEventos extends ActionBarActivity {
                 .build();                   // Creates a CameraPosition from the builder
 
         theMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-
-
-
         //theMap.animateCamera(CameraUpdateFactory.newLatLng(lastLatLng), 3000, null);
 
+        /*
         String types = "food|bar|store|museum|art_gallery";
         try {
             types = URLEncoder.encode(types, "UTF-8");
@@ -194,7 +165,7 @@ public class ListarEventos extends ActionBarActivity {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-		/*String placesSearchStr = "https://maps.googleapis.com/maps/api/place/nearbysearch/" +
+		String placesSearchStr = "https://maps.googleapis.com/maps/api/place/nearbysearch/" +
 		"json?location="+lat+","+lng+
 		"&radius=1000&sensor=true" +
 		"&types=" + types +
@@ -250,98 +221,8 @@ public class ListarEventos extends ActionBarActivity {
             }
             return placesBuilder.toString();
         }
+
         //process data retrieved from doInBackground
-		/*protected void onPostExecute(String result) {
-			//parse place data returned from Google Places
-			//remove existing markers
-			if(placeMarkers!=null){
-				for(int pm=0; pm<placeMarkers.length; pm++){
-					if(placeMarkers[pm]!=null)
-						placeMarkers[pm].remove();
-				}
-			}
-			try {
-				//parse JSON
-
-				//create JSONObject, pass stinrg returned from doInBackground
-				JSONObject resultObject = new JSONObject(result);
-				//get "results" array
-				JSONArray placesArray = resultObject.getJSONArray("results");
-				//marker options for each place returned
-				places = new MarkerOptions[placesArray.length()];
-				//loop through places
-				for (int p=0; p<placesArray.length(); p++) {
-					//parse each place
-					//if any values are missing we won't show the marker
-					boolean missingValue=false;
-					LatLng placeLL=null;
-					String placeName="";
-					String vicinity="";
-					int currIcon = otherIcon;
-					try{
-						//attempt to retrieve place data values
-						missingValue=false;
-						//get place at this index
-						JSONObject placeObject = placesArray.getJSONObject(p);
-						//get location section
-						JSONObject loc = placeObject.getJSONObject("geometry")
-								.getJSONObject("location");
-						//read lat lng
-						placeLL = new LatLng(Double.valueOf(loc.getString("lat")),
-								Double.valueOf(loc.getString("lng")));
-						//get types
-						JSONArray types = placeObject.getJSONArray("types");
-						//loop through types
-						for(int t=0; t<types.length(); t++){
-							//what type is it
-							String thisType=types.get(t).toString();
-							//check for particular types - set icons
-							if(thisType.contains("food")){
-								currIcon = foodIcon;
-								break;
-							}
-							else if(thisType.contains("bar")){
-								currIcon = drinkIcon;
-								break;
-							}
-							else if(thisType.contains("store")){
-								currIcon = shopIcon;
-								break;
-							}
-						}
-						//vicinity
-						vicinity = placeObject.getString("vicinity");
-						//name
-						placeName = placeObject.getString("name");
-					}
-					catch(JSONException jse){
-						Log.v("PLACES", "missing value");
-						missingValue=true;
-						jse.printStackTrace();
-					}
-					//if values missing we don't display
-					if(missingValue)	places[p]=null;
-					else
-						places[p]=new MarkerOptions()
-					.position(placeLL)
-					.title(placeName)
-					.icon(BitmapDescriptorFactory.fromResource(currIcon))
-					.snippet(vicinity);
-				}
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-			if(places!=null && placeMarkers!=null){
-				for(int p=0; p<places.length && p<placeMarkers.length; p++){
-					//will be null if a value was missing
-					if(places[p]!=null)
-						placeMarkers[p]=theMap.addMarker(places[p]);
-				}
-			}
-
-		}*/
-
         protected void onPostExecute(String result) {
             //parse place data returned from Google Places
             //remove existing markers
@@ -379,15 +260,16 @@ public class ListarEventos extends ActionBarActivity {
                         //read lat lng
                         placeLL = new LatLng(Double.valueOf(placeObject.getString("latitude")),
                                 Double.valueOf(placeObject.getString("longitude")));
-
-                        vicinity =placeObject.getString("description");
+                        JSONArray et=placeObject.getJSONArray("event_translations");
+                        JSONObject pt=et.getJSONObject(0);
+                        vicinity =pt.getString("description");
                         //name
-                        placeName = placeObject.getString("name");
-                        web[p]=placeObject.getString("name");
+                        placeName = pt.getString("name");
+                        web[p]=pt.getString("name");
                         pontos[p]=placeObject;
                     }
                     catch(JSONException jse){
-                        Log.v("PLACES", "missing value");
+                        Log.v("JSON", "missing value");
                         missingValue=true;
                         jse.printStackTrace();
                     }
@@ -460,17 +342,17 @@ public class ListarEventos extends ActionBarActivity {
 
 
     public void onLocationChanged(Location location) {
-        Log.v("MainActivity", "location changed");
+        Log.v("ListarEventos", "location changed");
         updatePlaces();
     }
     public void onProviderDisabled(String provider){
-        Log.v("MainActivity", "provider disabled");
+        Log.v("ListarEventos", "provider disabled");
     }
     public void onProviderEnabled(String provider) {
-        Log.v("MainActivity", "provider enabled");
+        Log.v("ListarEventos", "provider enabled");
     }
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        Log.v("MainActivity", "status changed");
+        Log.v("ListarEventos", "status changed");
     }
 
 

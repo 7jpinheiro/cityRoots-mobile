@@ -426,7 +426,7 @@ public class ListarPOIs extends ActionBarActivity {
                         pontos[p]=placeObject;
                     }
                     catch(JSONException jse){
-                        Log.v("PLACES", "missing value");
+                        Log.v("JSON", "missing value");
                         missingValue=true;
                         jse.printStackTrace();
                     }

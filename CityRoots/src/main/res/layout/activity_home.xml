@@ -44,7 +44,7 @@
                 />
             <LinearLayout
                 style="@style/MenuRow"
-                android:onClick="onClickCities">
+                android:onClick="onClickEvents">
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/events"/>
