@@ -92,7 +92,7 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
+        mViewPager.setCurrentItem(tab.getPosition());
     }
 
     @Override
@@ -116,12 +116,12 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return PlaceholderFragment.newInstance(position);
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
+            // Show 4 total pages.
             return 4;
         }
 
@@ -174,16 +174,16 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
             Integer position = getArguments().getInt(ARG_SECTION_NUMBER);
 
             switch (position) {
-                case 1:
+                case 0:
                     rootView = inflater.inflate(R.layout.fragment_city, container, false);
                     break;
-                case 2:
+                case 1:
                     rootView = inflater.inflate(R.layout.fragment_home, container, false);
                     break;
-                case 3:
+                case 2:
                     rootView = inflater.inflate(R.layout.fragment_saved, container, false);
                     break;
-                case 4:
+                case 3:
                     rootView = inflater.inflate(R.layout.fragment_mapnearby, container, false);
                     break;
             }
