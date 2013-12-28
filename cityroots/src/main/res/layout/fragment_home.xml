@@ -18,6 +18,12 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Find nearby locations"
+                android:onClick="clickNearbyLocations"/>
+
             <LinearLayout
                 style="@style/MenuRow">
                 <ImageView
@@ -59,7 +65,7 @@
                 style="@style/MenuRow">
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/abc_ab_stacked_solid_light_holo"/>
+                    android:src="@drawable/points_of_interest"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/TPA"/>
@@ -119,7 +125,7 @@
                 style="@style/MenuRow">
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/abc_ab_stacked_solid_light_holo"/>
+                    android:src="@drawable/transportes"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/hotels"/>
@@ -143,7 +149,7 @@
                 style="@style/MenuRow">
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/abc_ab_stacked_solid_light_holo"/>
+                    android:src="@drawable/transportes"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/afd"/>

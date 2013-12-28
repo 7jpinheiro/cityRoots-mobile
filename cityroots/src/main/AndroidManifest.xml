@@ -43,6 +43,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.uminho.uce15.cityroots.NearbyPlaces"
+            android:label="@string/title_activity_nearby_places" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

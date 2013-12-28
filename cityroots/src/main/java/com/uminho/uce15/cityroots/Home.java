@@ -1,6 +1,6 @@
 package com.uminho.uce15.cityroots;
 
-import android.support.v4.app.FragmentActivity;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -9,13 +9,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import com.google.android.gms.maps.SupportMapFragment;
 
 import java.util.Locale;
 
@@ -64,6 +66,11 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+    }
+
+    public void clickNearbyLocations(View view){
+        Intent intent = new Intent(this, NearbyPlaces.class);
+        startActivity(intent);
     }
 
 
@@ -122,7 +129,7 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         @Override
         public int getCount() {
             // Show 4 total pages.
-            return 4;
+            return 3;
         }
 
         @Override
@@ -135,11 +142,10 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
                     return getString(R.string.tab_home).toUpperCase(l);
                 case 2:
                     return getString(R.string.tab_saved).toUpperCase(l);
-                case 3:
-                    return getString(R.string.tab_mapnearby).toUpperCase(l);
             }
             return null;
         }
+
     }
 
 
@@ -182,9 +188,6 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
                     break;
                 case 2:
                     rootView = inflater.inflate(R.layout.fragment_saved, container, false);
-                    break;
-                case 3:
-                    rootView = inflater.inflate(R.layout.fragment_mapnearby, container, false);
                     break;
             }
 
