@@ -153,9 +153,11 @@ public class DetalhesEventos extends ActionBarActivity {
 
                     try{
                         JSONObject ponto= new JSONObject(Ref);
-                        name = ponto.getString("name");
-                        description = ponto.getString("description");
-                        schedule = ponto.getString("schedule");
+                        JSONArray et=ponto.getJSONArray("event_translations");
+                        JSONObject pt=et.getJSONObject(0);
+                        name = pt.getString("name");
+                        description = pt.getString("description");
+                        schedule = pt.getString("schedule");
                         address = ponto.getString("address");
                         organization = ponto.getString("organization");
                         price = ponto.getString("price");
@@ -164,7 +166,7 @@ public class DetalhesEventos extends ActionBarActivity {
                         longitude = ponto.getString("longitude");
                     }
                     catch(JSONException jse){
-                        Log.v("PLACES", "missing value");
+                        Log.v("DetalhesEventos", "missing value");
                         jse.printStackTrace();
                     }
 
