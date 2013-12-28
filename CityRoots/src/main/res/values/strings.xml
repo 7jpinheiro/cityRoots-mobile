@@ -13,11 +13,24 @@
     <string name="title_activity_listar_rotas">ListarRotas</string>
     <string name="title_simple_map">MapaSimples</string>
     <string name="title_activity_login">Login</string>
-    <string name="cidades">Cidades</string>
-    <string name="Roteiros">Roteiros</string>
-    <string name="PontosDeInteresse">Pontos de Interesse</string>
-    <string name="Eventos">Eventos</string>
-    <string name="ToVisitList">ToVisitList</string>
+
+    <!--Menu Strings-->
+
+    <string name="poi">Points of Interest</string>
+    <string name="routes">Routes</string>
+    <string name="events">Events</string>
+    <string name="TPA">Traditional Products  \u0026 Art</string>
+    <string name="gastronomy">Gastronomy</string>
+    <string name="activities">Activities  \u0026 Fun</string>
+    <string name="outdoor">Outdoor</string>
+    <string name="nightlife">Nightlife</string>
+    <string name="hotels">Hotels</string>
+    <string name="transport">Transport</string>
+    <string name="afd">Accessibility for Disabled</string>
+    <string name="contacts">Useful Contacts</string>
+
+    <!--**********************-->
+
     <string name="title_activity_to_visit">ToVisitActivity</string>
     <string name="title_activity_cidades">CidadesActivity</string>
     <string name="tovisittitle">To Visit information list</string>

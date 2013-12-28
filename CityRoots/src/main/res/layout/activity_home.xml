@@ -1,163 +1,148 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    android:background="@color/white"
+    android:background="@color/gray_android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.uminho.uce15.cityroots.Home"
-    tools:ignore="MergeRootFrame" >
+    tools:ignore="MergeRootFrame">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="left|top|right|bottom">
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:clickable="true"
-            android:onClick="onClickCities"
-            android:orientation="horizontal"
-            android:background="@color/cidadeslight"
-            android:layout_weight=".2">
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:background="@color/cidades"
-                android:layout_weight=".2"
-                android:id="@+id/imgHomeCities"
-                android:src="@drawable/homecities"
-                android:layout_alignParentBottom="true" />
-
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight=".8"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/cidades"
-                android:id="@+id/textView"
-                android:layout_gravity="fill_horizontal"/>
-        </LinearLayout>
-
+   
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView" >
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:clickable="true"
-            android:onClick="onClickRoutes"
-            android:orientation="horizontal"
-            android:background="@color/roteiroslight"
-            android:layout_weight=".2">
+            android:layout_height="fill_parent">
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:background="@color/roteiros"
-                android:layout_weight=".2"
-                android:id="@+id/imgHomeRoteiros"
-                android:src="@drawable/homeroutes"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight=".8"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/Roteiros"
-                android:id="@+id/textView"
-                android:layout_gravity="fill_horizontal"/>
+            <LinearLayout
+                style="@style/MenuRow"
+                android:onClick="onClickCities">
+                <ImageView
+                    style="@style/MenuImage"
+                    android:src="@drawable/poi"/>
+
+                <TextView
+                    style="@style/MenuText"
+                    android:text="@string/poi"/>
+            </LinearLayout>
+            <View
+                style="@style/MenuLine"
+                />
+            <LinearLayout
+                style="@style/MenuRow"
+                android:onClick="onClickCities">
+                <TextView
+                    style="@style/MenuText"
+                    android:text="@string/routes"/>
+            </LinearLayout>
+            <View
+                style="@style/MenuLine"
+                />
+            <LinearLayout
+                style="@style/MenuRow"
+                android:onClick="onClickCities">
+                <TextView
+                    style="@style/MenuText"
+                    android:text="@string/events"/>
+            </LinearLayout>
+            <View
+                style="@style/MenuLine"
+                />
+            <LinearLayout
+                style="@style/MenuRow"
+                android:onClick="onClickCities">
+                <TextView
+                    style="@style/MenuText"
+                    android:text="@string/TPA"/>
+            </LinearLayout>
+            <View
+                style="@style/MenuLine"
+                />
+            <LinearLayout
+                style="@style/MenuRow"
+                android:onClick="onClickCities">
+                <TextView
+                    style="@style/MenuText"
+                    android:text="@string/gastronomy"/>
+            </LinearLayout>
+            <View
+                style="@style/MenuLine"
+                />
+            <LinearLayout
+                style="@style/MenuRow"
+                android:onClick="onClickCities">
+                <TextView
+                    style="@style/MenuText"
+                    android:text="@string/activities"/>
+            </LinearLayout>
+            <View
+                style="@style/MenuLine"
+                />
+            <LinearLayout
+                style="@style/MenuRow"
+                android:onClick="onClickCities">
+                <TextView
+                    style="@style/MenuText"
+                    android:text="@string/outdoor"/>
+            </LinearLayout>
+            <View
+                style="@style/MenuLine"
+                />
+            <LinearLayout
+                style="@style/MenuRow"
+                android:onClick="onClickCities">
+                <TextView
+                    style="@style/MenuText"
+                    android:text="@string/nightlife"/>
+            </LinearLayout>
+            <View
+                style="@style/MenuLine"
+                />
+            <LinearLayout
+                style="@style/MenuRow"
+                android:onClick="onClickCities">
+                <TextView
+                    style="@style/MenuText"
+                    android:text="@string/hotels"/>
+            </LinearLayout>
+            <View
+                style="@style/MenuLine"
+                />
+            <LinearLayout
+                style="@style/MenuRow"
+                android:onClick="onClickCities">
+                <TextView
+                    style="@style/MenuText"
+                    android:text="@string/transport"/>
+            </LinearLayout>
+            <View
+                style="@style/MenuLine"
+                />
+            <LinearLayout
+                style="@style/MenuRow"
+                android:onClick="onClickCities">
+                <TextView
+                    style="@style/MenuText"
+                    android:text="@string/afd"/>
+            </LinearLayout>
+            <View
+                style="@style/MenuLine"
+                />
+            <LinearLayout
+                style="@style/MenuRow"
+                android:onClick="onClickCities">
+                <TextView
+                    style="@style/MenuText"
+                    android:text="@string/contacts"/>
+            </LinearLayout>
+
+
         </LinearLayout>
 
+    </ScrollView>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:clickable="true"
-            android:onClick="onClickPoI"
-            android:orientation="horizontal"
-            android:background="@color/pontoslight"
-            android:layout_weight=".2">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:background="@color/pontos"
-                android:layout_weight=".2"
-                android:id="@+id/imgHomePoI"
-                android:src="@drawable/homepoi"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight=".8"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/PontosDeInteresse"
-                android:id="@+id/textView"
-                android:layout_gravity="fill_horizontal"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:clickable="true"
-            android:onClick="onClickEvents"
-            android:orientation="horizontal"
-            android:background="@color/eventoslight"
-            android:layout_weight=".2">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:background="@color/eventos"
-                android:layout_weight=".2"
-                android:id="@+id/imgHomeEventos"
-                android:src="@drawable/homeevents"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight=".8"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/Eventos"
-                android:id="@+id/textView"
-                android:layout_gravity="fill_horizontal"/>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:clickable="true"
-            android:onClick="onClickToVisit"
-            android:orientation="horizontal"
-            android:background="@color/tovisitlight"
-            android:layout_weight=".2">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:background="@color/tovisit"
-                android:layout_weight=".2"
-                android:id="@+id/imgHomeToVisit"
-                android:src="@drawable/hometovisit"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight=".8"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/ToVisitList"
-                android:id="@+id/textView"
-                android:layout_gravity="fill_horizontal"/>
-        </LinearLayout>
-
-
-    </LinearLayout>
 </FrameLayout>

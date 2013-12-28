@@ -2,6 +2,9 @@
 <resources>
     <color name="white">#ffffffff</color>
 
+    <color name="blue_android">#B433B5E5</color>
+    <color name="gray_android">#333333</color>
+
     <color name="cidades">#0099cc</color>
     <color name="cidadeslight">#fff8f8f8</color>
 
