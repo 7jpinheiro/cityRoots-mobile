@@ -20,10 +20,10 @@
 
             <LinearLayout
                 style="@style/MenuRow"
-                android:onClick="onClickCities">
+                android:onClick="onClickPoI">
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/poi"/>
+                    android:src="@drawable/homepoi"/>
 
                 <TextView
                     style="@style/MenuText"
