@@ -19,6 +19,7 @@ import android.os.Build;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.facebook.widget.LoginButton;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -26,8 +27,6 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.plus.PlusClient;
 
 public class Login extends ActionBarActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +101,19 @@ public class Login extends ActionBarActivity {
             signInButton.setOnClickListener(this);
 
             return rootView;
+        }
+
+
+        @Override
+        public void onStart() {
+            super.onStart();
+            mPlusClient.connect();
+        }
+
+        @Override
+        public void onStop() {
+            super.onStop();
+            mPlusClient.disconnect();
         }
 
         @Override
