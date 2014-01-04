@@ -27,7 +27,7 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/poi"
-                android:onClick="clickPOI">
+                >
                 <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/points_of_interest"/>
@@ -43,7 +43,7 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/routes"
-                android:onClick="clickRoutes">
+                >
                 <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/route"/>
@@ -57,7 +57,7 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/events"
-                android:onClick="clickEvents">
+                >
                 <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/events"/>
@@ -71,7 +71,7 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/tpa"
-                android:onClick="clickTPA">
+                >
                 <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/points_of_interest"/>
@@ -85,7 +85,7 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/gastronomy"
-                android:onClick="clickGastronomy">
+                >
                 <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/gastronomy"/>
@@ -99,7 +99,7 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/activities"
-                android:onClick="clickActivities">
+                >
                 <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/activity"/>
@@ -113,7 +113,7 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/outdoor"
-                android:onClick="clickOutdoor">
+                >
                 <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/outdoor"/>
@@ -127,7 +127,7 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/nightlife"
-                android:onClick="clickNightlife">
+                >
                 <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/nightlife"/>
@@ -141,7 +141,7 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/hotels"
-                android:onClick="clickHotels">
+                >
                 <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/transportes"/>
@@ -155,7 +155,7 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/transport"
-                android:onClick="clickTransport">
+                >
                 <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/transportes"/>
@@ -169,7 +169,7 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/afd"
-                android:onClick="clickAccessibility">
+                >
                 <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/transportes"/>
@@ -183,7 +183,7 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/contacts"
-                android:onClick="clickContacts">
+                >
                 <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/contacts"/>
