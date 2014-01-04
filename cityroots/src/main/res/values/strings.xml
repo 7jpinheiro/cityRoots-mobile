@@ -35,6 +35,7 @@
     <string name="title_activity_simple_map">Simple map</string>
     <string name="loadinglist">Loading list</string>
     <string name="title_activity_nearby_places">NearbyPlaces</string>
+    <string name="title_activity_category">Category</string>
     <string name="title_activity_login">Login</string>
 
 </resources>

@@ -51,6 +51,10 @@
             android:name="com.uminho.uce15.cityroots.Login"
             android:label="@string/title_activity_login" >
         </activity>
+        <activity
+            android:name="com.uminho.uce15.cityroots.Category"
+            android:label="@string/title_activity_category" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
