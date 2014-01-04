@@ -1,5 +1,6 @@
 package com.uminho.uce15.cityroots;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,11 @@ public class Login extends ActionBarActivity {
         }
     }
 
+    public void skipLogin(View view){
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
