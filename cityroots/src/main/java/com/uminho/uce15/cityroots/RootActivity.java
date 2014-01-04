@@ -19,7 +19,7 @@ public class RootActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         Intent intent = null;
 
-        if( false ){
+        if( true){
             intent = new Intent(this, Home.class);
         }else{
             intent = new Intent(this, Login.class);

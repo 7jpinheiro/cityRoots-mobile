@@ -72,98 +72,10 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         startActivity(intent);
     }
 
-    public void clickPOI(View view){
+    public void clickCategory(View view){
         Intent intent = new Intent(this, Category.class);
         Bundle b = new Bundle();
-        b.putInt("id_category",R.id.poi);
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
-    public void clickRoutes(View view){
-        Intent intent = new Intent(this, Category.class);
-        Bundle b = new Bundle();
-        b.putInt("id_category",R.id.routes);
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
-    public void clickEvents(View view){
-        Intent intent = new Intent(this, Category.class);
-        Bundle b = new Bundle();
-        b.putInt("id_category",R.id.events);
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
-    public void clickTPA(View view){
-        Intent intent = new Intent(this, Category.class);
-        Bundle b = new Bundle();
-        b.putInt("id_category",R.id.tpa);
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
-    public void clickGastronomy(View view){
-        Intent intent = new Intent(this, Category.class);
-        Bundle b = new Bundle();
-        b.putInt("id_category",R.id.gastronomy);
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
-    public void clickActivities(View view){
-        Intent intent = new Intent(this, Category.class);
-        Bundle b = new Bundle();
-        b.putInt("id_category",R.id.activities);
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
-    public void clickOutdoor(View view){
-        Intent intent = new Intent(this, Category.class);
-        Bundle b = new Bundle();
-        b.putInt("id_category",R.id.outdoor);
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
-    public void clickNightlife(View view){
-        Intent intent = new Intent(this, Category.class);
-        Bundle b = new Bundle();
-        b.putInt("id_category",R.id.nightlife);
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
-    public void clickHotels(View view){
-        Intent intent = new Intent(this, Category.class);
-        Bundle b = new Bundle();
-        b.putInt("id_category",R.id.hotels);
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
-    public void clickTransport(View view){
-        Intent intent = new Intent(this, Category.class);
-        Bundle b = new Bundle();
-        b.putInt("id_category",R.id.transport);
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
-    public void clickAccessibility(View view){
-        Intent intent = new Intent(this, Category.class);
-        Bundle b = new Bundle();
-        b.putInt("id_category",R.id.afd);
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
-    public void clickContacts(View view){
-        Intent intent = new Intent(this, Category.class);
-        Bundle b = new Bundle();
-        b.putInt("id_category",R.id.contacts);
+        b.putInt("id_category",view.getId());
         intent.putExtras(b);
         startActivity(intent);
     }
