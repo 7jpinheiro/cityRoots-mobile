@@ -66,6 +66,9 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+
+        //Set Home as default tab selected
+        mViewPager.setCurrentItem(1);
     }
 
     public void clickNearbyLocations(View view){
