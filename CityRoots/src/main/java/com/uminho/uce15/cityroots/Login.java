@@ -19,10 +19,15 @@ import android.os.Build;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.plus.PlusClient;
 
@@ -79,8 +84,72 @@ public class Login extends ActionBarActivity {
         private PlusClient mPlusClient;
         private ConnectionResult mConnectionResult = null;
 
+        private static final String TAG = "MainFragment";
+
+        private Session.StatusCallback callback = new Session.StatusCallback() {
+            @Override
+            public void call(Session session, SessionState state, Exception exception) {
+                onSessionStateChange(session, state, exception);
+            }
+        };
+
+        private UiLifecycleHelper uiHelper;
 
         public PlaceholderFragment() {
+        }
+
+        private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+            if (state.isOpened()) {
+                Log.i(TAG, state.toString());
+            } else if (state.isClosed()) {
+                Log.i(TAG, state.toString());
+            }
+        }
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            uiHelper = new UiLifecycleHelper(getActivity(), callback);
+            uiHelper.onCreate(savedInstanceState);
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            // For scenarios where the main activity is launched and user
+            // session is not null, the session state change notification
+            // may not be triggered. Trigger it if it's open/closed.
+            Session session = Session.getActiveSession();
+            if (session != null &&
+                    (session.isOpened() || session.isClosed()) ) {
+                onSessionStateChange(session, session.getState(), null);
+            }
+
+            uiHelper.onResume();
+        }
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            uiHelper.onActivityResult(requestCode, resultCode, data);
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+            uiHelper.onPause();
+        }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            uiHelper.onDestroy();
+        }
+
+        @Override
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            uiHelper.onSaveInstanceState(outState);
         }
 
         @Override
@@ -100,10 +169,14 @@ public class Login extends ActionBarActivity {
             SignInButton signInButton = (SignInButton) rootView.findViewById(R.id.sign_in_button);
             signInButton.setOnClickListener(this);
 
+            LoginButton authButton = (LoginButton) rootView.findViewById(R.id.authButton);
+            authButton.setFragment(this);
+
+
             return rootView;
         }
 
-
+/*
         @Override
         public void onStart() {
             super.onStart();
@@ -115,7 +188,7 @@ public class Login extends ActionBarActivity {
             super.onStop();
             mPlusClient.disconnect();
         }
-
+*/
         @Override
         public void onClick(View view) {
 
@@ -165,15 +238,6 @@ public class Login extends ActionBarActivity {
             }
         }
 
-
-        @Override
-        public void onActivityResult(int requestCode, int responseCode, Intent intent) {
-            if (requestCode == REQUEST_CODE_RESOLVE_ERR && responseCode == RESULT_OK) {
-                mConnectionResult = null;
-                mPlusClient.disconnect();
-                mPlusClient.connect();
-            }
-        }
     }
 
     public void login(View view) {
