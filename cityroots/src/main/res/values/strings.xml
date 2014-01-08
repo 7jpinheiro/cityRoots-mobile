@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">CityRoots</string>
+    <string name="app_id">380098872136168</string>
     <string name="tab_home">Home</string>
     <string name="tab_mapnearby">Nearby</string>
     <string name="tab_saved">Saved</string>

@@ -10,18 +10,44 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.LoginButton;
+
 import com.google.android.gms.common.*;
 import com.google.android.gms.common.GooglePlayServicesClient.*;
 import com.google.android.gms.plus.PlusClient;
 
 public class Login extends Activity implements View.OnClickListener,
         ConnectionCallbacks, OnConnectionFailedListener {
+
+    //Google Plus
     private static final String TAG = "ExampleActivity";
     private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
 
     private ProgressDialog mConnectionProgressDialog;
     private PlusClient mPlusClient;
     private ConnectionResult mConnectionResult;
+
+
+    //Facebook
+    private UiLifecycleHelper uiHelper;
+
+    private Session.StatusCallback callback = new Session.StatusCallback() {
+        @Override
+        public void call(Session session, SessionState state, Exception exception) {
+            onSessionStateChange(session, state, exception);
+        }
+    };
+
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+        if (state.isOpened()) {
+            Log.i(TAG, state.toString());
+        } else if (state.isClosed()) {
+            Log.i(TAG, state.toString());
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +68,13 @@ public class Login extends Activity implements View.OnClickListener,
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
 
+        uiHelper = new UiLifecycleHelper(this, callback);
+        uiHelper.onCreate(savedInstanceState);
+
+        LoginButton authButton = (LoginButton) findViewById(R.id.authButton);
+
+        //authButton.setFragment();
+
     }
 
     @Override
@@ -49,6 +82,40 @@ public class Login extends Activity implements View.OnClickListener,
         mConnectionProgressDialog.dismiss();
         Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
         Log.d("G+Login", "User logged in:" + mPlusClient.getAccountName());
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // For scenarios where the main activity is launched and user
+        // session is not null, the session state change notification
+        // may not be triggered. Trigger it if it's open/closed.
+        Session session = Session.getActiveSession();
+        if (session != null &&
+                (session.isOpened() || session.isClosed()) ) {
+            onSessionStateChange(session, session.getState(), null);
+        }
+
+        uiHelper.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        uiHelper.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        uiHelper.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        uiHelper.onSaveInstanceState(outState);
     }
 
     @Override
@@ -107,6 +174,8 @@ public class Login extends Activity implements View.OnClickListener,
             mConnectionResult = null;
             mPlusClient.connect();
         }
+        super.onActivityResult(requestCode, responseCode, intent);
+        uiHelper.onActivityResult(requestCode, responseCode, intent);
     }
 
     @Override
