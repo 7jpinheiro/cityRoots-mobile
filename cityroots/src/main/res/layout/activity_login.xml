@@ -2,43 +2,41 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@color/gray_android">
+    android:background="@color/gray_android"
+    android:weightSum="1">
 
-    <!--ImageView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:id="@+id/imageView"
-        android:layout_gravity="center_horizontal" /-->
-
-    <!--TextView
-        android:layout_width="fill_parent"
-        android:layout_height="20dp"
         android:layout_gravity="center_horizontal"
+        android:src="@drawable/logo"
+        android:onClick="skipLogin"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:text="CityRoots"
         android:textStyle="bold"
-        android:textSize="@dimen/com_facebook_loginview_text_size"
-        android:textColor="@color/blue_android"/-->
+        android:textSize="60dp"
+        android:textColor="@color/blue_android"
+        android:gravity="center"
+        android:layout_weight="0.75" />
 
     <com.facebook.widget.LoginButton
         android:id="@+id/authButton"
-        android:layout_width="0dp"
-        android:layout_weight=".7"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="bottom"
         android:layout_gravity="center_horizontal"/>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_width="0dp"
-        android:layout_weight=".7"
-        android:layout_height="wrap_content"
-        android:text="Sign in with Google"/>
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Skip Login"
-        android:id="@+id/button"
-        android:onClick="skipLogin"
-        android:layout_gravity="center" />
+        android:layout_gravity="center_horizontal"
+        android:gravity="bottom"
+        android:text="Sign in with Google"/>
 
 </LinearLayout>

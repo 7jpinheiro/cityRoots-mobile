@@ -6,16 +6,17 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.Request;
+import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.LoginButton;
+import com.facebook.model.GraphUser;
 
 import com.google.android.gms.common.*;
 import com.google.android.gms.common.GooglePlayServicesClient.*;
@@ -25,12 +26,14 @@ public class Login extends Activity implements View.OnClickListener,
         ConnectionCallbacks, OnConnectionFailedListener {
 
     //Google Plus
-    private static final String TAG = "ExampleActivity";
+    private static final String TAG = "LoginActivity";
     private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
 
     private ProgressDialog mConnectionProgressDialog;
     private PlusClient mPlusClient;
     private ConnectionResult mConnectionResult;
+
+    private String fbUsername;
 
 
     //Facebook
@@ -46,9 +49,33 @@ public class Login extends Activity implements View.OnClickListener,
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         if (state.isOpened()) {
             Log.i(TAG, state.toString());
+            requestFbUsername(session);
         } else if (state.isClosed()) {
             Log.i(TAG, state.toString());
         }
+    }
+
+    private void requestFbUsername(final Session session) {
+        // Make an API call to get user data and define a
+        // new callback to handle the response.
+        Request request = Request.newMeRequest(session,
+                new Request.GraphUserCallback() {
+                    @Override
+                    public void onCompleted(GraphUser user, Response response) {
+                        // If the response is successful
+                        if (session == Session.getActiveSession()) {
+                            if (user != null) {
+                                // Set the Textview's text to the user's name.
+                                fbUsername = user.getUsername();
+                                Log.d(TAG, "Username:" + fbUsername);
+                            }
+                        }
+                        if (response.getError() != null) {
+                            // Handle errors, will do so later.
+                        }
+                    }
+                });
+        request.executeAsync();
     }
 
     @Override
@@ -130,6 +157,8 @@ public class Login extends Activity implements View.OnClickListener,
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.sign_in_button && !mPlusClient.isConnected()) {
+            mPlusClient.connect();
+
             if (mConnectionResult == null) {
                 mConnectionProgressDialog.show();
             } else {
@@ -150,7 +179,6 @@ public class Login extends Activity implements View.OnClickListener,
     @Override
     protected void onStart() {
         super.onStart();
-        mPlusClient.connect();
     }
 
     @Override

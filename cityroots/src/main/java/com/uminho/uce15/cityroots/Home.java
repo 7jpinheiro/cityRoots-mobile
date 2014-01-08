@@ -29,6 +29,8 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        getSupportActionBar().setTitle( getString(R.string.app_name) + " - " + getString(R.string.myCity));
+
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
