@@ -451,8 +451,8 @@ public class ListarPOIs extends ActionBarActivity {
                 }
             }
 
-            adapter = new Lista(ListarPOIs.this,web,imageId);
-            list.setAdapter(adapter);
+            if(web!=null){adapter = new Lista(ListarPOIs.this,web,imageId);
+                          list.setAdapter(adapter);}
         }
     }
 

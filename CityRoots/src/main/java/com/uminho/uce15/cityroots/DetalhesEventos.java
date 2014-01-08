@@ -1,5 +1,4 @@
 package com.uminho.uce15.cityroots;
-
 /**
  * Created by John on 18-12-2013.
  */
@@ -37,13 +36,10 @@ public class DetalhesEventos extends ActionBarActivity {
 
     // flag for Internet connection status
     Boolean isInternetPresent = false;
-
     // Alert Dialog Manager
     AlertDialogManager alert = new AlertDialogManager();
-
     // Progress dialog
     ProgressDialog pDialog;
-
     // KEY Strings
     public static String Ref= null; // id of the place
 
@@ -221,17 +217,17 @@ public class DetalhesEventos extends ActionBarActivity {
                         @Override
                         public void onClick(View arg0) {
 
-                            // Intent i = new Intent(getApplicationContext(),SimplePlaceMapActivity.class);
+                            Intent i = new Intent(getApplicationContext(),SimplePlaceMapActivity.class);
 
                             // Sending user current geo location
-                            //i.putExtra("place_latitude", lat1);
-                            //i.putExtra("place_longitude", lng1);
+                            i.putExtra("place_latitude", lat1);
+                            i.putExtra("place_longitude", lng1);
 
                             // passing near places to map activity
                             //  i.putExtra("near_places", nem);
                             // staring activity
 
-                            //startActivity(i);
+                            startActivity(i);
                         }
                     });
 
