@@ -17,7 +17,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        String user = prefs.getString("username", "");
+        //String user = prefs.getString("username", "");
         Intent intent;
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
@@ -28,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-
+        String user = "";
         if (user.equals("")){
             intent = new Intent(this, Login.class);
             this.startActivity(intent);
