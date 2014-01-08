@@ -1,7 +1,23 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+<android.support.v4.widget.SlidingPaneLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/pane"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:scrollbarDefaultDelayBeforeFade="2">
+
+
+<ListView
+    android:id="@+id/list"
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="left"  >
+</ListView>
+
+
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/map"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.uminho.uce15.cityroots.Category"
-    tools:ignore="MergeRootFrame" />
+    class="com.google.android.gms.maps.SupportMapFragment"/>
+
+</android.support.v4.widget.SlidingPaneLayout>
