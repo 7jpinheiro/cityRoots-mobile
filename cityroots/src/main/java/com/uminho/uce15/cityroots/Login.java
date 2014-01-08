@@ -6,8 +6,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.Session;
@@ -66,15 +68,22 @@ public class Login extends Activity implements View.OnClickListener,
         mConnectionProgressDialog = new ProgressDialog(this);
 
 
-        findViewById(R.id.sign_in_button).setOnClickListener(this);
+        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        signInButton.setOnClickListener(this);
+
+        for (int i = 0; i < signInButton.getChildCount(); i++) {
+            View v = signInButton.getChildAt(i);
+
+            if (v instanceof TextView) {
+                TextView tv = (TextView) v;
+                tv.setText("Log in with Google");
+                tv.setTextAppearance(getApplicationContext(),R.style.com_facebook_loginview_default_style);
+                break;
+            }
+        }
 
         uiHelper = new UiLifecycleHelper(this, callback);
         uiHelper.onCreate(savedInstanceState);
-
-        LoginButton authButton = (LoginButton) findViewById(R.id.authButton);
-
-        //authButton.setFragment();
-
     }
 
     @Override

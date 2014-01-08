@@ -5,23 +5,34 @@
     android:layout_height="match_parent"
     tools:context="com.uminho.uce15.cityroots.Login"
     tools:ignore="MergeRootFrame">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Skip Login"
-        android:id="@+id/button"
-        android:onClick="skipLogin"
-        android:layout_gravity="center" />
 
-    <com.facebook.widget.LoginButton
-        android:id="@+id/authButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        />
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:background="@color/gray_android">
+
+        <com.facebook.widget.LoginButton
+            android:id="@+id/authButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign in with Google"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skip Login"
+            android:id="@+id/button"
+            android:onClick="skipLogin"
+            android:layout_gravity="center" />
+
+        </LinearLayout>
+
+
 </FrameLayout>
