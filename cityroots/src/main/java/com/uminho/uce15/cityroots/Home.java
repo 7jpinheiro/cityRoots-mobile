@@ -141,7 +141,7 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         @Override
         public int getCount() {
             // Show 4 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -152,8 +152,6 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
                     return getString(R.string.tab_cities).toUpperCase(l);
                 case 1:
                     return getString(R.string.tab_home).toUpperCase(l);
-                case 2:
-                    return getString(R.string.tab_saved).toUpperCase(l);
             }
             return null;
         }
@@ -197,9 +195,6 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
                     break;
                 case 1:
                     rootView = inflater.inflate(R.layout.fragment_home, container, false);
-                    break;
-                case 2:
-                    rootView = inflater.inflate(R.layout.fragment_saved, container, false);
                     break;
             }
 
