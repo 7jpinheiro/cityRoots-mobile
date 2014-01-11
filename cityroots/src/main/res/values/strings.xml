@@ -41,4 +41,6 @@
     <string name="title_activity_category">Category</string>
     <string name="title_activity_login">Login</string>
 
+    <string name="title_activity_listar_eventos">Eventos</string>
+    <string name="title_activity_detalhes_eventos">Detalhes</string>
 </resources>

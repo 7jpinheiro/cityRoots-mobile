@@ -1,5 +1,6 @@
 package com.uminho.uce15.cityroots;
 
+import android.content.Intent;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -39,6 +40,7 @@ public class Category extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+
 
         slidingPaneLayout = (SlidingPaneLayout)findViewById(R.id.pane);
         list=(ListView)findViewById(R.id.list);
@@ -80,7 +82,7 @@ public class Category extends ActionBarActivity {
                 slidingEnabled = false;
             }
         });
-        /*
+
         Bundle b = getIntent().getExtras();
         int value = b.getInt("id_category");
 
@@ -90,6 +92,8 @@ public class Category extends ActionBarActivity {
             case R.id.routes:
                 break;
             case R.id.events:
+                Intent intent = new Intent(this, ListarEventos.class);
+                startActivity(intent);
                 break;
             case R.id.tpa:
                 break;
@@ -109,7 +113,7 @@ public class Category extends ActionBarActivity {
                 break;
             case R.id.contacts:
                 break;
-        }*/
+        }
     }
 
 
