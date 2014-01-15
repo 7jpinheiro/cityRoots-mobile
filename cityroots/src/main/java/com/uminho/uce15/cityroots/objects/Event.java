@@ -8,9 +8,8 @@ public class Event extends Poi{
     private String organization;
     private String program;
 
-    public Event(String name, String schedule, String language, String description, String transport, String price, String site, String email, String address, float latitude, float longitude, boolean is_active, int timestamp, boolean has_accessibility, String type, ArrayList<Photo> photos, float rating, int start, int end, String organization, String program) {
-
-        super(name, schedule, language, description, transport, price, site, email, address, latitude, longitude, is_active, timestamp, has_accessibility, type, photos, rating);
+    public Event(String name, String schedule, String language, String description, String transport, String price, String site, String email, String address, double latitude, double longitude, boolean is_active, int timestamp, boolean has_accessibility, ArrayList<String> type, ArrayList<Photo> photos, double rating, ArrayList<Comment> comments, int start, int end, String organization, String program) {
+        super(name, schedule, language, description, transport, price, site, email, address, latitude, longitude, is_active, timestamp, has_accessibility, type, photos, rating, comments);
         this.start = start;
         this.end = end;
         this.organization = organization;
