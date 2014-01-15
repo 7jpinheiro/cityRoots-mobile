@@ -70,10 +70,12 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         mViewPager.setCurrentItem(1);
     }
 
-    public void goToPlayStore(){
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://search?q=pub:CityRoots"));
-        startActivity(intent);
+    public void goToGooglePlay(View view){
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:CityRoots")));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/search?q=pub:<publisher_name>")));
+        }
     }
 
     public void clickNearbyLocations(View view){
