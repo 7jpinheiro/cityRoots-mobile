@@ -2,6 +2,7 @@ package com.uminho.uce15.cityroots;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.uminho.uce15.cityroots.objects.Attraction;
+
+import java.util.List;
 import java.util.Locale;
 
 
@@ -79,8 +84,16 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
     }
 
     public void clickNearbyLocations(View view){
-        Intent intent = new Intent(this, NearbyPlaces.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, NearbyPlaces.class);
+        //startActivity(intent);
+        DataProvider dp = new DataProvider();
+        List<Attraction> attrs = dp.getAttractions();
+
+        for( Attraction attr : attrs){
+            Log.d("ATTR", attr.getEmail());
+            Log.d("ATTR", attr.getAddress());
+
+        }
     }
 
     public void clickCategory(View view){

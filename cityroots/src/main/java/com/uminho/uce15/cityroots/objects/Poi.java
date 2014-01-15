@@ -2,7 +2,7 @@ package com.uminho.uce15.cityroots.objects;
 
 import java.util.ArrayList;
 
-public abstract class Poi {
+public class Poi {
     private String name;
     private String schedule;
     private String language;
@@ -41,6 +41,27 @@ public abstract class Poi {
         this.photos = photos;
         this.rating = rating;
         this.comments = comments;
+    }
+
+    public Poi( Poi p){
+        this.name = p.getName();
+        this.schedule = p.getSchedule();
+        this.language = p.getLanguage();
+        this.description = p.getDescription();
+        this.transport = p.getTransport();
+        this.price = p.getPrice();
+        this.site = p.getSite();
+        this.email = p.getEmail();
+        this.address = p.getAddress();
+        this.latitude = p.getLatitude();
+        this.longitude = p.getLongitude();
+        this.is_active = p.isIs_active();
+        this.timestamp = p.getTimestamp();
+        this.has_accessibility = p.isHas_accessibility();
+        this.type = p.getType();
+        this.photos = p.getPhotos();
+        this.rating = p.getRating();
+        this.comments = p.getComments();
     }
 
     public String getName() {

@@ -1,24 +1,21 @@
 package com.uminho.uce15.cityroots;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.uminho.uce15.cityroots.objects.*;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,16 +28,16 @@ public class DataProvider {
     }
 
 
-    public Poi createPoiFromJson(JSONObject jObj) throws JSONException {
+    public Poi createPoiFromJson(JSONObject jObj, String type) throws JSONException {
 
         int trpt_index = 0;
 
-        String name        = jObj.getJSONArray("attraction_translations").getJSONObject(trpt_index).getString("name");
-        String schedule    = jObj.getJSONArray("attraction_translations").getJSONObject(trpt_index).getString("schedule");
-        String language    = jObj.getJSONArray("attraction_translations").getJSONObject(trpt_index).getString("schedule");
-        String description = jObj.getJSONArray("attraction_translations").getJSONObject(trpt_index).getString("description");
-        String transport   = jObj.getJSONArray("attraction_translations").getJSONObject(trpt_index).getString("transport");
-        String price       = jObj.getJSONArray("attraction_translations").getJSONObject(trpt_index).getString("price");
+        String name        = jObj.getJSONArray(type + "_translations").getJSONObject(trpt_index).getString("name");
+        String schedule    = jObj.getJSONArray(type + "_translations").getJSONObject(trpt_index).getString("schedule");
+        String language    = jObj.getJSONArray(type + "_translations").getJSONObject(trpt_index).getString("schedule");
+        String description = jObj.getJSONArray(type + "_translations").getJSONObject(trpt_index).getString("description");
+        String transport   = jObj.getJSONArray(type + "_translations").getJSONObject(trpt_index).getString("transport");
+        String price       = jObj.getJSONArray(type + "_translations").getJSONObject(trpt_index).getString("price");
         String site        = jObj.getString("site");
         String email       = jObj.getString("email");
         String address     = jObj.getString("address");
@@ -49,12 +46,17 @@ public class DataProvider {
         boolean is_active  = jObj.getBoolean("active");
         int timestamp      = jObj.getInt("timestamp");
         boolean has_accessibility = jObj.getBoolean("accessibility");
-        String type        = "notype";
+
+
+        ArrayList<String> types = new ArrayList<String>();
+        JSONArray listTypes = jObj.getJSONArray("types");
+        for( int i=0; i<listTypes.length(); i++){
+            types.add( listTypes.getString(i) );
+        }
 
 
         ArrayList<Photo> photos = new ArrayList<Photo>();
         JSONArray listPhotos = jObj.getJSONArray("photo_attractions");
-
         for( int i=0; i<listPhotos.length(); i++){
             JSONObject joObj = listPhotos.getJSONObject(i);
             String photoName = joObj.getString("name");
@@ -66,14 +68,16 @@ public class DataProvider {
 
         ArrayList<Comment> comments = new ArrayList<Comment>();
         JSONArray listComments = jObj.getJSONArray("comment_attractions");
-
         for( int i=0; i<listComments.length(); i++){
             JSONObject joObj = listComments.getJSONObject(i);
-            String comment     = joObj.getString("comment");
+
             String userName    = joObj.getJSONObject("mobile_user").getString("firstname");
             String userSurname = joObj.getJSONObject("mobile_user").getString("surname");
+            User u = new User(userName, userSurname);
 
-            comments.add( null );
+            String comment     = joObj.getString("comment");
+
+            comments.add( new Comment(comment, u ));
         }
 
 
@@ -82,86 +86,66 @@ public class DataProvider {
 
 
         return new Poi(name, schedule, language, description, transport, price, site, email, address,
-                latitude, longitude, is_active, timestamp, has_accessibility, type, photos, rating);
+                latitude, longitude, is_active, timestamp, has_accessibility, types, photos, rating, comments);
     }
 
     public List<Attraction> getAttractions(){
         //get JSON from webserver
+        String poiType = "attraction";
+
         List<Attraction> res = new ArrayList<Attraction>();
-        String uri = uriBase + "attractions.json";
-        JSONArray jsonAttractions = getJSONFromUrl( uri );
+        String uri = uriBase + poiType + "s.json";
+        JSONArray jsonArray = null;
+        try {
+            jsonArray = getJSON(uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        for( int i=0; i<jsonAttractions.length(); i++){
+        for( int i=0; i<jsonArray.length(); i++){
             try {
-                JSONObject jObj = jsonAttractions.getJSONObject(i);
+                JSONObject jObj = jsonArray.getJSONObject(i);
+                Poi p = createPoiFromJson(jObj, poiType);
 
+                boolean b = jObj.getBoolean("reference_point");
+
+                Attraction a = new Attraction(p, b);
+                res.add(a);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
-            //res.add(tmp);
         }
         return res;
     }
 
-    public List<Comment> getComments(int poi_id){
-
-        //get JSON from webserver
-
-        //parse
-
-
-        //create list and return
-
-        List<Comment> res = new ArrayList<Comment>();
-
-
-        return res;
-    }
-
     public List<Event> getEvents(){
-
-        //get JSON from webserver
-
-        //parse
-
-
-        //create list and return
+        String poiType = "event";
 
         List<Event> res = new ArrayList<Event>();
+        String uri = uriBase + poiType + "s.json";
+        JSONArray jsonArray = null;
+        try {
+            jsonArray = getJSON(uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        for( int i=0; i<jsonArray.length(); i++){
+            try {
+                JSONObject jObj = jsonArray.getJSONObject(i);
+                Poi p = createPoiFromJson(jObj, poiType);
 
-        return res;
-    }
+                String start        = jObj.getString("startdate");
+                String end          = jObj.getString("enddate");
+                String organization = jObj.getString("organization");
+                String program      = jObj.getString("program");
 
-    public List<Photo> getPhotos(int poi_id){
-
-        //get JSON from webserver
-
-        //parse
-
-
-        //create list and return
-
-        List<Photo> res = new ArrayList<Photo>();
-
-
-        return res;
-    }
-
-    public List<Poi> getPois(){
-
-        //get JSON from webserver
-
-        //parse
-
-
-        //create list and return
-
-        List<Poi> res = new ArrayList<Poi>();
-
-
+                Event e = new Event(p, start, end, organization, program);
+                res.add(e);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         return res;
     }
 
@@ -181,76 +165,58 @@ public class DataProvider {
     }
 
     public List<Service> getServices(){
-
-        //get JSON from webserver
-
-        //parse
-
-
-        //create list and return
+        String poiType = "service";
 
         List<Service> res = new ArrayList<Service>();
-
-
-        return res;
-    }
-
-    public List<User> getUsers(){
-
-        //get JSON from webserver
-
-        //parse
-
-
-        //create list and return
-
-        List<User> res = new ArrayList<User>();
-
-
-        return res;
-    }
-
-    public JSONArray getJSONFromUrl(String url) {
-        InputStream is = null;
-        JSONArray jObj = null;
-        String json = "";
-        // Making HTTP request
+        String uri = uriBase + poiType + "s.json";
+        JSONArray jsonArray = null;
         try {
-            // defaultHttpClient
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(url);
-            HttpResponse httpResponse = httpClient.execute(httpPost);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            is = httpEntity.getContent();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
+            jsonArray = getJSON(uri);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "iso-8859-1"), 8);
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
+        for( int i=0; i<jsonArray.length(); i++){
+            try {
+                JSONObject jObj = jsonArray.getJSONObject(i);
+                Poi p = createPoiFromJson(jObj, poiType);
+
+                // boolean is_reference_point, int capacity, String details ) {
+                boolean is_reference_point = jObj.getBoolean("reference_point");
+                int capacity = jObj.getInt("capacity");
+                String details = jObj.getString("details");
+
+                Service s = new Service(p, is_reference_point, capacity, details );
+                res.add(s);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            is.close();
-            json = sb.toString();
-        } catch (Exception e) {
-            Log.e("Buffer Error", "Error converting result " + e.toString());
         }
-        // try parse the string to a JSON object
+        return res;
+    }
+
+    public JSONArray getJSON(String url) throws IOException {
+        JSONArray jArr = new JSONArray( );
+        String responseString;
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpResponse response = httpclient.execute(new HttpGet(url));
+        StatusLine statusLine = response.getStatusLine();
+        if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            response.getEntity().writeTo(out);
+            out.close();
+            responseString = out.toString();
+        } else{
+            response.getEntity().getContent().close();
+            throw new IOException(statusLine.getReasonPhrase());
+        }
+
         try {
-            jObj = new JSONArray(json);
+            jArr = new JSONArray(responseString);
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
-        // return JSON String
-        return jObj;
+        return jArr;
     }
 
 }

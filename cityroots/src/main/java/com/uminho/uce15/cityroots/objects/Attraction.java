@@ -10,6 +10,12 @@ public class Attraction extends Poi{
         this.is_reference_point = is_reference_point;
     }
 
+    public Attraction(Poi p, boolean is_reference_point) {
+        super(p);
+        this.is_reference_point = is_reference_point;
+    }
+
+
     public boolean isIs_reference_point() {
         return is_reference_point;
     }

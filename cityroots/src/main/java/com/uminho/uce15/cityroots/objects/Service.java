@@ -14,6 +14,13 @@ public class Service extends Poi {
         this.details = details;
     }
 
+    public Service(Poi p, boolean is_reference_point, int capacity, String details ) {
+        super(p);
+        this.is_reference_point = is_reference_point;
+        this.capacity = capacity;
+        this.details = details;
+    }
+
     public boolean isIs_reference_point() {
         return is_reference_point;
     }
