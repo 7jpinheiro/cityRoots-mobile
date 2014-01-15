@@ -181,7 +181,6 @@ public class DataProvider {
                 JSONObject jObj = jsonArray.getJSONObject(i);
                 Poi p = createPoiFromJson(jObj, poiType);
 
-                // boolean is_reference_point, int capacity, String details ) {
                 boolean is_reference_point = jObj.getBoolean("reference_point");
                 int capacity = jObj.getInt("capacity");
                 String details = jObj.getString("details");
@@ -195,7 +194,7 @@ public class DataProvider {
         return res;
     }
 
-    public JSONArray getJSON(String url) throws IOException {
+    private JSONArray getJSON(String url) throws IOException {
         JSONArray jArr = new JSONArray( );
         String responseString;
         HttpClient httpclient = new DefaultHttpClient();
