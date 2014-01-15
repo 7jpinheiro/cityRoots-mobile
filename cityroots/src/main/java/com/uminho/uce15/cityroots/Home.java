@@ -84,16 +84,8 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
     }
 
     public void clickNearbyLocations(View view){
-        //Intent intent = new Intent(this, NearbyPlaces.class);
-        //startActivity(intent);
-        DataProvider dp = new DataProvider();
-        List<Attraction> attrs = dp.getAttractions();
-
-        for( Attraction attr : attrs){
-            Log.d("ATTR", attr.getEmail());
-            Log.d("ATTR", attr.getAddress());
-
-        }
+        Intent intent = new Intent(this, NearbyPlaces.class);
+        startActivity(intent);
     }
 
     public void clickCategory(View view){
@@ -162,7 +154,7 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
 
         @Override
         public int getCount() {
-            // Show 4 total pages.
+            // Show 2 total pages.
             return 2;
         }
 
