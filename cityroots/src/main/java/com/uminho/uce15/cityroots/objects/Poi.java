@@ -2,7 +2,7 @@ package com.uminho.uce15.cityroots.objects;
 
 import java.util.ArrayList;
 
-public class Poi {
+public abstract class Poi {
     private String name;
     private String schedule;
     private String language;
@@ -12,16 +12,17 @@ public class Poi {
     private String site;
     private String email;
     private String address;
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
     private boolean is_active;
     private int timestamp;
     private boolean has_accessibility;
-    private String type;
+    private ArrayList<String> type;
     private ArrayList<Photo> photos;
-    private float rating;
+    private double rating;
+    private ArrayList<Comment> comments;
 
-    public Poi(String name, String schedule, String language, String description, String transport, String price, String site, String email, String address, float latitude, float longitude, boolean is_active, int timestamp, boolean has_accessibility, String type, ArrayList<Photo> photos, float rating) {
+    public Poi(String name, String schedule, String language, String description, String transport, String price, String site, String email, String address, double latitude, double longitude, boolean is_active, int timestamp, boolean has_accessibility, ArrayList<String> type, ArrayList<Photo> photos, double rating, ArrayList<Comment> comments) {
         this.name = name;
         this.schedule = schedule;
         this.language = language;
@@ -39,6 +40,7 @@ public class Poi {
         this.type = type;
         this.photos = photos;
         this.rating = rating;
+        this.comments = comments;
     }
 
     public String getName() {
@@ -113,19 +115,19 @@ public class Poi {
         this.address = address;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
@@ -153,11 +155,11 @@ public class Poi {
         this.has_accessibility = has_accessibility;
     }
 
-    public String getType() {
+    public ArrayList<String> getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ArrayList<String> type) {
         this.type = type;
     }
 
@@ -169,11 +171,19 @@ public class Poi {
         this.photos = photos;
     }
 
-    public float getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
     }
 }
