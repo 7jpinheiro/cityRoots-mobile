@@ -118,6 +118,7 @@ public class Login extends Activity implements View.OnClickListener,
         mConnectionProgressDialog.dismiss();
         Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
         Log.d("G+Login", "User logged in:" + mPlusClient.getAccountName());
+
     }
 
 
