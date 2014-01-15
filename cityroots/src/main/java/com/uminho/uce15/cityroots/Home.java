@@ -1,6 +1,7 @@
 package com.uminho.uce15.cityroots;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -67,6 +68,12 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
 
         //Set Home as default tab selected
         mViewPager.setCurrentItem(1);
+    }
+
+    public void goToPlayStore(){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://search?q=pub:CityRoots"));
+        startActivity(intent);
     }
 
     public void clickNearbyLocations(View view){
