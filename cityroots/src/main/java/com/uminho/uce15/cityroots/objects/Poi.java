@@ -8,7 +8,6 @@ public class Poi {
     private String language;
     private String description;
     private String transport;
-    private String price;
     private String site;
     private String email;
     private String address;
@@ -22,13 +21,12 @@ public class Poi {
     private double rating;
     private ArrayList<Comment> comments;
 
-    public Poi(String name, String schedule, String language, String description, String transport, String price, String site, String email, String address, double latitude, double longitude, boolean is_active, int timestamp, boolean has_accessibility, ArrayList<String> type, ArrayList<Photo> photos, double rating, ArrayList<Comment> comments) {
+    public Poi(String name, String schedule, String language, String description, String transport, String site, String email, String address, double latitude, double longitude, boolean is_active, int timestamp, boolean has_accessibility, ArrayList<String> type, ArrayList<Photo> photos, double rating, ArrayList<Comment> comments) {
         this.name = name;
         this.schedule = schedule;
         this.language = language;
         this.description = description;
         this.transport = transport;
-        this.price = price;
         this.site = site;
         this.email = email;
         this.address = address;
@@ -49,7 +47,6 @@ public class Poi {
         this.language = p.getLanguage();
         this.description = p.getDescription();
         this.transport = p.getTransport();
-        this.price = p.getPrice();
         this.site = p.getSite();
         this.email = p.getEmail();
         this.address = p.getAddress();
@@ -102,14 +99,6 @@ public class Poi {
 
     public void setTransport(String transport) {
         this.transport = transport;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     public String getSite() {
