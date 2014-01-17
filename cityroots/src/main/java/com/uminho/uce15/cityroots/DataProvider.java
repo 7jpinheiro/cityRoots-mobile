@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class DataProvider {
     private String uriBase;
@@ -106,7 +104,7 @@ public class DataProvider {
         JSONArray jsonArray = null;
         try {
 
-            jsonArray = (new ListViewLoaderTask()).execute(uri).get();
+            jsonArray = (new GetContentTask()).execute(uri).get();
 
         for( int i=0; i<jsonArray.length(); i++){
             try {
@@ -139,12 +137,8 @@ public class DataProvider {
 
         JSONArray jsonArray = null;
         try {
-            jsonArray = (new ListViewLoaderTask()).execute(uri).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+            jsonArray = (new GetContentTask()).execute(uri).get();
+
 
         for( int i=0; i<jsonArray.length(); i++){
             try {
@@ -162,6 +156,11 @@ public class DataProvider {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
 
         return res;
@@ -190,12 +189,8 @@ public class DataProvider {
         JSONArray jsonArray = null;
 
         try {
-            jsonArray = (new ListViewLoaderTask()).execute(uri).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+            jsonArray = (new GetContentTask()).execute(uri).get();
+
 
         for( int i=0; i<jsonArray.length(); i++){
             try {
@@ -220,10 +215,17 @@ public class DataProvider {
                 e.printStackTrace();
             }
         }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        
         return res;
     }
 
-    private class ListViewLoaderTask extends AsyncTask<String, Void, JSONArray> {
+    private class GetContentTask extends AsyncTask<String, Void, JSONArray> {
         //@Override
         protected JSONArray  doInBackground(String ... urls){
             JSONArray jArr = new JSONArray( );
