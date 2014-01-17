@@ -7,7 +7,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <!--android:debuggable="false"-->
+
+        <!-- android:debuggable="false" -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -28,26 +29,25 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDooBm6zcQfeIC1X7dgphhfc0kw5YqlAiE"/>
+            android:value="AIzaSyB2HwK4POlvMNCPfj6GZhJPMBc4hjlvl_w" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
 
-
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
-
-        <activity
-            android:name="com.facebook.LoginActivity">
+        <activity android:name="com.facebook.LoginActivity" >
         </activity>
-
         <activity
             android:name="com.uminho.uce15.cityroots.RootActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.uminho.uce15.cityroots.Home"
-            android:label="@string/title_activity_home">
+            android:label="@string/title_activity_home" >
         </activity>
         <activity
             android:name="com.uminho.uce15.cityroots.NearbyPlaces"
@@ -56,23 +56,27 @@
         <activity
             android:name="com.uminho.uce15.cityroots.Login"
             android:label="@string/title_activity_login"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.uminho.uce15.cityroots.Category"
             android:label="@string/title_activity_category" >
         </activity>
         <activity
-            android:name="com.uminho.uce15.cityroots.ListarEventos"
+            android:name="com.uminho.uce15.cityroots.ListarPoi"
             android:label="@string/title_activity_listar_eventos" >
         </activity>
         <activity
-            android:name="com.uminho.uce15.cityroots.DetalhesEventos"
+            android:name="com.uminho.uce15.cityroots.DetalhesPois"
             android:label="@string/title_activity_detalhes_eventos" >
         </activity>
         <activity
             android:name="com.uminho.uce15.cityroots.SimpleMapAct"
             android:label="@string/title_activity_simple_map" >
+        </activity>
+        <activity
+            android:name="com.uminho.uce15.cityroots.DetalhesRoteiros"
+            android:label="@string/title_activity_detalhes_roteiros" >
         </activity>
     </application>
 
@@ -87,10 +91,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <!-- Use Google Plus Sign In-->
+    <!-- Use Google Plus Sign In -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-
 
     <uses-feature
         android:glEsVersion="0x00020000"

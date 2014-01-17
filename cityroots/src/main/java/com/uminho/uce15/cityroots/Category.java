@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.view.GestureDetector.SimpleOnGestureListener;
 
 
+/*
 public class Category extends ActionBarActivity {
 
     private ListView list;
@@ -92,7 +93,7 @@ public class Category extends ActionBarActivity {
             case R.id.routes:
                 break;
             case R.id.events:
-                Intent intent = new Intent(this, ListarEventos.class);
+                Intent intent = new Intent(this, ListarPoi.class);
                 startActivity(intent);
                 break;
             case R.id.tpa:
@@ -138,9 +139,11 @@ public class Category extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
+    */
+/**
      * A placeholder fragment containing a simple view.
-     */
+     *//*
+
     public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
@@ -156,3 +159,4 @@ public class Category extends ActionBarActivity {
 
 }
 
+*/

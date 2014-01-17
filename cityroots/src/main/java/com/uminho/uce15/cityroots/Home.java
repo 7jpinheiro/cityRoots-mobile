@@ -89,7 +89,7 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
     }
 
     public void clickCategory(View view){
-        Intent intent = new Intent(this, Category.class);
+        Intent intent = new Intent(this, ListarPoi.class);
         Bundle b = new Bundle();
         b.putInt("id_category",view.getId());
         intent.putExtras(b);

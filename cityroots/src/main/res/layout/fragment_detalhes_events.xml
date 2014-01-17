@@ -1,0 +1,72 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dip" >
+    <!-- start value -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="10dip"
+        android:text="Inicio:"
+        android:textStyle="bold" />
+
+    <!-- start value -->
+
+    <TextView
+        android:id="@+id/event_start"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- end value -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="10dip"
+        android:text="Fim:"
+        android:textStyle="bold" />
+
+    <!-- end value -->
+
+    <TextView
+        android:id="@+id/event_end"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+
+    <!-- org value -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="10dip"
+        android:text="Organização:"
+        android:textStyle="bold" />
+
+    <!-- org value -->
+
+    <TextView
+        android:id="@+id/org"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- program value -->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="10dip"
+        android:text="Programação:"
+        android:textStyle="bold" />
+
+    <!-- program value -->
+
+    <TextView
+        android:id="@+id/event_program"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

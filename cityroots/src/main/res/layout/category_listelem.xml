@@ -20,6 +20,7 @@
             <TableRow>
                 <TextView
                     android:id="@+id/listelem_txt"
+                    android:textColor="@android:color/primary_text_dark"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"

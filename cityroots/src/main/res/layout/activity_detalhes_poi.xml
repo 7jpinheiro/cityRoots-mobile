@@ -90,6 +90,12 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
+        <fragment
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/event_frag"
+            />
+
         <!-- Address Label -->
 
         <TextView
@@ -123,36 +129,19 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
-        <!-- Organization Value -->
+        <!-- Transport Value -->
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dip"
             android:layout_marginTop="10dip"
-            android:text="Organização:"
+            android:text="Transporte:"
             android:textStyle="bold" />
 
-        <!-- Organization Value -->
+        <!-- Site Value -->
 
         <TextView
-            android:id="@+id/organization"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-
-        <!-- Program Value -->
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
-            android:layout_marginTop="10dip"
-            android:text="Programa:"
-            android:textStyle="bold" />
-
-        <!-- Program Value -->
-
-        <TextView
-            android:id="@+id/program"
+            android:id="@+id/transport"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
@@ -169,6 +158,40 @@
 
         <TextView
             android:id="@+id/price"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Site Value -->
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="10dip"
+            android:text="Website:"
+            android:textStyle="bold" />
+
+        <!-- Site Value -->
+
+        <TextView
+            android:id="@+id/website"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+
+
+        <!-- Email Value -->
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="10dip"
+            android:text="E-mail:"
+            android:textStyle="bold" />
+
+        <!-- Email Value -->
+
+        <TextView
+            android:id="@+id/email"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 

@@ -2,7 +2,6 @@
 <resources>
 
     <string name="myCity">Braga</string>
-
     <string name="app_name">CityRoots</string>
     <string name="app_id">380098872136168</string>
     <string name="tab_home">Home</string>
@@ -40,7 +39,8 @@
     <string name="title_activity_nearby_places">NearbyPlaces</string>
     <string name="title_activity_category">Category</string>
     <string name="title_activity_login">Login</string>
-
     <string name="title_activity_listar_eventos">Eventos</string>
     <string name="title_activity_detalhes_eventos">Detalhes</string>
+    <string name="title_activity_detalhes_roteiros">DetalhesRoteiros</string>
+
 </resources>
