@@ -1,5 +1,6 @@
 package com.uminho.uce15.cityroots;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.uminho.uce15.cityroots.objects.*;
@@ -18,6 +19,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class DataProvider {
     private String uriBase;
@@ -37,7 +41,7 @@ public class DataProvider {
         String language    = jObj.getJSONArray(type + "_translations").getJSONObject(trpt_index).getString("schedule");
         String description = jObj.getJSONArray(type + "_translations").getJSONObject(trpt_index).getString("description");
         String transport   = jObj.getJSONArray(type + "_translations").getJSONObject(trpt_index).getString("transport");
-        String price       = jObj.getJSONArray(type + "_translations").getJSONObject(trpt_index).getString("price");
+
         String site        = jObj.getString("site");
         String email       = jObj.getString("email");
         String address     = jObj.getString("address");
@@ -56,7 +60,9 @@ public class DataProvider {
 
 
         ArrayList<Photo> photos = new ArrayList<Photo>();
-        JSONArray listPhotos = jObj.getJSONArray("photo_attractions");
+
+        JSONArray listPhotos = jObj.getJSONArray("photo_" + type + "s");
+
         for( int i=0; i<listPhotos.length(); i++){
             JSONObject joObj = listPhotos.getJSONObject(i);
             String photoName = joObj.getString("name");
@@ -67,7 +73,9 @@ public class DataProvider {
 
 
         ArrayList<Comment> comments = new ArrayList<Comment>();
-        JSONArray listComments = jObj.getJSONArray("comment_attractions");
+        JSONArray listComments = jObj.getJSONArray("comment_" + type + "s");
+
+
         for( int i=0; i<listComments.length(); i++){
             JSONObject joObj = listComments.getJSONObject(i);
 
@@ -85,7 +93,7 @@ public class DataProvider {
         double rating      = jObj.getDouble("rating");
 
 
-        return new Poi(name, schedule, language, description, transport, price, site, email, address,
+        return new Poi(name, schedule, language, description, transport, site, email, address,
                 latitude, longitude, is_active, timestamp, has_accessibility, types, photos, rating, comments);
     }
 
@@ -97,24 +105,29 @@ public class DataProvider {
         String uri = uriBase + poiType + "s.json";
         JSONArray jsonArray = null;
         try {
-            jsonArray = getJSON(uri);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+            jsonArray = (new ListViewLoaderTask()).execute(uri).get();
 
         for( int i=0; i<jsonArray.length(); i++){
             try {
                 JSONObject jObj = jsonArray.getJSONObject(i);
                 Poi p = createPoiFromJson(jObj, poiType);
-
+                String price = jObj.getJSONArray(poiType + "_translations").getJSONObject(0).getString("price");
                 boolean b = jObj.getBoolean("reference_point");
 
-                Attraction a = new Attraction(p, b);
+                Attraction a = new Attraction(p,b,price);
                 res.add(a);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
         return res;
     }
 
@@ -123,10 +136,13 @@ public class DataProvider {
 
         List<Event> res = new ArrayList<Event>();
         String uri = uriBase + poiType + "s.json";
+
         JSONArray jsonArray = null;
         try {
-            jsonArray = getJSON(uri);
-        } catch (IOException e) {
+            jsonArray = (new ListViewLoaderTask()).execute(uri).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
@@ -138,14 +154,16 @@ public class DataProvider {
                 String start        = jObj.getString("startdate");
                 String end          = jObj.getString("enddate");
                 String organization = jObj.getString("organization");
-                String program      = jObj.getString("program");
+                String program      = jObj.getJSONArray(poiType + "_translations").getJSONObject(0).getString("program");
+                String price = jObj.getJSONArray(poiType + "_translations").getJSONObject(0).getString("price");
 
-                Event e = new Event(p, start, end, organization, program);
+                Event e = new Event(p, start, end, organization, program,price);
                 res.add(e);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+
         return res;
     }
 
@@ -170,9 +188,12 @@ public class DataProvider {
         List<Service> res = new ArrayList<Service>();
         String uri = uriBase + poiType + "s.json";
         JSONArray jsonArray = null;
+
         try {
-            jsonArray = getJSON(uri);
-        } catch (IOException e) {
+            jsonArray = (new ListViewLoaderTask()).execute(uri).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
@@ -182,7 +203,15 @@ public class DataProvider {
                 Poi p = createPoiFromJson(jObj, poiType);
 
                 boolean is_reference_point = jObj.getBoolean("reference_point");
-                int capacity = jObj.getInt("capacity");
+                int capacity = 0;
+                try{
+                    capacity=jObj.getInt("capacity");
+                }
+                catch ( Exception e )
+                {
+                    capacity=0;
+                }
+
                 String details = jObj.getString("details");
 
                 Service s = new Service(p, is_reference_point, capacity, details );
@@ -194,28 +223,49 @@ public class DataProvider {
         return res;
     }
 
-    private JSONArray getJSON(String url) throws IOException {
-        JSONArray jArr = new JSONArray( );
-        String responseString;
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpResponse response = httpclient.execute(new HttpGet(url));
-        StatusLine statusLine = response.getStatusLine();
-        if(statusLine.getStatusCode() == HttpStatus.SC_OK){
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            response.getEntity().writeTo(out);
-            out.close();
-            responseString = out.toString();
-        } else{
-            response.getEntity().getContent().close();
-            throw new IOException(statusLine.getReasonPhrase());
-        }
+    private class ListViewLoaderTask extends AsyncTask<String, Void, JSONArray> {
+        //@Override
+        protected JSONArray  doInBackground(String ... urls){
+            JSONArray jArr = new JSONArray( );
 
-        try {
-            jArr = new JSONArray(responseString);
-        } catch (JSONException e) {
-            Log.e("JSON Parser", "Error parsing data " + e.toString());
+            String responseString=null;
+            for (String url : urls) {
+                HttpClient httpclient = new DefaultHttpClient();
+                try {
+                    HttpResponse response = null;
+                    response = httpclient.execute(new HttpGet(url));
+
+                    StatusLine statusLine = response.getStatusLine();
+                    if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+                        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+                        response.getEntity().writeTo(out);
+                        out.close();
+
+
+                        responseString = out.toString();
+                    } else{
+
+                        response.getEntity().getContent().close();
+                        throw new IOException(statusLine.getReasonPhrase());
+
+                    }
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            try {
+                jArr = new JSONArray(responseString);
+            } catch (JSONException e) {
+                Log.e("JSON Parser", "Error parsing data " + e.toString());
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+            return jArr;
         }
-        return jArr;
     }
 
 }
