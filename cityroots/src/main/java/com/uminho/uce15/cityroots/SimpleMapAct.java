@@ -24,13 +24,11 @@ import android.util.Log;
 
 public class SimpleMapAct  extends FragmentActivity implements LocationListener{
 
-    private LocationManager locMan;
     private Marker userMarker;
-    private Marker[] placeMarkers;
     private final int MAX_PLACES = 2;
     private MarkerOptions[] places;
 
-    private int userIcon, foodIcon, drinkIcon, shopIcon, otherIcon;
+    private int userIcon;
     private GoogleMap theMap=null;
 
     double loclat=41.561653;
@@ -38,6 +36,14 @@ public class SimpleMapAct  extends FragmentActivity implements LocationListener{
 
     double placelat = 41.557183;
     double placelng = -8.39657;
+
+    private SupportMapFragment fragmentActivity;
+
+    public SimpleMapAct(FragmentActivity fragmentActivity){
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,7 +51,6 @@ public class SimpleMapAct  extends FragmentActivity implements LocationListener{
         setContentView(R.layout.simple_map);
 
         userIcon = R.drawable.user_pos;
-        otherIcon = R.drawable.events;
 
         System.out.println("1");
         if(theMap==null){
@@ -58,7 +63,7 @@ public class SimpleMapAct  extends FragmentActivity implements LocationListener{
         if(theMap != null){
             //ok - proceed
             theMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-            placeMarkers = new Marker[MAX_PLACES];
+            Marker[] placeMarkers = new Marker[MAX_PLACES];
 
             Intent intent = getIntent();
 
