@@ -43,7 +43,6 @@
     <string name="title_activity_detalhes_eventos">Detalhes</string>
     <string name="title_activity_detalhes_roteiros">DetalhesRoteiros</string>
 
-
     <!-- POI Description -->
 
     <string name="name">Nome:</string>
@@ -55,6 +54,8 @@
     <string name="email">E-mail:</string>
     <string name="seemap">Ver no mapa</string>
     <string name="comment">Comentar</string>
-
+    <string name="search_label">Search</string>
+    <string name="title_activity_search">Search</string>
+    <string name="Search">Search</string>
 
 </resources>

@@ -231,12 +231,67 @@ public class DataProvider {
         Poi poi;
         Attraction attraction=null;
 
+        String poiType = "attractions/";
+
+        String uri = uriBase + poiType + id + ".json";
+        JSONArray jsonArray = null;
+        try {
+
+            jsonArray = (new GetContentTask()).execute(uri).get();
+
+            try {
+                 JSONObject jObj = jsonArray.getJSONObject(0);
+                 poi = createPoiFromJson(jObj, poiType);
+                 String price = jObj.getJSONArray(poiType + "_translations").getJSONObject(0).getString("price");
+                 boolean b = jObj.getBoolean("reference_point");
+
+                 attraction = new Attraction(poi,b,price);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
         return attraction;
     }
 
     public Event getEvent (int id){
         Poi poi;
         Event event=null;
+
+        String poiType = "events/";
+
+        List<Event> res = new ArrayList<Event>();
+        String uri = uriBase + poiType + id + ".json";
+
+        JSONArray jsonArray = null;
+        try {
+            jsonArray = (new GetContentTask()).execute(uri).get();
+            try {
+                JSONObject jObj = jsonArray.getJSONObject(id);
+                poi = createPoiFromJson(jObj, poiType);
+
+                String start        = jObj.getString("startdate");
+                String end          = jObj.getString("enddate");
+                String organization = jObj.getString("organization");
+                String program      = jObj.getJSONArray(poiType + "_translations").getJSONObject(0).getString("program");
+                String price = jObj.getJSONArray(poiType + "_translations").getJSONObject(0).getString("price");
+
+                Event e = new Event(poi, start, end, organization, program,price);
+                res.add(e);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
 
         return event;
     }
