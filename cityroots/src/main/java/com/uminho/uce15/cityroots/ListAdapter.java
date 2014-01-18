@@ -84,14 +84,13 @@ public class ListAdapter extends ArrayAdapter<String> {
 
         protected Bitmap doInBackground(String... urls) {
             String urldisplay = urls[0];
-            Bitmap mIcon11 ;
+            Bitmap mIcon11 = BitmapFactory.decodeResource(context.getResources(),
+                    R.drawable.abc_ab_bottom_solid_dark_holo); ;
             try {
                 InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
+                if(in!=null) mIcon11 = BitmapFactory.decodeStream(in);
             } catch (Exception e) {
                 //Log.e("Error", e.getMessage());
-                mIcon11 = BitmapFactory.decodeResource(context.getResources(),
-                        R.drawable.abc_ab_bottom_solid_dark_holo);
                 e.printStackTrace();
             }
             return mIcon11;
