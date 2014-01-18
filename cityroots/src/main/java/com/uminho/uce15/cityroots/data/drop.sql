@@ -1,0 +1,12 @@
+DROP TABLE photos;
+DROP TABLE pois;
+DROP TABLE types;
+DROP TABLE types_pois;
+DROP TABLE attractions;
+DROP TABLE events;
+DROP TABLE services;
+DROP TABLE routes;
+DROP TABLE routes_pois;
+DROP TABLE comments_pois;
+DROP TABLE comments;
+DROP TABLE users;

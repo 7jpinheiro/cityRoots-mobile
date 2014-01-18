@@ -83,4 +83,10 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
+    <provider
+        android:authorities="com.uminho.uce15.cityroots.data.provider"
+        android:name=".data.CityRootsContentProvider"
+        android:exported="false" >
+    </provider>
+
 </manifest>
