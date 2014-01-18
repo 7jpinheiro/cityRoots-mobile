@@ -23,7 +23,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.SlidingPaneLayout;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -108,14 +111,16 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
     private ListAdapter adapter;
 
     private Context old;
-
+    MySlidingPaneLayout slidingPaneLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_listar_poi);
+
         ArrayList lista = null;
+        slidingPaneLayout = (MySlidingPaneLayout)findViewById(R.id.pane);
 
         DataProvider provider = new DataProvider() ;
 
@@ -127,37 +132,37 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
                 lista = (ArrayList<Attraction>) provider.getAttractions();
                 break;
             case R.id.routes:
-                //lista = (ArrayList<Route>) provider.getRoutes();
+                lista = (ArrayList<Route>) provider.getRoutes();
                 break;
             case R.id.events:
                 lista =(ArrayList<Event>) provider.getEvents();
                 break;
             case R.id.tpa:
-                //lista = (ArrayList<Attraction>) provider.getAttractions();
+                lista = (ArrayList<Attraction>) provider.getAttractions();
                 break;
             case R.id.gastronomy:
-                //lista = (ArrayList<Attraction>) provider.getAttractions();
+                lista = (ArrayList<Attraction>) provider.getAttractions();
                 break;
             case R.id.activities:
-                //lista = (ArrayList<Attraction>) provider.getAttractions();
+                lista = (ArrayList<Attraction>) provider.getAttractions();
                 break;
             case R.id.outdoor:
-                //lista = (ArrayList<Attraction>) provider.getAttractions();
+                lista = (ArrayList<Attraction>) provider.getAttractions();
                 break;
             case R.id.nightlife:
-                //lista = (ArrayList<Attraction>) provider.getAttractions();
+                lista = (ArrayList<Attraction>) provider.getAttractions();
                 break;
             case R.id.hotels:
-                //lista = (ArrayList<Attraction>) provider.getAttractions();
+                lista = (ArrayList<Attraction>) provider.getAttractions();
                 break;
             case R.id.transport:
                 lista = (ArrayList<Service>) provider.getServices();
                 break;
             case R.id.afd:
-                //lista = (ArrayList<Attraction>) provider.getAttractions();
+                lista = (ArrayList<Attraction>) provider.getAttractions();
                 break;
             case R.id.contacts:
-                //lista = provider.getEvents();
+                lista = (ArrayList<Event>) provider.getEvents();
                 break;
         }
 
@@ -170,6 +175,7 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
             adapter = new ListAdapter(ListarPoi.this,lista);
             list.setAdapter(adapter);
         }
+
         assert lista != null;
 
 
@@ -209,7 +215,7 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
          * Create a new location client, using the enclosing class to
          * handle callbacks.
          */
-        userIcon = R.drawable.user_pos;
+        userIcon = R.drawable.marcador;
         otherIcon = R.drawable.events;
 
         if(theMap==null){
@@ -250,6 +256,10 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
               //  startActivity(intent);
             }
         });
+    }
+
+    public void goToList(View view){
+        slidingPaneLayout.openPane();
     }
 
     private void updatePlaces(){
