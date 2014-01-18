@@ -33,3 +33,5 @@ proguard/
 /local.properties
 /.idea/workspace.xml
 .DS_Store
+
+libraries/facebook/build/*
