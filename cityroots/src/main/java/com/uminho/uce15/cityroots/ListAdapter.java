@@ -59,8 +59,13 @@ public class ListAdapter extends ArrayAdapter<String> {
 
 
         txtTitle.setText(((Poi) lista.get(position)).getName());
-        //new DownloadImageTask((ImageView) imageView, (ProgressBar) loadBar ).execute(((Poi) lista.get(position)).getPhotos().get(0).getPath());
-
+        try{
+        String photo_path = ((Poi) lista.get(position)).getPhotos().get(0).getPath();
+        new DownloadImageTask((ImageView) imageView, (ProgressBar) loadBar ).execute(photo_path);
+        }
+        catch(Exception e){
+            imageView.setImageResource(R.drawable.abc_ab_bottom_solid_dark_holo);
+        }
         if(lista.get(position).getClass() == Event.class){
             txtDesc.setText(((Event) lista.get(position)).getStart());
             rtbar.setVisibility(View.GONE);
@@ -84,8 +89,7 @@ public class ListAdapter extends ArrayAdapter<String> {
 
         protected Bitmap doInBackground(String... urls) {
             String urldisplay = urls[0];
-            Bitmap mIcon11 = BitmapFactory.decodeResource(context.getResources(),
-                    R.drawable.abc_ab_bottom_solid_dark_holo); ;
+            Bitmap mIcon11 = null ;
             try {
                 InputStream in = new java.net.URL(urldisplay).openStream();
                 if(in!=null) mIcon11 = BitmapFactory.decodeStream(in);
