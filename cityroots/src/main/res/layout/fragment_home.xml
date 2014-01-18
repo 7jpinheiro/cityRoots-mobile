@@ -7,7 +7,6 @@
     tools:context="com.uminho.uce15.cityroots.Home"
     tools:ignore="MergeRootFrame">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
