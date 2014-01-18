@@ -59,7 +59,7 @@ public class ListAdapter extends ArrayAdapter<String> {
 
 
         txtTitle.setText(((Poi) lista.get(position)).getName());
-        new DownloadImageTask((ImageView) imageView, (ProgressBar) loadBar ).execute(((Poi) lista.get(position)).getPhotos().get(0).getPath());
+        //new DownloadImageTask((ImageView) imageView, (ProgressBar) loadBar ).execute(((Poi) lista.get(position)).getPhotos().get(0).getPath());
 
         if(lista.get(position).getClass() == Event.class){
             txtDesc.setText(((Event) lista.get(position)).getStart());

@@ -249,9 +249,9 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
         list.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-                // Starting new intent
-              //  Intent intent = new Intent(ListarPoi.this, DetalhesPois.class);
-              //  intent.putExtra("id",(Poi)lista[position].toString());
+              //Starting new intent
+              //Intent intent = new Intent(ListarPoi.this, DetalhesPois.class);
+              //intent.putExtra("id",lista[position].);
                 //intent.putExtra("id",pos.toString());
               //  startActivity(intent);
             }

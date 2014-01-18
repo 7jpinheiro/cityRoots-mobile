@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class DataProvider {
     private String uriBase;
@@ -104,7 +106,7 @@ public class DataProvider {
         JSONArray jsonArray = null;
         try {
 
-            jsonArray = (new GetContentTask()).execute(uri).get();
+            jsonArray = (new GetContentTask()).execute(uri).get(10, TimeUnit.SECONDS);;
 
         for( int i=0; i<jsonArray.length(); i++){
             try {
@@ -124,6 +126,8 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
         }
 
         return res;
@@ -137,7 +141,7 @@ public class DataProvider {
 
         JSONArray jsonArray = null;
         try {
-            jsonArray = (new GetContentTask()).execute(uri).get();
+            jsonArray = (new GetContentTask()).execute(uri).get(10, TimeUnit.SECONDS);
 
 
         for( int i=0; i<jsonArray.length(); i++){
@@ -160,6 +164,8 @@ public class DataProvider {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
             e.printStackTrace();
         }
 
@@ -189,7 +195,7 @@ public class DataProvider {
         JSONArray jsonArray = null;
 
         try {
-            jsonArray = (new GetContentTask()).execute(uri).get();
+            jsonArray = (new GetContentTask()).execute(uri).get(10, TimeUnit.SECONDS);
 
 
         for( int i=0; i<jsonArray.length(); i++){
@@ -220,10 +226,34 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
         }
-        
+
         return res;
     }
+
+    public Attraction getAttraction (int id){
+        Poi poi;
+        Attraction attraction=null;
+
+        return attraction;
+    }
+
+    public Event getEvent (int id){
+        Poi poi;
+        Event event=null;
+
+        return event;
+    }
+
+    public Service getService (int id){
+        Poi poi;
+        Service service=null;
+
+        return service;
+    }
+
 
     private class GetContentTask extends AsyncTask<String, Void, JSONArray> {
         //@Override
