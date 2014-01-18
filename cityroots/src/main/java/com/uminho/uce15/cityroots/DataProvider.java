@@ -106,7 +106,7 @@ public class DataProvider {
         JSONArray jsonArray = null;
         try {
 
-            jsonArray = (new GetContentTask()).execute(uri).get(10, TimeUnit.SECONDS);;
+            jsonArray = (new GetContentTask()).execute(uri).get();
 
         for( int i=0; i<jsonArray.length(); i++){
             try {
@@ -126,8 +126,6 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
         }
 
         return res;
@@ -141,7 +139,7 @@ public class DataProvider {
 
         JSONArray jsonArray = null;
         try {
-            jsonArray = (new GetContentTask()).execute(uri).get(10, TimeUnit.SECONDS);
+            jsonArray = (new GetContentTask()).execute(uri).get();
 
 
         for( int i=0; i<jsonArray.length(); i++){
@@ -164,8 +162,6 @@ public class DataProvider {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
             e.printStackTrace();
         }
 
@@ -195,7 +191,7 @@ public class DataProvider {
         JSONArray jsonArray = null;
 
         try {
-            jsonArray = (new GetContentTask()).execute(uri).get(10, TimeUnit.SECONDS);
+            jsonArray = (new GetContentTask()).execute(uri).get();
 
 
         for( int i=0; i<jsonArray.length(); i++){
@@ -225,8 +221,6 @@ public class DataProvider {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
             e.printStackTrace();
         }
 
