@@ -21,12 +21,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.StrictMode;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.widget.SlidingPaneLayout;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -52,12 +48,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.uminho.uce15.cityroots.objects.Attraction;
-import com.uminho.uce15.cityroots.objects.Event;
-import com.uminho.uce15.cityroots.objects.Route;
-import com.uminho.uce15.cityroots.objects.Service;
-
-import org.json.JSONObject;
+import com.uminho.uce15.cityroots.data.Attraction;
+import com.uminho.uce15.cityroots.data.Event;
+import com.uminho.uce15.cityroots.data.Route;
+import com.uminho.uce15.cityroots.data.Service;
 
 import android.widget.ListView;
 

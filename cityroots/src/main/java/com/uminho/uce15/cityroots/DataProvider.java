@@ -3,7 +3,14 @@ package com.uminho.uce15.cityroots;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.uminho.uce15.cityroots.objects.*;
+import com.uminho.uce15.cityroots.data.Attraction;
+import com.uminho.uce15.cityroots.data.Comment;
+import com.uminho.uce15.cityroots.data.Event;
+import com.uminho.uce15.cityroots.data.Photo;
+import com.uminho.uce15.cityroots.data.Poi;
+import com.uminho.uce15.cityroots.data.Route;
+import com.uminho.uce15.cityroots.data.Service;
+import com.uminho.uce15.cityroots.data.User;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -20,8 +27,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class DataProvider {
     private String uriBase;

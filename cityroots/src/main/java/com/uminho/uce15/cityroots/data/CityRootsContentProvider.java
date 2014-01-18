@@ -124,7 +124,6 @@ public class CityRootsContentProvider extends ContentProvider {
         int numberOfRowsAffected = database.delete(tableName, selection, selectionArgs);
 
         // notify about deletion of values
-        getContext().getContentResolver().notifyChange(uri, null);
 
         return numberOfRowsAffected;
     }
@@ -142,7 +141,7 @@ public class CityRootsContentProvider extends ContentProvider {
                                                    contentValues,
                                                    selection,
                                                    selectionArgs);
-        
+
         // notify about deletion of values
         getContext().getContentResolver().notifyChange(uri, null);
 

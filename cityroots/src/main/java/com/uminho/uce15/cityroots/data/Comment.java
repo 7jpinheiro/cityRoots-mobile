@@ -1,4 +1,4 @@
-package com.uminho.uce15.cityroots.objects;
+package com.uminho.uce15.cityroots.data;
 
 public class Comment {
     private String comment;
