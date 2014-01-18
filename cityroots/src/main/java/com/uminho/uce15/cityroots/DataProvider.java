@@ -45,8 +45,21 @@ public class DataProvider {
         String site        = jObj.getString("site");
         String email       = jObj.getString("email");
         String address     = jObj.getString("address");
-        double latitude    = jObj.getDouble("latitude");
-        double longitude   = jObj.getDouble("latitude");
+        double latitude;
+        try{
+            latitude    = jObj.getDouble("latitude");
+        }
+        catch (Exception e){
+            latitude = 0.0;
+        }
+        double longitude;
+        try{
+            longitude    = jObj.getDouble("longitude");
+        }
+        catch (Exception e){
+            longitude = 0.0;
+        }
+        
         boolean is_active  = jObj.getBoolean("active");
         int timestamp      = jObj.getInt("timestamp");
         boolean has_accessibility = jObj.getBoolean("accessibility");
@@ -260,7 +273,7 @@ public class DataProvider {
                 try {
                     HttpResponse response = null;
                     response = httpclient.execute(new HttpGet(url));
-
+                    System.out.println("adasdadasda");
                     StatusLine statusLine = response.getStatusLine();
                     if(statusLine.getStatusCode() == HttpStatus.SC_OK){
                         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -270,6 +283,7 @@ public class DataProvider {
 
 
                         responseString = out.toString();
+                        System.out.println("cenz");
                     } else{
 
                         response.getEntity().getContent().close();

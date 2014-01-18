@@ -299,49 +299,7 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
         //locMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 100, this);
     }
 
-   /* private class GetPlaces extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... placesURL) {
-            //fetch places
-
-            //build result as string
-            StringBuilder placesBuilder = new StringBuilder();
-            //process search parameter string(s)
-            for (String placeSearchURL : placesURL) {
-                HttpClient placesClient = new DefaultHttpClient();
-                try {
-                    //try to fetch the data
-
-                    //HTTP Get receives URL string
-                    HttpGet placesGet = new HttpGet(placeSearchURL);
-                    //execute GET with Client - return response
-                    HttpResponse placesResponse = placesClient.execute(placesGet);
-                    //check response status
-                    StatusLine placeSearchStatus = placesResponse.getStatusLine();
-                    //only carry on if response is OK
-                    if (placeSearchStatus.getStatusCode() == 200) {
-                        //get response entity
-                        HttpEntity placesEntity = placesResponse.getEntity();
-                        //get input stream setup
-                        InputStream placesContent = placesEntity.getContent();
-                        //create reader
-                        InputStreamReader placesInput = new InputStreamReader(placesContent);
-                        //use buffered reader to process
-                        BufferedReader placesReader = new BufferedReader(placesInput);
-                        //read a line at a time, append to string builder
-                        String lineIn;
-                        while ((lineIn = placesReader.readLine()) != null) {
-                            placesBuilder.append(lineIn);
-                        }
-                    }
-                }
-                catch(Exception e){
-                    e.printStackTrace();
-                }
-            }
-            return placesBuilder.toString();
-        }
-
+   /* private class GetPlaces extends AsyncTask<String, Void, String>
         //process data retrieved from doInBackground
         protected void onPostExecute(String result) {
             //parse place data returned from Google Places
@@ -439,10 +397,7 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
         return super.onOptionsItemSelected(item);
     }
 
-    /*public void onClickPOI(View view){
-        Intent intent = new Intent(this, DetalhesEvento.class);
-        startActivity(intent);
-    }*/
+
 
     /**
      * A placeholder fragment containing a simple view.
@@ -460,37 +415,8 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
         }
     }
 
-/*
-    public void onLocationChanged(Location location) {
-        Log.v("ListarPoi", "location changed");
-        updatePlaces();
-    }
-    public void onProviderDisabled(String provider){
-        Log.v("ListarPoi", "provider disabled");
-    }
-    public void onProviderEnabled(String provider) {
-        Log.v("ListarPoi", "provider enabled");
-    }
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        Log.v("ListarPoi", "status changed");
-    }*/
 
 
-	/*@Override
-	protected void onResume() {
-		super.onResume();
-		if(theMap!=null){
-			locMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 100, this);
-		}
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		if(theMap!=null){
-			locMan.removeUpdates(this);
-		}
-	}*/
 
     /*
      * Called when the Activity is no longer visible at all.
