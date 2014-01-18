@@ -1,6 +1,8 @@
 package com.uminho.uce15.cityroots;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -9,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,6 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.uminho.uce15.cityroots.objects.Attraction;
+
+import java.util.List;
 import java.util.Locale;
 
 
@@ -69,13 +75,21 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         mViewPager.setCurrentItem(1);
     }
 
+    public void goToGooglePlay(View view){
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:CityRoots")));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/search?q=pub:<publisher_name>")));
+        }
+    }
+
     public void clickNearbyLocations(View view){
         Intent intent = new Intent(this, NearbyPlaces.class);
         startActivity(intent);
     }
 
     public void clickCategory(View view){
-        Intent intent = new Intent(this, Category.class);
+        Intent intent = new Intent(this, ListarPoi.class);
         Bundle b = new Bundle();
         b.putInt("id_category",view.getId());
         intent.putExtras(b);
@@ -140,8 +154,8 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
 
         @Override
         public int getCount() {
-            // Show 4 total pages.
-            return 3;
+            // Show 2 total pages.
+            return 2;
         }
 
         @Override
@@ -152,8 +166,6 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
                     return getString(R.string.tab_cities).toUpperCase(l);
                 case 1:
                     return getString(R.string.tab_home).toUpperCase(l);
-                case 2:
-                    return getString(R.string.tab_saved).toUpperCase(l);
             }
             return null;
         }
@@ -197,9 +209,6 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
                     break;
                 case 1:
                     rootView = inflater.inflate(R.layout.fragment_home, container, false);
-                    break;
-                case 2:
-                    rootView = inflater.inflate(R.layout.fragment_saved, container, false);
                     break;
             }
 

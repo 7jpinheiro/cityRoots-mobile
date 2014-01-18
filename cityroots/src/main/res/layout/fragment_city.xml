@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:background="@color/gray_android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.uminho.uce15.cityroots.Home"
-    tools:ignore="MergeRootFrame">
-
-    <ScrollView
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/gray_android">
+
 
     <LinearLayout
+
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -52,17 +45,44 @@
                     android:textColor="@color/white"
                     android:layout_height="wrap_content"
                     android:text="Portugal"/>
-                </LinearLayout>
-
             </LinearLayout>
 
 
-    </LinearLayout>
+        </LinearLayout>
 
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="fill_parent"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."/>
+
+        <View
+            android:layout_marginTop="40dp"
+            style="@style/MenuLine"
+            />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:onClick="goToGooglePlay">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/googleplay"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:text="Get More Cities"/>
+
+        </LinearLayout>
+    </LinearLayout>
 
     </ScrollView>
 
-
-
-
-</FrameLayout>

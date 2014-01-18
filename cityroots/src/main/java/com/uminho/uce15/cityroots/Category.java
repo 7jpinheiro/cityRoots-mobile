@@ -1,5 +1,6 @@
 package com.uminho.uce15.cityroots;
 
+import android.content.Intent;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -19,6 +20,7 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import org.apache.commons.io.IOUtils;
 
 
+/*
 public class Category extends ActionBarActivity {
 
     private ListView list;
@@ -41,6 +43,7 @@ public class Category extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+
 
         slidingPaneLayout = (SlidingPaneLayout)findViewById(R.id.pane);
         list=(ListView)findViewById(R.id.list);
@@ -82,7 +85,7 @@ public class Category extends ActionBarActivity {
                 slidingEnabled = false;
             }
         });
-        /*
+
         Bundle b = getIntent().getExtras();
         int value = b.getInt("id_category");
 
@@ -92,6 +95,8 @@ public class Category extends ActionBarActivity {
             case R.id.routes:
                 break;
             case R.id.events:
+                Intent intent = new Intent(this, ListarPoi.class);
+                startActivity(intent);
                 break;
             case R.id.tpa:
                 break;
@@ -111,7 +116,7 @@ public class Category extends ActionBarActivity {
                 break;
             case R.id.contacts:
                 break;
-        }*/
+        }
     }
 
 
@@ -136,9 +141,11 @@ public class Category extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
+    */
+/**
      * A placeholder fragment containing a simple view.
-     */
+     *//*
+
     public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
@@ -154,3 +161,4 @@ public class Category extends ActionBarActivity {
 
 }
 
+*/

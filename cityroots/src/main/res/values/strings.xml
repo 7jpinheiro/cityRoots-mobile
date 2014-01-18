@@ -2,7 +2,6 @@
 <resources>
 
     <string name="myCity">Braga</string>
-
     <string name="app_name">CityRoots</string>
     <string name="app_id">380098872136168</string>
     <string name="tab_home">Home</string>
@@ -40,5 +39,22 @@
     <string name="title_activity_nearby_places">NearbyPlaces</string>
     <string name="title_activity_category">Category</string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_listar_eventos">Eventos</string>
+    <string name="title_activity_detalhes_eventos">Detalhes</string>
+    <string name="title_activity_detalhes_roteiros">DetalhesRoteiros</string>
+
+
+    <!-- POI Description -->
+
+    <string name="name">Nome:</string>
+    <string name="description">Descrição:</string>
+    <string name="adress">Endereço:</string>
+    <string name="scheudle">Horario:</string>
+    <string name="price">Transporte:</string>
+    <string name="site">Site:</string>
+    <string name="email">E-mail:</string>
+    <string name="seemap">Ver no mapa</string>
+    <string name="comment">Comentar</string>
+
 
 </resources>
