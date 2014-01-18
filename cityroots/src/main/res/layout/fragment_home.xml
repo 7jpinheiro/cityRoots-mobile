@@ -60,7 +60,7 @@
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/events_mv"/>
+                    android:src="@drawable/rotas_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/events"/>
@@ -88,7 +88,7 @@
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/gastronomia_mv"/>
+                    android:src="@drawable/artesanato_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/gastronomy"/>
@@ -144,7 +144,7 @@
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/hotel_mv"/>
+                    android:src="@drawable/nightlife_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/hotels"/>
