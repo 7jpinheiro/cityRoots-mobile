@@ -1,4 +1,4 @@
-/*
+
 
 package com.uminho.uce15.cityroots;
 
@@ -19,12 +19,76 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.uminho.uce15.cityroots.objects.Poi;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DetalhesPois extends ActionBarActivity {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detalhes_poi);
 
+
+/*if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new PlaceholderFragment())
+                    .commit();
+        }*/
+
+
+        Intent i = getIntent();
+        // Place reference id
+        int ref = i.getIntExtra("id",0);
+        // Calling a Async Background thread
+        System.out.println(ref);
+        //Ref=reference;
+        //new LoadSinglePlaceDetails().execute(reference);
+    }
+    class loadDetails extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute(){
+            //start loading
+        }
+        @Override
+        protected String doInBackground(String... strings) {
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String url){
+
+            //finish loading
+
+            int poi_type=0;
+
+            // Poi Labels
+            TextView lbl_name = (TextView) findViewById(R.id.name);
+            TextView lbl_description = (TextView) findViewById(R.id.description);
+            TextView lbl_schedule = (TextView) findViewById(R.id.schedule);
+            TextView lbl_address = (TextView) findViewById(R.id.address);
+            TextView lbl_price = (TextView) findViewById(R.id.price);
+            TextView lbl_location = (TextView) findViewById(R.id.location);
+
+            switch (poi_type){
+                case 0:
+                    //Events Labels
+                    break;
+                case 1:
+                    //Services Labels
+                    break;
+                case 2:
+                    //Attractions Labels
+                    break;
+            }
+        }
+
+    }
+}
+
+
+
+/*
     // flag for Internet connection status
     Boolean isInternetPresent = false;
     // Alert Dialog Manager
@@ -214,27 +278,6 @@ public class DetalhesPois extends ActionBarActivity {
 
                     btnShowPlaceOnMap = (Button) findViewById(R.id.placebutton);
 
-                    */
-/** Button click event for shown on map *//*
-
-                    btnShowPlaceOnMap.setOnClickListener(new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View arg0) {
-
-                            Intent i = new Intent(getApplicationContext(),SimpleMapAct.class);
-
-                            // Sending user current geo location
-                            i.putExtra("place_latitude", lat1);
-                            i.putExtra("place_longitude", lng1);
-
-                            // passing near places to map activity
-                            //  i.putExtra("near_places", nem);
-                            // staring activity
-
-                            startActivity(i);
-                        }
-                    });
 
                 }
             });

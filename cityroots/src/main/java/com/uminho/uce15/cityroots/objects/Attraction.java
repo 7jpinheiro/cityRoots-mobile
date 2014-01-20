@@ -6,8 +6,8 @@ public class Attraction extends Poi{
     private boolean is_reference_point;
     private String price;
 
-    public Attraction(String name, String schedule, String language, String description, String transport, String price, String site, String email, String address, double latitude, double longitude, boolean is_active, int timestamp, boolean has_accessibility, ArrayList<String> type, ArrayList<Photo> photos, double rating, ArrayList<Comment> comments, boolean is_reference_point) {
-        super(name, schedule, language, description, transport, site, email, address, latitude, longitude, is_active, timestamp, has_accessibility, type, photos, rating, comments);
+    public Attraction(int id,String name, String schedule, String language, String description, String transport, String price, String site, String email, String address, double latitude, double longitude, boolean is_active, int timestamp, boolean has_accessibility, ArrayList<String> type, ArrayList<Photo> photos, double rating, ArrayList<Comment> comments, boolean is_reference_point) {
+        super(id, name, schedule, language, description, transport, site, email, address, latitude, longitude, is_active, timestamp, has_accessibility, type, photos, rating, comments);
         this.is_reference_point = is_reference_point;
         this.price = price;
     }

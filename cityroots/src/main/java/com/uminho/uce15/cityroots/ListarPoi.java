@@ -54,6 +54,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.uminho.uce15.cityroots.objects.Attraction;
 import com.uminho.uce15.cityroots.objects.Event;
+import com.uminho.uce15.cityroots.objects.Poi;
 import com.uminho.uce15.cityroots.objects.Route;
 import com.uminho.uce15.cityroots.objects.Service;
 
@@ -106,6 +107,7 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
 
     private int userIcon, foodIcon, drinkIcon, shopIcon, otherIcon;
     private GoogleMap theMap=null;
+    private ArrayList lista;
 
     private ListView list;
     private ListAdapter adapter;
@@ -119,7 +121,7 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
 
         setContentView(R.layout.activity_listar_poi);
 
-        ArrayList lista = null;
+        lista = null;
         slidingPaneLayout = (MySlidingPaneLayout)findViewById(R.id.pane);
 
         DataProvider provider = new DataProvider() ;
@@ -251,9 +253,9 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
               //Starting new intent
               //Intent intent = new Intent(ListarPoi.this, DetalhesPois.class);
-              //intent.putExtra("id",lista[position].);
-                //intent.putExtra("id",pos.toString());
-              //  startActivity(intent);
+              //Intent id1 = intent.putExtra("id", ((Poi) lista.get(position)).getId());
+              //startActivity(intent);
+
             }
         });
     }

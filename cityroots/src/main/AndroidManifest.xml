@@ -15,9 +15,9 @@
 
         <!-- chave marco -->
 
-        <meta-data
+        <!--<meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyA1zGN0pbdggubT0-S1oKtkkz8u8_KnqLY" />
+            android:value="AIzaSyA1zGN0pbdggubT0-S1oKtkkz8u8_KnqLY" />-->
 
         <!-- chave fabio (?) -->
         <!--
@@ -30,7 +30,14 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyB2HwK4POlvMNCPfj6GZhJPMBc4hjlvl_w" />
+
         -->
+
+        <!-- chave luis -->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyB2HwK4POlvMNCPfj6GZhJPMBc4hjlvl_w" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
@@ -72,6 +79,10 @@
         </activity>
         <activity
             android:name="com.uminho.uce15.cityroots.DetalhesRoteiros"
+            android:label="@string/title_activity_detalhes_roteiros" >
+        </activity>
+        <activity
+            android:name="com.uminho.uce15.cityroots.DetalhesPois"
             android:label="@string/title_activity_detalhes_roteiros" >
         </activity>
     </application>

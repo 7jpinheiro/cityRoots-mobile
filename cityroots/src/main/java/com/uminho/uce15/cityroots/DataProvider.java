@@ -36,6 +36,7 @@ public class DataProvider {
 
         int trpt_index = 0;
 
+        int id             = jObj.getInt("id");
         String name        = jObj.getJSONArray(type + "_translations").getJSONObject(trpt_index).getString("name");
         String schedule    = jObj.getJSONArray(type + "_translations").getJSONObject(trpt_index).getString("schedule");
         String language    = jObj.getJSONArray(type + "_translations").getJSONObject(trpt_index).getString("schedule");
@@ -106,7 +107,7 @@ public class DataProvider {
         double rating      = jObj.getDouble("rating");
 
 
-        return new Poi(name, schedule, language, description, transport, site, email, address,
+        return new Poi(id,name, schedule, language, description, transport, site, email, address,
                 latitude, longitude, is_active, timestamp, has_accessibility, types, photos, rating, comments);
     }
 

@@ -100,7 +100,7 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mgr.hideSoftInputFromWindow(findViewById(R.id.editText).getWindowToken(), 0);
 
-        Log.d("Search", "Text:" + textView.getText());
+        //Log.d("Search", "Text:" + textView.getText());
     }
 
 

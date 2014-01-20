@@ -3,6 +3,7 @@ package com.uminho.uce15.cityroots.objects;
 import java.util.ArrayList;
 
 public class Poi {
+    private int id;
     private String name;
     private String schedule;
     private String language;
@@ -21,7 +22,8 @@ public class Poi {
     private double rating;
     private ArrayList<Comment> comments;
 
-    public Poi(String name, String schedule, String language, String description, String transport, String site, String email, String address, double latitude, double longitude, boolean is_active, int timestamp, boolean has_accessibility, ArrayList<String> type, ArrayList<Photo> photos, double rating, ArrayList<Comment> comments) {
+    public Poi(int id, String name, String schedule, String language, String description, String transport, String site, String email, String address, double latitude, double longitude, boolean is_active, int timestamp, boolean has_accessibility, ArrayList<String> type, ArrayList<Photo> photos, double rating, ArrayList<Comment> comments) {
+        this.id = id;
         this.name = name;
         this.schedule = schedule;
         this.language = language;
@@ -42,6 +44,7 @@ public class Poi {
     }
 
     public Poi( Poi p){
+        this.id = p.id;
         this.name = p.getName();
         this.schedule = p.getSchedule();
         this.language = p.getLanguage();
@@ -60,6 +63,8 @@ public class Poi {
         this.rating = p.getRating();
         this.comments = p.getComments();
     }
+
+    public int getId() { return id; }
 
     public String getName() {
         return name;
