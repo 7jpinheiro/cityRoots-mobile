@@ -86,6 +86,11 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         startActivity(intent);
     }
 
+    public void clickListarRotas(View view){
+        Intent intent = new Intent(this, DrawRoute.class);
+        startActivity(intent);
+    }
+
     public void clickCategory(View view){
         Intent intent = new Intent(this, ListarPoi.class);
         Bundle b = new Bundle();

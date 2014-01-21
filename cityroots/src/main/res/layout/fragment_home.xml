@@ -42,6 +42,7 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/routes"
+                android:onClick="clickListarRotas"
                 >
                 <ImageView
                     style="@style/MenuImage"
