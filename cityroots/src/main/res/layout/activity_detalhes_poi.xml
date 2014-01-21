@@ -346,11 +346,15 @@
 
         android:layout_gravity="center_vertical"
         android:background="@color/white"
-        android:layout_width="fill_parent"
-        android:layout_height="80dp" />
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_weight=".8"/>
     <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_gravity="center_vertical"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight=".2"
+        />
 
     </LinearLayout>
 <ListView
