@@ -102,8 +102,6 @@ public class SimpleMapAct  extends FragmentActivity implements LocationListener{
     }
 
 
-
-
     @Override
     public void onLocationChanged(Location location) {
         Log.v("MainActivity", "location changed");
