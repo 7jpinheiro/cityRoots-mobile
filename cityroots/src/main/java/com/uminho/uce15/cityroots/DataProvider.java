@@ -252,7 +252,7 @@ public class DataProvider {
         JSONObject jObj = null;
         try {
 
-            jObj = (new Oi()).execute(uri).get();
+            jObj = (new getObjJson()).execute(uri).get();
 
             try {
 
@@ -285,7 +285,7 @@ public class DataProvider {
 
         JSONObject jObj = null;
         try {
-            jObj = (new Oi()).execute(uri).get();
+            jObj = (new getObjJson()).execute(uri).get();
             try {
                 poi = createPoiFromJson(jObj, poiType);
 
@@ -322,7 +322,7 @@ public class DataProvider {
         JSONObject jObj = null;
 
         try {
-            jObj = (new Oi()).execute(uri).get();
+            jObj = (new getObjJson()).execute(uri).get();
                 try {
 
                     Poi p = createPoiFromJson(jObj, poiType);
@@ -353,6 +353,12 @@ public class DataProvider {
 
         return service;
 
+    }
+
+    public ArrayList<Poi> getAds(){
+        ArrayList<Poi> pois = new ArrayList<Poi>();
+
+        return pois;
     }
 
 
@@ -402,7 +408,7 @@ public class DataProvider {
         }
     }
 
-    private class Oi extends AsyncTask<String, Void, JSONObject> {
+    private class getObjJson extends AsyncTask<String, Void, JSONObject> {
         //@Override
         protected JSONObject  doInBackground(String ... urls){
             JSONObject jobj = new JSONObject( );

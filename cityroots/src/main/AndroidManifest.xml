@@ -39,11 +39,11 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.uminho.uce15.cityroots.AndroidOpenStreetMapViewActivity">
+        <activity android:name="com.uminho.uce15.cityroots.AndroidOpenStreetMapViewActivity" >
         </activity>
 
         <activity
@@ -68,12 +68,16 @@
             android:label="@string/title_activity_simple_map" >
         </activity>
         <activity
-            android:name="com.uminho.uce15.cityroots.DrawRoute"
-            android:label="@string/title_activity_listar_eventos" >
-        </activity>
-        <activity
             android:name="com.uminho.uce15.cityroots.DetalhesRoteiros"
             android:label="@string/title_activity_detalhes_roteiros" >
+        </activity>
+        <activity
+            android:name="com.uminho.uce15.cityroots.DetalhesPois"
+            android:label="@string/title_activity_detalhes_roteiros" >
+        </activity>
+        <activity
+            android:name="com.uminho.uce15.cityroots.ListRoteiros"
+            android:label="@string/title_activity_list_roteiros" >
         </activity>
     </application>
 
