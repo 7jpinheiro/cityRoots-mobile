@@ -28,6 +28,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -415,6 +416,13 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
         return super.onOptionsItemSelected(item);
     }
 
+
+    public void search(View view){
+        TextView textView = (TextView)findViewById(R.id.editText);
+        setContentView(R.layout.fragment_search);
+
+        //Log.d("Search", "Text:" + textView.getText());
+    }
 
 
     /**
