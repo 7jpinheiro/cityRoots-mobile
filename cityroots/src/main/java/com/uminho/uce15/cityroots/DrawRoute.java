@@ -79,8 +79,8 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,
     private LocationManager service;
     private String provider;
     private Location posicao;
-    double lati=41.561653;
-    double longi=-8.397139;
+    double lati=0.0;
+    double longi=0.0;
     // A request to connect to Location Services
     private LocationRequest mLocationRequest;
 
@@ -125,7 +125,7 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,
 
         DataProvider provider = new DataProvider() ;
 
-        lista = (ArrayList<Attraction>) provider.getAttractions();
+        lista = (ArrayList<Event>) provider.getEvents();
 
         /*Bundle b = getIntent().getExtras();
         int value = b.getInt("id_category");
@@ -268,16 +268,16 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,
 
         int i=0;
         theMap.addMarker(new MarkerOptions()
-                .position(lastpos=(new LatLng(((Attraction)lista.get(0)).getLatitude(),((Attraction)lista.get(0)).getLongitude())))
-                .title(((Attraction)lista.get(0)).getName())
-                .snippet(((Attraction) lista.get(0)).getDescription()));
+                .position(lastpos=(new LatLng(((Poi)lista.get(0)).getLatitude(),((Poi)lista.get(0)).getLongitude())))
+                .title(((Poi)lista.get(0)).getName())
+                .snippet(((Poi) lista.get(0)).getDescription()));
         i++;
         while(i<lista.size()){
             md = new GMapV2Direction(); 
             theMap.addMarker(new MarkerOptions()
-                    .position(newpos = (new LatLng(((Attraction) lista.get(i)).getLatitude(), ((Attraction) lista.get(i)).getLongitude())))
-                    .title(((Attraction) lista.get(i)).getName())
-                    .snippet(((Attraction) lista.get(i)).getDescription()));
+                    .position(newpos = (new LatLng(((Poi) lista.get(i)).getLatitude(), ((Poi) lista.get(i)).getLongitude())))
+                    .title(((Poi) lista.get(i)).getName())
+                    .snippet(((Poi) lista.get(i)).getDescription()));
             i++;
 
             Document doc = md.getDocument(lastpos, newpos,
@@ -584,9 +584,6 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,
     @Override
     public void onLocationChanged(Location location) {
         System.out.println("Location changed");
-        if(gps.canGetLocation()){
-            System.out.println("GPSLat:"+gps.getLatitude()+" GPSLong:"+gps.getLongitude());
-        }else System.out.println("Erro de GPS");
 
         Location currentLocation=null;
 
@@ -602,6 +599,25 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,
                 //LatLng lastLatLng2 = new LatLng(lati, longi);
                 System.out.println("Lat:"+currentLocation.getLatitude()+" Long:"+currentLocation.getLongitude());
             }
+
+        if(currentLocation!=null){
+            if(userMarker!=null) userMarker.remove();
+            LatLng pos=new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
+
+            userMarker = theMap.addMarker(new MarkerOptions()
+                    .position(pos)
+                    .title("Está aqui")
+                    .icon(BitmapDescriptorFactory.fromResource(userIcon))
+                    .snippet("Sua última localização"));
+
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(pos)
+                    .zoom(12)                   // Sets the zoom
+                    .tilt(45)                   // Sets the tilt of the camera to 30 degrees
+                    .build();                   // Creates a CameraPosition from the builder
+
+            theMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        }
     }
 
     private void startPeriodicUpdates() {
