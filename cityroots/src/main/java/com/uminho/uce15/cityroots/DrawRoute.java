@@ -1,10 +1,7 @@
 package com.uminho.uce15.cityroots;
-
 /**
  * Created by John on 21-01-2014.
  */
-
-
 import org.w3c.dom.Document;
 import android.graphics.Color;
 import com.google.android.gms.maps.model.Polyline;
@@ -67,22 +64,14 @@ import com.uminho.uce15.cityroots.objects.Poi;
 import com.uminho.uce15.cityroots.objects.Route;
 import com.uminho.uce15.cityroots.objects.Service;
 
-import org.json.JSONObject;
-
 import android.widget.ListView;
-
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class DrawRoute extends ActionBarActivity implements LocationListener,GooglePlayServicesClient.ConnectionCallbacks,GooglePlayServicesClient.OnConnectionFailedListener{
+public class DrawRoute extends ActionBarActivity implements LocationListener,
+        GooglePlayServicesClient.ConnectionCallbacks,GooglePlayServicesClient.OnConnectionFailedListener{
 
     //-----------------
-    double loclat=41.561653;
-    double loclng=-8.397139;
-
-    double placelat;
-    double placelng;
-
     GMapV2Direction md;
     //---------------------
 
@@ -98,19 +87,11 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
     // Stores the current instantiation of the location client in this object
     private LocationClient mLocationClient;
 
-    // Handles to UI widgets
-    private TextView mLatLng;
-    private TextView mAddress;
-    private ProgressBar mActivityIndicator;
-    private TextView mConnectionState;
-    private TextView mConnectionStatus;
-
     // Handle to SharedPreferences for this app
     SharedPreferences mPrefs;
 
     // Handle to a SharedPreferences editor
     SharedPreferences.Editor mEditor;
-
     /*
      * Note if updates have been turned on. Starts out as "false"; is set to "true" in the
      * method handleRequestSuccess of LocationUpdateReceiver.
@@ -118,10 +99,8 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
      */
     boolean mUpdatesRequested = true;
 
-    private LocationManager locMan;
     private Marker userMarker;
     private Marker[] placeMarkers;
-    private final int MAX_PLACES = 2;
     private MarkerOptions[] places;
 
     private int userIcon, foodIcon, drinkIcon, shopIcon, otherIcon;
@@ -133,17 +112,20 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
 
     private Context old;
     MySlidingPaneLayout slidingPaneLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
 
-        setContentView(R.layout.activity_listar_poi);
+        setContentView(R.layout.activity_desenhar_rota);
 
         lista = null;
         slidingPaneLayout = (MySlidingPaneLayout)findViewById(R.id.pane);
 
         DataProvider provider = new DataProvider() ;
+
+        lista = (ArrayList<Attraction>) provider.getAttractions();
 
         /*Bundle b = getIntent().getExtras();
         int value = b.getInt("id_category");
@@ -186,7 +168,7 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
                 lista = (ArrayList<Event>) provider.getEvents();
                 break;
         }
-
+        */
 
         list=(ListView)findViewById(R.id.list);
         list.setEmptyView(findViewById(android.R.id.empty));
@@ -198,14 +180,6 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
         }
 
         assert lista != null;
-        */
-
-        /*// Get handles to the UI view objects
-        mLatLng = (TextView) findViewById(R.id.lat_lng);
-        mAddress = (TextView) findViewById(R.id.address);
-        mActivityIndicator = (ProgressBar) findViewById(R.id.address_progress);
-        mConnectionState = (TextView) findViewById(R.id.text_connection_state);
-        mConnectionStatus = (TextView) findViewById(R.id.text_connection_status);*/
 
 
         mLocationClient = new LocationClient(this, this, this);
@@ -216,28 +190,23 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
          * Set the update interval
          */
         mLocationRequest.setInterval(LocationUtils.UPDATE_INTERVAL_IN_MILLISECONDS);
-
         // Use high accuracy
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
         // Set the interval ceiling to one minute
         mLocationRequest.setFastestInterval(LocationUtils.FAST_INTERVAL_CEILING_IN_MILLISECONDS);
-
         // Note that location updates are off until the user turns them on
         mUpdatesRequested = false;
-
         // Open Shared Preferences
         mPrefs = getSharedPreferences(LocationUtils.SHARED_PREFERENCES, Context.MODE_PRIVATE);
-
         // Get an editor
         mEditor = mPrefs.edit();
-
         /*
          * Create a new location client, using the enclosing class to
          * handle callbacks.
          */
+
         userIcon = R.drawable.marcador;
-        otherIcon = R.drawable.events;
+        otherIcon = R.drawable.user_pos;
 
         if(theMap==null){
             //map not instantiated yet
@@ -248,106 +217,33 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
         }
         if(theMap != null){
             //ok - proceed
-            theMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-            placeMarkers = new Marker[MAX_PLACES];
-
-            placelat =41.4361653;
-            placelng = -8.157139;
-
-            updatePlaces(loclat,loclng,placelat,placelng);
-            updatePlaces(placelat,placelng,41.421653,-8.337139);
-            //updatePlaces();
+            theMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            updatePlaces();
         }
 
-        //GPS
-        /*service = (LocationManager) getSystemService(LOCATION_SERVICE);
-        boolean enabled = service
-                .isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if(enabled)
-        {System.out.println("GPS Ligado");
-            Criteria criteria = new Criteria();
-            provider = service.getBestProvider(criteria, false);
-            posicao = service.getLastKnownLocation(provider);
-        }
-        else System.out.println("GPS Desligado");*/
         gps = new GPSTracker(this);
-        //GPS----------------------------------------
 
-       /* list.setOnItemClickListener(new OnItemClickListener() {
+       list.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 //Starting new intent
                 //Intent intent = new Intent(ListarPoi.this, DetalhesPois.class);
                 //Intent id1 = intent.putExtra("id", ((Poi) lista.get(position)).getId());
                 //startActivity(intent);
-
             }
-        });*/
+        });
     }
 
     public void goToList(View view){
         slidingPaneLayout.openPane();
     }
 
-    private void updatePlaces(double loclatitude, double loclongitude,double placelat,double placelng){
-        if(userMarker!=null) userMarker.remove();
-        System.out.println("3");
-        LatLng lastLatLng = new LatLng(loclat, loclng);
-        LatLng lastLatLng2 = new LatLng(placelat, placelng);
-        userMarker = theMap.addMarker(new MarkerOptions()
-                .position(lastLatLng)
-                .title("You are here")
-                .icon(BitmapDescriptorFactory.fromResource(userIcon))
-                .snippet("Your last recorded location"));
-
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(lastLatLng)
-                .zoom(12)                   // Sets the zoom
-                .tilt(45)                   // Sets the tilt of the camera to 30 degrees
-                .build();                   // Creates a CameraPosition from the builder
-
-        theMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-        theMap.addMarker(new MarkerOptions()
-                .position(new LatLng(placelat, placelng))
-                .title("Local Escolhido"));
-
-
-        md = new GMapV2Direction();
-        System.out.println(" inicio lat loc" + lastLatLng.latitude);
-        System.out.println(" inicio long loc" + lastLatLng.longitude);
-        System.out.println(" inicio lat PLA" + lastLatLng2.latitude);
-        System.out.println(" inicio long PLA" + lastLatLng2.longitude);
-
-
-        Document doc = md.getDocument(lastLatLng, lastLatLng2,
-                GMapV2Direction.MODE_WALKING);
-
-
-        ArrayList<LatLng> directionPoint = md.getDirection(doc);
-        PolylineOptions rectLine = new PolylineOptions().width(3).color(
-                Color.RED);
-        System.out.println("44");
-        for (int i = 0; i < directionPoint.size(); i++) {
-            rectLine.add(directionPoint.get(i));
-        }
-        Polyline polylin = theMap.addPolyline(rectLine);
-
-    }
-
     private void updatePlaces(){
+
+        /*
         if(userMarker!=null) userMarker.remove();
-        //update location
-        //locMan = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        //Location lastLoc = locMan.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-        //double lat = lastLoc.getLatitude();
-        //double lng = lastLoc.getLongitude();
-
-
         double lat=lati;
         double lng=longi;
-
 
         LatLng lastLatLng = new LatLng(lat, lng);
 
@@ -364,114 +260,55 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
                 .build();                   // Creates a CameraPosition from the builder
 
         theMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        //theMap.animateCamera(CameraUpdateFactory.newLatLng(lastLatLng), 3000, null);
+        */
 
-        //String placesSearchStr = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.561653,-8.397139&radius=1000&sensor=true&types=bar&key=AIzaSyCSbIjUOgbOhQ9JJ4njs3hyPkdkyhXBxnQ";
 
-        //new GetPlaces().execute(placesSearchStr);
-        //locMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 100, this);
-    }
+        LatLng lastpos = null;
+        LatLng newpos = null;
 
-    /* private class GetPlaces extends AsyncTask<String, Void, String>
-         //process data retrieved from doInBackground
-         protected void onPostExecute(String result) {
-             //parse place data returned from Google Places
-             //remove existing markers
-             if(placeMarkers!=null){
-                 for(int pm=0; pm<placeMarkers.length; pm++){
-                     if(placeMarkers[pm]!=null)
-                         placeMarkers[pm].remove();
-                 }
-             }
-             try {
-                 //parse JSON
+        int i=0;
+        theMap.addMarker(new MarkerOptions()
+                .position(lastpos=(new LatLng(((Attraction)lista.get(0)).getLatitude(),((Attraction)lista.get(0)).getLongitude())))
+                .title(((Attraction)lista.get(0)).getName())
+                .snippet(((Attraction) lista.get(0)).getDescription()));
+        i++;
+        while(i<lista.size()){
+            md = new GMapV2Direction(); 
+            theMap.addMarker(new MarkerOptions()
+                    .position(newpos = (new LatLng(((Attraction) lista.get(i)).getLatitude(), ((Attraction) lista.get(i)).getLongitude())))
+                    .title(((Attraction) lista.get(i)).getName())
+                    .snippet(((Attraction) lista.get(i)).getDescription()));
+            i++;
 
-                 //create JSONObject, pass stinrg returned from doInBackground
-                 JSONArray placesArray = new JSONArray(result);
-                 //get "results" array
-                 //marker options for each place returned
-                 pontos=new JSONObject[placesArray.length()];
-                 web=new String[placesArray.length()];
-                 places = new MarkerOptions[placesArray.length()];
-                 //loop through places
-                 for (int p=0; p<placesArray.length(); p++) {
-                     //parse each place
-                     //if any values are missing we won't show the marker
-                     boolean missingValue=false;
-                     LatLng placeLL=null;
-                     String placeName="";
-                     String vicinity="";
-                     int currIcon = otherIcon;
-                     try{
-                         //attempt to retrieve place data values
-                         missingValue=false;
-                         //get place at this index
-                         JSONObject placeObject = placesArray.getJSONObject(p);
-                         //get location section
-                         //read lat lng
-                         placeLL = new LatLng(Double.valueOf(placeObject.getString("latitude")),
-                                 Double.valueOf(placeObject.getString("longitude")));
-                         JSONArray et=placeObject.getJSONArray("event_translations");
-                         JSONObject pt=et.getJSONObject(0);
-                         vicinity =pt.getString("description");
-                         //name
-                         placeName = pt.getString("name");
-                         web[p]=pt.getString("name");
-                         pontos[p]=placeObject;
-                     }
-                     catch(JSONException jse){
-                         Log.v("JSON", "missing value");
-                         missingValue=true;
-                         jse.printStackTrace();
-                     }
-                     //if values missing we don't display
-                     if(missingValue)	places[p]=null;
-                     else
-                         places[p]=new MarkerOptions()
-                                 .position(placeLL)
-                                 .title(placeName)
-                                 .icon(BitmapDescriptorFactory.fromResource(currIcon))
-                                 .snippet(vicinity);
-                 }
-             }
-             catch (Exception e) {
-                 e.printStackTrace();
-             }
-             if(places!=null && placeMarkers!=null){
-                 for(int p=0; p<places.length && p<placeMarkers.length; p++){
-                     //will be null if a value was missing
-                     if(places[p]!=null)
-                         placeMarkers[p]=theMap.addMarker(places[p]);
-                 }
-             }
+            Document doc = md.getDocument(lastpos, newpos,
+                    GMapV2Direction.MODE_WALKING);
 
-             if(web!=null){adapter = new ListAdapter(ListarPoi.this,web,imageId);
-             list.setAdapter(adapter);}
-         }
-     }
- */
+            ArrayList<LatLng> directionPoint = md.getDirection(doc);
+            PolylineOptions rectLine = new PolylineOptions().width(3).color(
+                    Color.RED);
+
+            for (int j = 0; j < directionPoint.size(); j++) {
+                rectLine.add(directionPoint.get(j));
+            }
+            Polyline polylin = theMap.addPolyline(rectLine);
+        }
+}
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.listar_eventos, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -488,9 +325,6 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
         }
     }
 
-
-
-
     /*
      * Called when the Activity is no longer visible at all.
      * Stop updates and disconnect.
@@ -502,7 +336,6 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
         if (mLocationClient.isConnected()) {
             stopPeriodicUpdates();
         }
-
         // After disconnect() is called, the client is considered "dead".
         mLocationClient.disconnect();
 
@@ -521,21 +354,17 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
         //service.removeUpdates(this);
         super.onPause();
     }
-
     /*
      * Called when the Activity is restarted, even before it becomes visible.
      */
     @Override
     public void onStart() {
-
         super.onStart();
-
         /*
          * Connect the client. Don't re-start any requests here;
          * instead, wait for onResume()
          */
         mLocationClient.connect();
-
     }
     /*
      * Called when the system detects that this Activity is now visible.
@@ -604,7 +433,6 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
                 break;
         }
     }
-
     /**
      * Verify that Google Play services is available before making a request.
      *
@@ -637,43 +465,12 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
     }
 
     /**
-     * Invoked by the "Get Address" button.
-     * Get the address of the current location, using reverse geocoding. This only works if
-     * a geocoding service is available.
-     *
-     * @param v The view object associated with this method, in this case a Button.
-     */
-    // For Eclipse with ADT, suppress warnings about Geocoder.isPresent()
-    @SuppressLint("NewApi")
-    public void getAddress(View v) {
-
-        // In Gingerbread and later, use Geocoder.isPresent() to see if a geocoder is available.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD && !Geocoder.isPresent()) {
-            // No geocoder is present. Issue an error message
-            //Toast.makeText(this, R.string.no_geocoder_available, Toast.LENGTH_LONG).show();
-            Toast.makeText(this,"no_geocoder_available", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if (servicesConnected()) {
-
-            // Get the current location
-            Location currentLocation = mLocationClient.getLastLocation();
-
-            // Turn the indefinite activity indicator on
-            mActivityIndicator.setVisibility(View.VISIBLE);
-
-            // Start the background task
-            (new GetAddressTask(this)).execute(currentLocation);
-        }
-    }
-
-    /**
      * Invoked by the "Start Updates" button
      * Sends a request to start location updates
      *
      * @param v The view object associated with this method, in this case a Button.
      */
+
     public void startUpdates(View v) {
         mUpdatesRequested = true;
 
@@ -681,22 +478,6 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
             startPeriodicUpdates();
         }
     }
-
-    /**
-     * Invoked by the "Stop Updates" button
-     * Sends a request to remove location updates
-     * request them.
-     *
-     * @param v The view object associated with this method, in this case a Button.
-     */
-    public void stopUpdates(View v) {
-        mUpdatesRequested = false;
-
-        if (servicesConnected()) {
-            stopPeriodicUpdates();
-        }
-    }
-
     /*
      * Called by Location Services when the request to connect the
      * client finishes successfully. At this point, you can
@@ -704,12 +485,12 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
      */
     @Override
     public void onConnected(Bundle bundle) {
+        Location currentLocation=null;
         //mConnectionStatus.setText(R.string.connected);
         System.out.println("Ligado: Listener");
         if (servicesConnected()) {
             System.out.println("Ligado: Services");
             // Get the current location
-            Location currentLocation=null;
             while(currentLocation==null){
                 System.out.println("NOP");
                 currentLocation = mLocationClient.getLastLocation();
@@ -725,16 +506,35 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
             // Display the current location in the UI
             //mLatLng.setText(LocationUtils.getLatLng(this, currentLocation));
         }else System.out.println("DesLigado: Services");
-        if (mUpdatesRequested) {
+        //if (mUpdatesRequested) {
             startPeriodicUpdates();
-        }
+        //}
 
         if(gps.canGetLocation()){
             System.out.println("GPSLat:"+gps.getLatitude()+" GPSLong:"+gps.getLongitude());
         }else System.out.println("Erro de GPS");
 
-    }
 
+        if(currentLocation!=null){
+                if(userMarker!=null) userMarker.remove();
+                LatLng pos=new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
+
+                userMarker = theMap.addMarker(new MarkerOptions()
+                        .position(pos)
+                        .title("Está aqui")
+                        .icon(BitmapDescriptorFactory.fromResource(userIcon))
+                        .snippet("Sua última localização"));
+
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(pos)
+                        .zoom(12)                   // Sets the zoom
+                        .tilt(45)                   // Sets the tilt of the camera to 30 degrees
+                        .build();                   // Creates a CameraPosition from the builder
+
+                theMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        }
+
+    }
     /*
      * Called by Location Services if the connection to the
      * location client drops because of an error.
@@ -743,14 +543,12 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
     public void onDisconnected() {
         //mConnectionStatus.setText(R.string.disconnected);
     }
-
     /*
      * Called by Location Services if the attempt to
      * Location Services fails.
      */
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-
         /*
          * Google Play services can resolve some errors it detects.
          * If the error has a resolution, try sending an Intent to
@@ -764,14 +562,11 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
                 connectionResult.startResolutionForResult(
                         this,
                         LocationUtils.CONNECTION_FAILURE_RESOLUTION_REQUEST);
-
                 /*
                 * Thrown if Google Play services canceled the original
                 * PendingIntent
                 */
-
             } catch (IntentSender.SendIntentException e) {
-
                 // Log the error
                 e.printStackTrace();
             }
@@ -781,7 +576,6 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
             showErrorDialog(connectionResult.getErrorCode());
         }
     }
-
     /**
      * Report location updates to the UI.
      *
@@ -789,168 +583,36 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
      */
     @Override
     public void onLocationChanged(Location location) {
+        System.out.println("Location changed");
+        if(gps.canGetLocation()){
+            System.out.println("GPSLat:"+gps.getLatitude()+" GPSLong:"+gps.getLongitude());
+        }else System.out.println("Erro de GPS");
 
-        // Report to the UI that the location was updated
-        //mConnectionStatus.setText(R.string.location_updated);
+        Location currentLocation=null;
 
-        // In the UI, set the latitude and longitude to the value received
-        mLatLng.setText(LocationUtils.getLatLng(this, location));
+            while(currentLocation==null){
+                System.out.println("NOP");
+                currentLocation = mLocationClient.getLastLocation();
+                //currentLocation =service.getLastKnownLocation(provider);
+            }
+            if(currentLocation!=null){
+                System.out.println("YESSSS");
+                lati=(double)currentLocation.getLatitude();
+                longi=(double)currentLocation.getLongitude();
+                //LatLng lastLatLng2 = new LatLng(lati, longi);
+                System.out.println("Lat:"+currentLocation.getLatitude()+" Long:"+currentLocation.getLongitude());
+            }
     }
 
-    /**
-     * In response to a request to start updates, send a request
-     * to Location Services
-     */
     private void startPeriodicUpdates() {
 
         mLocationClient.requestLocationUpdates(mLocationRequest, this);
-        //mConnectionState.setText(R.string.location_requested);
     }
 
-    /**
-     * In response to a request to stop updates, send a request to
-     * Location Services
-     */
     private void stopPeriodicUpdates() {
         mLocationClient.removeLocationUpdates(this);
-        //mConnectionState.setText(R.string.location_updates_stopped);
     }
 
-    /**
-     * An AsyncTask that calls getFromLocation() in the background.
-     * The class uses the following generic types:
-     * Location - A {@link android.location.Location} object containing the current location,
-     *            passed as the input parameter to doInBackground()
-     * Void     - indicates that progress units are not used by this subclass
-     * String   - An address passed to onPostExecute()
-     */
-    protected class GetAddressTask extends AsyncTask<Location, Void, String> {
-
-        // Store the context passed to the AsyncTask when the system instantiates it.
-        Context localContext;
-
-        // Constructor called by the system to instantiate the task
-        public GetAddressTask(Context context) {
-
-            // Required by the semantics of AsyncTask
-            super();
-
-            // Set a Context for the background task
-            localContext = context;
-        }
-
-        /**
-         * Get a geocoding service instance, pass latitude and longitude to it, format the returned
-         * address, and return the address to the UI thread.
-         */
-        @Override
-        protected String doInBackground(Location... params) {
-            /*
-             * Get a new geocoding service instance, set for localized addresses. This example uses
-             * android.location.Geocoder, but other geocoders that conform to address standards
-             * can also be used.
-             */
-            Geocoder geocoder = new Geocoder(localContext, Locale.getDefault());
-
-            // Get the current location from the input parameter list
-            Location location = params[0];
-
-            // Create a list to contain the result address
-            List <Address> addresses = null;
-
-            // Try to get an address for the current location. Catch IO or network problems.
-            try {
-
-                /*
-                 * Call the synchronous getFromLocation() method with the latitude and
-                 * longitude of the current location. Return at most 1 address.
-                 */
-                addresses = geocoder.getFromLocation(location.getLatitude(),
-                        location.getLongitude(), 1
-                );
-
-                // Catch network or other I/O problems.
-            } catch (IOException exception1) {
-
-                // Log an error and return an error message
-                //Log.e(LocationUtils.APPTAG, getString(R.string.IO_Exception_getFromLocation));
-                Log.e(LocationUtils.APPTAG, "IO_Exception_getFromLocation");
-
-                // print the stack trace
-                exception1.printStackTrace();
-
-                // Return an error message
-                //return (getString(R.string.IO_Exception_getFromLocation));
-                return "IO_Exception_getFromLocation";
-
-                // Catch incorrect latitude or longitude values
-            } catch (IllegalArgumentException exception2) {
-
-                // Construct a message containing the invalid arguments
-               /* String errorString = getString(
-                        R.string.illegal_argument_exception,
-                        location.getLatitude(),
-                        location.getLongitude()
-                );*/
-                String errorString="erro illegal argument exception";
-                // Log the error and print the stack trace
-                Log.e(LocationUtils.APPTAG, errorString);
-                exception2.printStackTrace();
-
-                //
-                return errorString;
-            }
-            // If the reverse geocode returned an address
-            if (addresses != null && addresses.size() > 0) {
-
-                // Get the first address
-                Address address = addresses.get(0);
-
-                // Format the first line of address
-                /*String addressText = getString(R.string.address_output_string,
-
-                        // If there's a street address, add it
-                        address.getMaxAddressLineIndex() > 0 ?
-                                address.getAddressLine(0) : "",
-
-                        // Locality is usually a city
-                        address.getLocality(),
-
-                        // The country of the address
-                        address.getCountryName()
-                );*/
-
-                // Return the text
-                //return addressText;
-                return "endereco";
-                // If there aren't any addresses, post a message
-            } else {
-                return "no_address found";
-                //return getString(R.string.no_address_found);
-            }
-        }
-
-        /**
-         * A method that's called once doInBackground() completes. Set the text of the
-         * UI element that displays the address. This method runs on the UI thread.
-         */
-        @Override
-        protected void onPostExecute(String address) {
-
-            // Turn off the progress bar
-            mActivityIndicator.setVisibility(View.GONE);
-
-            // Set the address in the UI
-            mAddress.setText(address);
-        }
-    }
-
-    /**
-     * Show a dialog returned by Google Play services for the
-     * connection error code
-     *
-     * @param errorCode An error code returned from onConnectionFailed
-     */
     private void showErrorDialog(int errorCode) {
 
         // Get the error dialog from Google Play services
@@ -989,7 +651,6 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
             super();
             mDialog = null;
         }
-
         /**
          * Set the dialog to display
          *
@@ -998,7 +659,6 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
         public void setDialog(Dialog dialog) {
             mDialog = dialog;
         }
-
         /*
          * This method must return a Dialog to the DialogFragment.
          */
@@ -1007,6 +667,4 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,Goo
             return mDialog;
         }
     }
-
-
 }

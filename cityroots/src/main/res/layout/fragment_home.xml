@@ -154,7 +154,7 @@
                 />
             <LinearLayout
                 style="@style/MenuRow"
-                android:id="@+id/transport"
+                android:id="@+id/transport1"
                 >
                <!-- <ImageView
                     style="@style/MenuImage"
