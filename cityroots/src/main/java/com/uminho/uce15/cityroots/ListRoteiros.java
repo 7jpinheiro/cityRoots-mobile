@@ -1,5 +1,7 @@
 package com.uminho.uce15.cityroots;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -10,21 +12,74 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.uminho.uce15.cityroots.objects.Comment;
+import com.uminho.uce15.cityroots.objects.Route;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListRoteiros extends ActionBarActivity {
-
+    private ArrayList <Route> routes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_roteiros);
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+        DataProvider dp = new DataProvider();
+
+        routes = (ArrayList<Route>) dp.getRoutes();
+
+        ListView list = (ListView) findViewById(R.id.listView_roteiros);
+
+        ListAdapter adapter = new ListAdapter(ListRoteiros.this, routes);
+
+        list.setAdapter(adapter);
+
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                //Starting new intent
+                Intent intent = new Intent(ListRoteiros.this, DetalhesRoteiros.class);
+                intent.putExtra("id", ((Route) routes.get(position)).getId());
+                startActivity(intent);
+
+            }
+        });
     }
 
+    private class ListAdapter extends ArrayAdapter<String> {
+
+        private final Activity context;
+        private List lista;
+
+
+        public ListAdapter(Activity context, List lista) {
+
+            super(context, R.layout.list_comment, lista);
+            this.context = context;
+
+            this.lista = lista;
+        }
+
+        @Override
+        public View getView(int position, View view, ViewGroup parent) {
+
+            LayoutInflater inflater = context.getLayoutInflater();
+            View rowView= inflater.inflate(R.layout.list_comment, null, true);
+
+            TextView route_name = (TextView) rowView.findViewById(R.id.user_name);
+            route_name.setText(((Route)lista.get(position)).getName());
+
+            return route_name;
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
