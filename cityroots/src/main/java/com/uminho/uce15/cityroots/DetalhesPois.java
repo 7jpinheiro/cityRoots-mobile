@@ -81,7 +81,9 @@ public class DetalhesPois extends ActionBarActivity {
             TextView lbl_schedule = (TextView) findViewById(R.id.schedule);
             TextView lbl_address = (TextView) findViewById(R.id.address);
             TextView lbl_price = (TextView) findViewById(R.id.price);
-
+            TextView lbl_site = (TextView) findViewById(R.id.website);
+            TextView lbl_email = (TextView) findViewById(R.id.email);
+            TextView lbl_transport = (TextView) findViewById(R.id.transport);
             //Event Labels
             TextView lbl_start = (TextView) findViewById(R.id.event_start);
             TextView lbl_end = (TextView) findViewById(R.id.event_end);
@@ -109,7 +111,7 @@ public class DetalhesPois extends ActionBarActivity {
                     break;
                 case 1:
                     poi = dp.getEvent(id);
-                    String price = (((Attraction) poi).getPrice());
+                    String price = (((Event) poi).getPrice());
                     price = price == null? "Não tem":price;
                     lbl_price.setText(price);
                     lbl_start.setText(((Event)poi).getStart());
@@ -122,8 +124,8 @@ public class DetalhesPois extends ActionBarActivity {
                     break;
                 case 2:
                     poi = dp.getService(id);
-                    lbl_capacity.setText(((Service)poi).getCapacity());
-                    lbl_details.setText(((Service)poi).getDetails());
+                    lbl_capacity.setText(Integer.toString(((Service)poi).getCapacity()));
+                    lbl_details.setText(Integer.toString(((Service)poi).getCapacity()));
 
                     lbl_price.setVisibility(View.GONE);
                     lin.setVisibility(View.GONE);
@@ -134,6 +136,11 @@ public class DetalhesPois extends ActionBarActivity {
             lbl_description.setText(poi.getDescription());
             lbl_schedule.setText(poi.getSchedule());
             lbl_address.setText(poi.getAddress());
+            lbl_site.setText(poi.getSite());
+            lbl_email.setText(poi.getEmail());
+            lbl_transport.setText(poi.getTransport());
+
+
 
             CommentAdapter ca = new CommentAdapter(activity,poi.getComments());
             ListView list = (ListView) findViewById(R.id.comments);

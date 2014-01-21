@@ -295,8 +295,8 @@ public class DataProvider {
                 String program      = jObj.getJSONArray(poiType + "_translations").getJSONObject(0).getString("program");
                 String price = jObj.getJSONArray(poiType + "_translations").getJSONObject(0).getString("price");
 
-                Event e = new Event(poi, start, end, organization, program,price);
-                res.add(e);
+                event = new Event(poi, start, end, organization, program,price);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -306,6 +306,8 @@ public class DataProvider {
             e.printStackTrace();
         }
 
+        System.out.println(event.getName());
+        System.out.println(event.getPrice());
 
         return event;
     }
@@ -314,7 +316,43 @@ public class DataProvider {
         Poi poi;
         Service service=null;
 
+        String poiType = "service";
+
+        String uri = uriBase + poiType + "s" + "/" + id + ".json";
+        JSONObject jObj = null;
+
+        try {
+            jObj = (new Oi()).execute(uri).get();
+                try {
+
+                    Poi p = createPoiFromJson(jObj, poiType);
+
+                    boolean is_reference_point = jObj.getBoolean("reference_point");
+                    int capacity = 0;
+                    try{
+                        capacity=jObj.getInt("capacity");
+                    }
+                    catch ( Exception e )
+                    {
+                        capacity=0;
+                    }
+
+                    String details = jObj.getString("details");
+
+                    service = new Service(p, is_reference_point, capacity, details );
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
         return service;
+
     }
 
 
