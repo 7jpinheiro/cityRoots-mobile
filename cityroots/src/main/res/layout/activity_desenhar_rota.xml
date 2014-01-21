@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<com.uminho.uce15.cityroots.MySlidingPaneLayout
+    android:id="@+id/pane"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:id="@+id/pane1"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:background="@color/gray_android">
+
+        <ImageView
+            android:id="@android:id/empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:src="@drawable/error_connection"
+            android:layout_gravity="center" />
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
+    </FrameLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mapa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            />
+        <ImageView
+            android:id="@android:id/empty"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/arrow"
+            android:onClick="goToList"
+            android:layout_centerVertical="true"
+            android:background="#33FFFFFF"
+           />
+
+    </RelativeLayout>
+</com.uminho.uce15.cityroots.MySlidingPaneLayout>
