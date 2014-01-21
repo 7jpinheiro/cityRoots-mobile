@@ -244,17 +244,18 @@ public class DataProvider {
     public Attraction getAttraction (int id){
         Poi poi;
         Attraction attraction=null;
+        System.out.println("ID:"+id);
+        String poiType = "attraction";
 
-        String poiType = "attractions/";
-
-        String uri = uriBase + poiType + id + ".json";
-        JSONArray jsonArray = null;
+        String uri = uriBase + poiType+ "s" + "/" + id + ".json";
+        System.out.println(uri);
+        JSONObject jObj = null;
         try {
 
-            jsonArray = (new GetContentTask()).execute(uri).get();
+            jObj = (new Oi()).execute(uri).get();
 
             try {
-                 JSONObject jObj = jsonArray.getJSONObject(0);
+
                  poi = createPoiFromJson(jObj, poiType);
                  String price = jObj.getJSONArray(poiType + "_translations").getJSONObject(0).getString("price");
                  boolean b = jObj.getBoolean("reference_point");
@@ -277,16 +278,15 @@ public class DataProvider {
         Poi poi;
         Event event=null;
 
-        String poiType = "events/";
+        String poiType = "event";
 
         List<Event> res = new ArrayList<Event>();
-        String uri = uriBase + poiType + id + ".json";
+        String uri = uriBase + poiType + "s" + "/" + id + ".json";
 
-        JSONArray jsonArray = null;
+        JSONObject jObj = null;
         try {
-            jsonArray = (new GetContentTask()).execute(uri).get();
+            jObj = (new Oi()).execute(uri).get();
             try {
-                JSONObject jObj = jsonArray.getJSONObject(id);
                 poi = createPoiFromJson(jObj, poiType);
 
                 String start        = jObj.getString("startdate");
@@ -329,7 +329,7 @@ public class DataProvider {
                 try {
                     HttpResponse response = null;
                     response = httpclient.execute(new HttpGet(url));
-                    System.out.println("adasdadasda");
+
                     StatusLine statusLine = response.getStatusLine();
                     if(statusLine.getStatusCode() == HttpStatus.SC_OK){
                         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -339,7 +339,7 @@ public class DataProvider {
 
 
                         responseString = out.toString();
-                        System.out.println("cenz");
+
                     } else{
 
                         response.getEntity().getContent().close();
@@ -361,6 +361,52 @@ public class DataProvider {
                 e.printStackTrace();
             }
             return jArr;
+        }
+    }
+
+    private class Oi extends AsyncTask<String, Void, JSONObject> {
+        //@Override
+        protected JSONObject  doInBackground(String ... urls){
+            JSONObject jobj = new JSONObject( );
+
+            String responseString=null;
+            for (String url : urls) {
+                HttpClient httpclient = new DefaultHttpClient();
+                try {
+                    HttpResponse response = null;
+                    response = httpclient.execute(new HttpGet(url));
+
+                    StatusLine statusLine = response.getStatusLine();
+                    if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+                        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+                        response.getEntity().writeTo(out);
+                        out.close();
+
+
+                        responseString = out.toString();
+
+                    } else{
+
+                        response.getEntity().getContent().close();
+                        throw new IOException(statusLine.getReasonPhrase());
+
+                    }
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            try {
+                jobj = new JSONObject(responseString);
+            } catch (JSONException e) {
+                Log.e("JSON Parser", "Error parsing data " + e.toString());
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+            return jobj;
         }
     }
 

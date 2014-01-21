@@ -23,7 +23,7 @@
     <string name="outdoor">Outdoor</string>
     <string name="nightlife">Nightlife</string>
     <string name="hotels">Hotels</string>
-    <string name="transport">Transport</string>
+    <string name="transport">Transporte</string>
     <string name="afd">Accessibility for Disabled</string>
     <string name="contacts">Useful Contacts</string>
 
@@ -49,7 +49,7 @@
     <string name="description">Descrição:</string>
     <string name="adress">Endereço:</string>
     <string name="scheudle">Horario:</string>
-    <string name="price">Transporte:</string>
+    <string name="price">Preço:</string>
     <string name="site">Site:</string>
     <string name="email">E-mail:</string>
     <string name="seemap">Ver no mapa</string>
