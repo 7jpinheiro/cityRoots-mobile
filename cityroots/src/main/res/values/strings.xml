@@ -42,6 +42,7 @@
     <string name="title_activity_listar_eventos">Eventos</string>
     <string name="title_activity_detalhes_eventos">Detalhes</string>
     <string name="title_activity_detalhes_roteiros">DetalhesRoteiros</string>
+    <string name="title_activity_desenho_roteiro">Roteiro</string>
 
     <!-- POI Description -->
 
