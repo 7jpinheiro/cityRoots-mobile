@@ -327,22 +327,11 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:textColor="@android:color/primary_text_dark"
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/comment" />
-
-            <EditText
-                android:id="@+id/comentario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textMultiLine" >
-            </EditText>
         </LinearLayout>
 </ScrollView>
+    <View
+        style="@style/MenuLine"
+        />
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -350,8 +339,11 @@
     <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/abc_ab_bottom_solid_dark_holo"/>
+        android:src="@drawable/abc_ab_bottom_solid_dark_holo"
+        android:paddingRight="10dp"
+        />
     <EditText
+
         android:layout_gravity="center_vertical"
         android:background="@color/white"
         android:layout_width="fill_parent"
