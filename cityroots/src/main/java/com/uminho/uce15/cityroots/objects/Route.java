@@ -3,14 +3,20 @@ package com.uminho.uce15.cityroots.objects;
 import java.util.ArrayList;
 
 public class Route {
+    private int id;
     private String name;
     private String description;
     private ArrayList<Poi> pois;
 
-    public Route(String name, String description, ArrayList<Poi> pois) {
+    public Route(int id,String name, String description, ArrayList<Poi> pois) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.pois = pois;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
