@@ -50,15 +50,14 @@ public class ListAdapter extends ArrayAdapter<String> {
         View rowView= inflater.inflate(R.layout.category_listelem, null, true);
 
         TextView txtTitle = (TextView) rowView.findViewById(R.id.listelem_txt);
-
         TextView txtDesc = (TextView) rowView.findViewById(R.id.listelem_desc);
         RatingBar rtbar = (RatingBar) rowView.findViewById(R.id.listelem_ratingBar);
-
         ProgressBar loadBar = (ProgressBar) rowView.findViewById(R.id.loadingImg);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.listelem_img);
 
 
         txtTitle.setText(((Poi) lista.get(position)).getName());
+
         try{
         String photo_path = ((Poi) lista.get(position)).getPhotos().get(0).getPath();
         new DownloadImageTask((ImageView) imageView, (ProgressBar) loadBar ).execute(photo_path);
@@ -66,6 +65,8 @@ public class ListAdapter extends ArrayAdapter<String> {
         catch(Exception e){
             imageView.setImageResource(R.drawable.abc_ab_bottom_solid_dark_holo);
         }
+
+
         if(lista.get(position).getClass() == Event.class){
             txtDesc.setText(((Event) lista.get(position)).getStart());
             rtbar.setVisibility(View.GONE);
@@ -77,33 +78,5 @@ public class ListAdapter extends ArrayAdapter<String> {
         return rowView;
     }
 
-    //Image download for element icon
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-        ProgressBar loadBar;
-
-        public DownloadImageTask(ImageView bmImage, ProgressBar loadBar) {
-            this.bmImage = bmImage;
-            this.loadBar = loadBar;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null ;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                if(in!=null) mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                //Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-            loadBar.setVisibility(View.GONE);
-        }
-    }
 
 }

@@ -111,9 +111,12 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
 
     private ListView list;
     private ListAdapter adapter;
-
+    private int value;
     private Context old;
     MySlidingPaneLayout slidingPaneLayout;
+
+    private int type_poi = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,44 +130,56 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
         DataProvider provider = new DataProvider() ;
 
         Bundle b = getIntent().getExtras();
-        int value = b.getInt("id_category");
+        value = b.getInt("id_category");
 
         switch (value){
             case R.id.poi:
                 lista = (ArrayList<Attraction>) provider.getAttractions();
+                type_poi = 0;
                 break;
             case R.id.routes:
                 lista = (ArrayList<Route>) provider.getRoutes();
+                type_poi = -1;
                 break;
             case R.id.events:
                 lista =(ArrayList<Event>) provider.getEvents();
+                type_poi = 1;
                 break;
             case R.id.tpa:
                 lista = (ArrayList<Attraction>) provider.getAttractions();
+                type_poi = 0;
                 break;
             case R.id.gastronomy:
                 lista = (ArrayList<Attraction>) provider.getAttractions();
+                type_poi = 0;
                 break;
             case R.id.activities:
                 lista = (ArrayList<Attraction>) provider.getAttractions();
+                type_poi = 0;
                 break;
             case R.id.outdoor:
                 lista = (ArrayList<Attraction>) provider.getAttractions();
+                type_poi = 0;
                 break;
             case R.id.nightlife:
                 lista = (ArrayList<Attraction>) provider.getAttractions();
+                type_poi = 0;
                 break;
             case R.id.hotels:
                 lista = (ArrayList<Attraction>) provider.getAttractions();
+                type_poi = 0;
                 break;
             case R.id.transport:
                 lista = (ArrayList<Service>) provider.getServices();
+                type_poi = 2;
                 break;
             case R.id.afd:
                 lista = (ArrayList<Attraction>) provider.getAttractions();
+                type_poi = 0;
                 break;
             case R.id.contacts:
                 lista = (ArrayList<Event>) provider.getEvents();
+                type_poi = 1;
                 break;
         }
 
@@ -252,9 +267,10 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
               //Starting new intent
-              //Intent intent = new Intent(ListarPoi.this, DetalhesPois.class);
-              //Intent id1 = intent.putExtra("id", ((Poi) lista.get(position)).getId());
-              //startActivity(intent);
+              Intent intent = new Intent(ListarPoi.this, DetalhesPois.class);
+              intent.putExtra("id", ((Poi) lista.get(position)).getId());
+              intent.putExtra("type", type_poi);
+              startActivity(intent);
 
             }
         });
