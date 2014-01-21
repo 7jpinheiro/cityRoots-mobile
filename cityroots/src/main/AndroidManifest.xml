@@ -14,29 +14,19 @@
             android:value="@integer/google_play_services_version" />
 
         <!-- chave marco -->
-
         <!--<meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyA1zGN0pbdggubT0-S1oKtkkz8u8_KnqLY" />-->
-
-        <!-- chave fabio (?) -->
-        <!--
+            android:value="AIzaSyA1zGN0pbdggubT0-S1oKtkkz8u8_KnqLY" />
+        -->
+        <!-- chave fabio
            <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDooBm6zcQfeIC1X7dgphhfc0kw5YqlAiE" />
         -->
-        <!-- chave lucas
-
+        <!-- chave lucas-->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyB2HwK4POlvMNCPfj6GZhJPMBc4hjlvl_w" />
-
-        -->
-
-        <!-- chave luis -->
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyB2HwK4POlvMNCPfj6GZhJPMBc4hjlvl_w" />
+            android:value="AIzaSyDigLQy28w1eY_7j_W_5g8WXtXDvhVBJiE" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -78,11 +68,11 @@
             android:label="@string/title_activity_simple_map" >
         </activity>
         <activity
-            android:name="com.uminho.uce15.cityroots.DetalhesRoteiros"
-            android:label="@string/title_activity_detalhes_roteiros" >
+            android:name="com.uminho.uce15.cityroots.DrawRoute"
+            android:label="@string/title_activity_listar_eventos" >
         </activity>
         <activity
-            android:name="com.uminho.uce15.cityroots.DetalhesPois"
+            android:name="com.uminho.uce15.cityroots.DetalhesRoteiros"
             android:label="@string/title_activity_detalhes_roteiros" >
         </activity>
     </application>

@@ -13,16 +13,6 @@
         android:layout_height="match_parent"
         android:background="@color/gray_android">
 
-        <EditText
-            android:layout_width="249dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@+id/imageButton"
-            android:singleLine="true" />
-
         <ImageView
             android:id="@android:id/empty"
             android:layout_width="wrap_content"
@@ -34,20 +24,8 @@
         <ListView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="473dp"
-            android:layout_gravity="left|bottom">
+            android:layout_height="match_parent" >
         </ListView>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:onClick="search"
-            android:background="@drawable/abc_ic_search"
-            android:layout_gravity="right|top" />
     </FrameLayout>
 
 
