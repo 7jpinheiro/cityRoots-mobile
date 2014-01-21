@@ -419,7 +419,6 @@ public class ListarPoi extends ActionBarActivity implements LocationListener,Goo
 
     public void search(View view){
         TextView textView = (TextView)findViewById(R.id.editText);
-        setContentView(R.layout.fragment_search);
 
         //Log.d("Search", "Text:" + textView.getText());
     }
