@@ -12,7 +12,10 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:background="@color/gray_android">
-
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
         <EditText
             android:layout_width="249dp"
             android:layout_height="wrap_content"
@@ -23,6 +26,14 @@
             android:layout_toLeftOf="@+id/imageButton"
             android:singleLine="true" />
 
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+        </ListView>
+    </LinearLayout>
+
+
         <ImageView
             android:id="@android:id/empty"
             android:layout_width="wrap_content"
@@ -31,12 +42,7 @@
             android:src="@drawable/error_connection"
             android:layout_gravity="center" />
 
-        <ListView
-            android:id="@+id/list"
-            android:layout_width="match_parent"
-            android:layout_height="465dp"
-            android:layout_gravity="left|bottom">
-        </ListView>
+
 
         <ImageButton
             android:layout_width="wrap_content"
