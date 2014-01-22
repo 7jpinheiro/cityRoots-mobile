@@ -1,5 +1,6 @@
 package com.uminho.uce15.cityroots;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.view.ViewPager;
@@ -16,6 +17,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import java.util.Locale;
 
@@ -83,6 +86,11 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         startActivity(intent);
     }
 
+    public void clickListarRotas(View view){
+        Intent intent = new Intent(this, ListRoteiros.class);
+        startActivity(intent);
+    }
+
     public void clickCategory(View view){
         Intent intent = new Intent(this, ListarPoi.class);
         Bundle b = new Bundle();
@@ -91,7 +99,14 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         startActivity(intent);
     }
 
+    public void search(View view){
+        TextView textView = (TextView)findViewById(R.id.editText);
 
+        InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(findViewById(R.id.editText).getWindowToken(), 0);
+
+        //Log.d("Search", "Text:" + textView.getText());
+    }
 
 
 
@@ -113,7 +128,11 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+
             return true;
+        }
+        if (id == R.id.action_announcement) {
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -125,14 +144,16 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
+        if (tab.getPosition() == 2) {
+            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            mgr.hideSoftInputFromWindow(findViewById(R.id.editText).getWindowToken(), 0);
+        }
     }
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
     }
-
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -150,7 +171,7 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         @Override
         public int getCount() {
             // Show 2 total pages.
-            return 2;
+            return 3;
         }
 
         @Override
@@ -161,6 +182,8 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
                     return getString(R.string.tab_cities).toUpperCase(l);
                 case 1:
                     return getString(R.string.tab_home).toUpperCase(l);
+                case 2:
+                    return getString(R.string.Search).toUpperCase(l);
             }
             return null;
         }
@@ -204,6 +227,9 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
                     break;
                 case 1:
                     rootView = inflater.inflate(R.layout.fragment_home, container, false);
+                    break;
+                case 2:
+                    rootView = inflater.inflate(R.layout.fragment_search, container, false);
                     break;
             }
 

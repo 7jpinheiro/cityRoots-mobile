@@ -14,22 +14,20 @@
             android:value="@integer/google_play_services_version" />
 
         <!-- chave marco -->
-        <!--
-        <meta-data
+        <!--<meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyA1zGN0pbdggubT0-S1oKtkkz8u8_KnqLY" />
         -->
-        <!-- chave fabio (?) -->
-        <!--
+        <!-- chave fabio
            <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDooBm6zcQfeIC1X7dgphhfc0kw5YqlAiE" />
         -->
-        <!-- chave lucas -->
-
+        <!-- chave lucas-->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyB2HwK4POlvMNCPfj6GZhJPMBc4hjlvl_w" />
+            android:value="AIzaSyDooBm6zcQfeIC1X7dgphhfc0kw5YqlAiE" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
@@ -45,6 +43,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.uminho.uce15.cityroots.AndroidOpenStreetMapViewActivity" >
+        </activity>
+
         <activity
             android:name="com.uminho.uce15.cityroots.Home"
             android:label="@string/title_activity_home" >
@@ -59,24 +60,28 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.uminho.uce15.cityroots.Category"
-            android:label="@string/title_activity_category" >
-        </activity>
-        <activity
             android:name="com.uminho.uce15.cityroots.ListarPoi"
             android:label="@string/title_activity_listar_eventos" >
-        </activity>
-        <activity
-            android:name="com.uminho.uce15.cityroots.DetalhesPois"
-            android:label="@string/title_activity_detalhes_eventos" >
         </activity>
         <activity
             android:name="com.uminho.uce15.cityroots.SimpleMapAct"
             android:label="@string/title_activity_simple_map" >
         </activity>
         <activity
+            android:name="com.uminho.uce15.cityroots.DrawRoute"
+            android:label="@string/title_activity_desenho_roteiro" >
+        </activity>
+        <activity
             android:name="com.uminho.uce15.cityroots.DetalhesRoteiros"
             android:label="@string/title_activity_detalhes_roteiros" >
+        </activity>
+        <activity
+            android:name="com.uminho.uce15.cityroots.DetalhesPois"
+            android:label="@string/title_activity_detalhes_roteiros" >
+        </activity>
+        <activity
+            android:name="com.uminho.uce15.cityroots.ListRoteiros"
+            android:label="@string/title_activity_list_roteiros" >
         </activity>
     </application>
 

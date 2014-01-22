@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow
+        android:id="@+id/linha"
+        >
+        <LinearLayout
+            android:layout_width="135dp"
+            android:layout_height="match_parent"
+            >
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            />
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".8">
+            <TableRow>
+                <TextView
+                    android:id="@+id/user_name"
+                    android:textColor="@android:color/primary_text_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    />
+            </TableRow>
+            <TableRow>
+                    <TextView
+                        android:textColor="@android:color/primary_text_dark"
+                        android:id="@+id/comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+
+                        />
+
+            </TableRow>
+        </TableLayout>
+    </TableRow>
+
+</TableLayout>

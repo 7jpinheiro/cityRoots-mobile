@@ -12,27 +12,6 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:background="@color/gray_android">
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
-        <EditText
-            android:layout_width="249dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText_lispoi"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@+id/imageButton"
-            android:singleLine="true" />
-
-        <ListView
-            android:id="@+id/list"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent">
-        </ListView>
-    </LinearLayout>
-
 
         <ImageView
             android:id="@android:id/empty"
@@ -42,18 +21,11 @@
             android:src="@drawable/error_connection"
             android:layout_gravity="center" />
 
-
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:onClick="search"
-            android:background="@drawable/abc_ic_search"
-            android:layout_gravity="right|top" />
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
     </FrameLayout>
 
 
@@ -62,19 +34,12 @@
         android:layout_height="match_parent">
 
 
-      <!--  <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/mapa"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             class="com.google.android.gms.maps.SupportMapFragment"
-            /> -->
-
-
-        <org.osmdroid.views.MapView
-            android:id="@+id/openmapview"
-            android:layout_width= "match_parent"
-            android:layout_height="match_parent"/>
-
+            />
         <ImageView
             android:id="@android:id/empty"
             android:layout_width="48dp"

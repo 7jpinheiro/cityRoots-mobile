@@ -34,6 +34,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.google.android.gms:play-services:4.0.30'
     compile project(':libraries:facebook')
-    compile 'org.apache.commons:commons-io:1.3.2'
-    compile 'com.squareup.retrofit:retrofit:1.3.0'
+    compile files('osmdroid-android-4.0.jar')
+    compile files('slf4j-android-1.6.1-RC1.jar')
 }

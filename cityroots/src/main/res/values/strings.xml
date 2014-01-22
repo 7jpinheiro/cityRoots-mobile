@@ -18,12 +18,12 @@
     <string name="routes">Routes</string>
     <string name="events">Events</string>
     <string name="TPA">Traditional Products  \u0026 Art</string>
-    <string name="gastronomy">Gastronomy</string>
+    <string name="gastronomy">Food</string>
     <string name="activities">Activities  \u0026 Fun</string>
     <string name="outdoor">Outdoor</string>
     <string name="nightlife">Nightlife</string>
     <string name="hotels">Hotels</string>
-    <string name="transport">Transport</string>
+    <string name="transport">Transporte</string>
     <string name="afd">Accessibility for Disabled</string>
     <string name="contacts">Useful Contacts</string>
 
@@ -42,7 +42,7 @@
     <string name="title_activity_listar_eventos">Eventos</string>
     <string name="title_activity_detalhes_eventos">Detalhes</string>
     <string name="title_activity_detalhes_roteiros">DetalhesRoteiros</string>
-
+    <string name="title_activity_desenho_roteiro">Roteiro</string>
 
     <!-- POI Description -->
 
@@ -50,11 +50,14 @@
     <string name="description">Descrição:</string>
     <string name="adress">Endereço:</string>
     <string name="scheudle">Horario:</string>
-    <string name="price">Transporte:</string>
+    <string name="price">Preço:</string>
     <string name="site">Site:</string>
     <string name="email">E-mail:</string>
     <string name="seemap">Ver no mapa</string>
     <string name="comment">Comentar</string>
-
+    <string name="search_label">Search</string>
+    <string name="title_activity_search">Search</string>
+    <string name="Search">Search</string>
+    <string name="title_activity_list_roteiros">ListRoteiros</string>
 
 </resources>

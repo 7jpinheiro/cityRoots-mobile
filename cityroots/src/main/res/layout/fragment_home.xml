@@ -7,7 +7,6 @@
     tools:context="com.uminho.uce15.cityroots.Home"
     tools:ignore="MergeRootFrame">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,7 +29,7 @@
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/points_of_interest"/>
+                    android:src="@drawable/poi_mv"/>
 
                 <TextView
                     style="@style/MenuText"
@@ -43,10 +42,11 @@
             <LinearLayout
                 style="@style/MenuRow"
                 android:id="@+id/routes"
+                android:onClick="clickListarRotas"
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/route"/>
+                    android:src="@drawable/rotas_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/routes"/>
@@ -60,7 +60,7 @@
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/events"/>
+                    android:src="@drawable/events_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/events"/>
@@ -74,7 +74,7 @@
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/points_of_interest"/>
+                    android:src="@drawable/artesanato_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/TPA"/>
@@ -88,7 +88,7 @@
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/gastronomy"/>
+                    android:src="@drawable/gastronomia"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/gastronomy"/>
@@ -102,7 +102,7 @@
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/activity"/>
+                    android:src="@drawable/activity_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/activities"/>
@@ -114,9 +114,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/outdoor"
                 >
-                <ImageView
+               <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/outdoor"/>
+                    android:src="@drawable/outdoor_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/outdoor"/>
@@ -128,9 +128,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/nightlife"
                 >
-                <ImageView
+               <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/nightlife"/>
+                    android:src="@drawable/nightlife_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/nightlife"/>
@@ -144,7 +144,7 @@
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/transportes"/>
+                    android:src="@drawable/hotel_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/hotels"/>
@@ -154,11 +154,11 @@
                 />
             <LinearLayout
                 style="@style/MenuRow"
-                android:id="@+id/transport"
+                android:id="@+id/transport1"
                 >
-                <ImageView
+               <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/transportes"/>
+                    android:src="@drawable/transporte_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/transport"/>
@@ -170,9 +170,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/afd"
                 >
-                <ImageView
+               <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/transportes"/>
+                    android:src="@drawable/deficiente_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/afd"/>
@@ -186,7 +186,7 @@
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/contacts"/>
+                    android:src="@drawable/info_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/contacts"/>
