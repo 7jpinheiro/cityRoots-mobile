@@ -125,7 +125,7 @@ public class Login extends Activity implements View.OnClickListener,
     @Override
     public void onConnected(Bundle connectionHint) {
         mConnectionProgressDialog.dismiss();
-        Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
         Log.d("G+Login", "User logged in:" + mPlusClient.getAccountName());
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);

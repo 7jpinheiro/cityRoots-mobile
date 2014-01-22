@@ -28,9 +28,10 @@ public class CityRootsWebInterfaceImpl {
     }
 
     private boolean isCached(String filename) throws IOException {
-        //return false;
-        File outputDir = this.context.getCacheDir();
-        return File.createTempFile(filename,"obj",outputDir).exists();
+        return false;
+        //TODO FIXME NOTE ERROR
+        //File outputDir = this.context.getCacheDir();
+        //return File.createTempFile(filename,"obj",outputDir).exists();
     }
 
     private void cache(String filename, Object object) throws IOException {
@@ -93,14 +94,21 @@ public class CityRootsWebInterfaceImpl {
     }
 
     public Attraction getAttractionWithId(int id) throws IOException, ClassNotFoundException {
-        if(isCached("attraction")){
+        /*if(isCached("attraction")){
             List<Attraction> attractions = (List<Attraction>)getCache("attractions");
             for (Attraction attraction : attractions) {
                 if(attraction.getId() == id)
                     return attraction;
             }
+        }*/
+
+        List<Attraction> attractions = service.getAttractions("PT");
+        for (Attraction attraction : attractions) {
+            if(attraction.getId() == id)
+                return attraction;
         }
-        return service.getAttractionWithId(id);
+        return null;
+        //return service.getAttractionWithId(id);
     }
 
     public List<Service> getServices() throws IOException, ClassNotFoundException {

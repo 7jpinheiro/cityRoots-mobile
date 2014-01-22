@@ -81,7 +81,7 @@ public class DataProvider {
     }
 
     public List<Poi> getPontosRoute(int id){
-        return null;
+        return new ArrayList<Poi>();
     }
 
     public List<Service> getServices(){

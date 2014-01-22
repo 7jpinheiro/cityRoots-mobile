@@ -21,7 +21,7 @@ public class RootActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(RootActivity.this);
-        String user = prefs.getString("username", "");
+        String user = prefs.getString("userid", "");
         Intent intent;
 
         if( user.equals("") ){
