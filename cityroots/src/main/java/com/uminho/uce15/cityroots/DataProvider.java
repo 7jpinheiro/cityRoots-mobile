@@ -133,9 +133,9 @@ public class DataProvider {
 
     }
 
-    public ArrayList<Poi> getAds(){
-        //TODO
-        return new ArrayList<Poi>();
+    public ArrayList<Event> getAds(){
+        ArrayList<Event> res = new ArrayList<Event>();
+        return res;
     }
 
 }

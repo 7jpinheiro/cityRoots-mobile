@@ -67,11 +67,13 @@ public class NearbyPlaces extends ActionBarActivity {
     private final int MAX_PLACES = 20;
     private int distNearBy=1;
     private ArrayList pois = new ArrayList() ;
-    DataProvider dp = new DataProvider(getApplicationContext());
+    private DataProvider dp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dp = new DataProvider(getApplicationContext());
+        dp = new DataProvider(getApplicationContext());
         setContentView(R.layout.activity_nearby_places);
         SeekBar seekbar = (SeekBar) findViewById(R.id.seekBar);
 

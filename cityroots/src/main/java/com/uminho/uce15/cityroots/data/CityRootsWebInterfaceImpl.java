@@ -28,7 +28,6 @@ public class CityRootsWebInterfaceImpl {
     }
 
     private boolean isCached(String filename) throws IOException {
-
         //return false;
         File outputDir = this.context.getCacheDir();
         return File.createTempFile(filename,"obj",outputDir).exists();
@@ -37,22 +36,17 @@ public class CityRootsWebInterfaceImpl {
     private void cache(String filename, Object object) throws IOException {
         File outputDir = this.context.getCacheDir();
         File file = File.createTempFile(filename, "obj", outputDir);
-        FileOutputStream fos = new FileOutputStream(file);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
         oos.writeObject(object);
         oos.close();
-        fos.close();
-
     }
 
     private Object getCache(String filename) throws IOException, ClassNotFoundException {
         File outputDir = this.context.getCacheDir();
         File file = File.createTempFile(filename, "obj", outputDir);
-        FileInputStream fis = new FileInputStream(file);
-        ObjectInputStream ois = new ObjectInputStream(fis);
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
         Object o = ois.readObject();
         ois.close();
-        fis.close();
         return o;
     }
 
