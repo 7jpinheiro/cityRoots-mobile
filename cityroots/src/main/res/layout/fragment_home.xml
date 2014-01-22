@@ -60,7 +60,7 @@
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/rotas_mv"/>
+                    android:src="@drawable/events_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/events"/>
@@ -88,7 +88,7 @@
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/artesanato_mv"/>
+                    android:src="@drawable/gastronomia"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/gastronomy"/>
@@ -114,7 +114,7 @@
                 style="@style/MenuRow"
                 android:id="@+id/outdoor"
                 >
-                <ImageView
+               <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/outdoor_mv"/>
                 <TextView
@@ -128,7 +128,7 @@
                 style="@style/MenuRow"
                 android:id="@+id/nightlife"
                 >
-                <ImageView
+               <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/nightlife_mv"/>
                 <TextView
@@ -144,7 +144,7 @@
                 >
                 <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/nightlife_mv"/>
+                    android:src="@drawable/hotel_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/hotels"/>
@@ -156,7 +156,7 @@
                 style="@style/MenuRow"
                 android:id="@+id/transport1"
                 >
-                <ImageView
+               <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/transporte_mv"/>
                 <TextView
@@ -170,7 +170,7 @@
                 style="@style/MenuRow"
                 android:id="@+id/afd"
                 >
-                <ImageView
+               <ImageView
                     style="@style/MenuImage"
                     android:src="@drawable/deficiente_mv"/>
                 <TextView
