@@ -303,11 +303,11 @@ public class NearbyPlaces extends ActionBarActivity {
                     items, mMarker,
                     new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                         @Override public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                            return true;
+                            return onSingleTapUpHelper(index, item);
                         }
 
                         @Override public boolean onItemLongPress(final int index, final OverlayItem item) {
-                            return onSingleTapUpHelper(index, item);
+                            return true;
                         }
                     }, resourceProxy);
 

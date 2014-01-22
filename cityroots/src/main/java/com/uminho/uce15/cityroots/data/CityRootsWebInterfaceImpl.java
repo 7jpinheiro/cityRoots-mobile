@@ -162,6 +162,7 @@ public class CityRootsWebInterfaceImpl {
             }
         }
         return service.getEventWithId(id);*/
+        //TODO usar: service.getEventWithId(id)
         List<Event> events = service.getEvents("PT");
         for (Event event : events) {
             if(event.getId() == id)
