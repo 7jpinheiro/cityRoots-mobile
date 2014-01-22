@@ -7,6 +7,7 @@ CREATE TABLE photos (
 CREATE TABLE pois (
     _ID INTEGER PRIMARY KEY,
     remote_id INTEGER,
+    type INTEGER, -- attraction = 0, events = 0,
     name TEXT,
     schedule TEXT,
     language TEXT,
@@ -25,6 +26,7 @@ CREATE TABLE pois (
     photos_id INTEGER,
     rating REAL,
     FOREIGN KEY (photos_id) REFERENCES photos(_ID)
+    FOREIGN KEY (type_id) REFERENCES types(_ID)
 );
 
 CREATE TABLE types (
