@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.uminho.uce15.cityroots.objects.Attraction;
@@ -35,7 +36,7 @@ public class NearbyPlaces extends ActionBarActivity {
 
     ArrayList<OverlayItem> anotherOverlayItemArray;
     MyLocationOverlay myLocationOverlay = null;
-    ArrayList<Poi> lis;
+    ArrayList<Poi> lis = new ArrayList<Poi>();;
     double lat=41.54694103404733;
     double lng=-8.425848484039307;
 
@@ -63,17 +64,33 @@ public class NearbyPlaces extends ActionBarActivity {
     private Marker userMarker;
     private Marker[] placeMarkers;
     private final int MAX_PLACES = 20;
-    private int distNearBy;
+    private int distNearBy=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby_places);
+        SeekBar seekbar = (SeekBar) findViewById(R.id.seekBar);
 
-        DataProvider dp = new DataProvider();
-        ArrayList pois = new ArrayList() ;
+        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
-        //pois = (ArrayList<Event>) dp.getEvents();
+                    // change progress text label with current seekbar value
+                    distNearBy=i;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                updatePlaces();
+            }
+        });
+
         if(myOpenMapView==null){
             //map not instantiated yet
             GeoPoint geo = new GeoPoint(lat, lng);
@@ -97,34 +114,12 @@ public class NearbyPlaces extends ActionBarActivity {
                 myOpenMapView.getController().animateTo(myLocationOverlay.getMyLocation());
             }
         });
-        GeoPoint myLocation = myLocationOverlay.getMyLocation();
-
-        double lat1 =-8.418472;
-        double lng1 = 41.5505;
-        double myLocLat=0.0;
-        double myLocLng=0.0;
-        try{
-            myLocLat = myLocation.getLatitude();
-            myLocLng = myLocation.getLongitude();
-        }
-        catch(Exception e){
 
 
-        }
-       System.out.println(distance(myLocLng, myLocLat,lng1,lat1));
 
-        /*
-        Poi poi;
 
-        for(int i = 0; i< pois.size();i++){
-             poi =(Poi) pois.get(i);
-             if(distance(myLocLng, myLocLat, poi.getLongitude(), poi.getLatitude()) < distNearBy);
-                  lis.add(poi);
-        }*/
-        //AndroidOpenStreetMapViewActivity maps = new AndroidOpenStreetMapViewActivity(map,res);
-        //maps.placemarkers();
 
-       // updatePlaces();
+       //updatePlaces();
     }
 
     private void updatePlaces(){
@@ -151,28 +146,19 @@ public class NearbyPlaces extends ActionBarActivity {
     }
 
 
-    private double distance(double lat1, double lon1, double lat2, double lon2) {
-        double theta = lon1 - lon2;
-        double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
-        dist = Math.acos(dist);
-        dist = rad2deg(dist);
-        dist = dist * 1.609344;
+    public static float distFrom(double lat1, double lng1, double lat2, double lng2) {
+        double earthRadius = 3958.75;
+        double dLat = Math.toRadians(lat2-lat1);
+        double dLng = Math.toRadians(lng2-lng1);
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                        Math.sin(dLng/2) * Math.sin(dLng/2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double dist = earthRadius * c;
 
-        return (dist);
-    }
+        int meterConversion = 1609;
 
-    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-    /*::  This function converts decimal degrees to radians             :*/
-    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-    private double deg2rad(double deg) {
-        return (deg * Math.PI / 180.0);
-    }
-
-    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-    /*::  This function converts radians to decimal degrees             :*/
-    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-    private double rad2deg(double rad) {
-        return (rad * 180.0 / Math.PI);
+        return (float) (dist * meterConversion);
     }
 
 
@@ -232,6 +218,36 @@ public class NearbyPlaces extends ActionBarActivity {
         myLocationOverlay.enableMyLocation();
         myLocationOverlay.enableCompass();
         myLocationOverlay.enableFollowLocation();
+
+        GeoPoint myLocation = myLocationOverlay.getMyLocation();
+
+        double myLocLat=0.0;
+        double myLocLng=0.0;
+        try{
+            myLocLat = myLocation.getLatitude();
+            myLocLng = myLocation.getLongitude();
+        }
+        catch(Exception e){
+
+        }
+        DataProvider dp = new DataProvider();
+        ArrayList pois = new ArrayList() ;
+        pois = (ArrayList<Event>) dp.getEvents();
+        Poi poi;
+
+        for(int i = 0; i< pois.size();i++){
+            poi =(Poi) pois.get(i);
+            System.out.println("Distancia:" + distFrom(myLocLat, myLocLng, poi.getLatitude(), poi.getLongitude()));
+            if(distFrom(myLocLat, myLocLng,  poi.getLatitude(), poi.getLongitude()) < distNearBy)
+                lis.add(poi);
+
+            System.out.println("Buahahahahahahhsdada");
+        }
+
+        updatePlaces();
+
+        //System.out.println("Long:" + myLocLng + " Lat:" + myLocLat);
+        //System.out.println("Distancia:" + distFrom(myLocLat,myLocLng,p,lng1));
     }
 
     /**

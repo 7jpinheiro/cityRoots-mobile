@@ -8,9 +8,10 @@
 
 
     <TextView
+        android:textColor="@android:color/primary_text_dark"
         android:id="@+id/listelem_name"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="100dp"
         android:gravity="center"
     />
 

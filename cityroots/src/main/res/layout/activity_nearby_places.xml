@@ -12,4 +12,11 @@
         android:layout_width= "fill_parent"
         android:layout_height="fill_parent"/>
 
+    <SeekBar
+        android:layout_width="351dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_gravity="center_horizontal|top"
+        android:max="10" />
+
 </FrameLayout>

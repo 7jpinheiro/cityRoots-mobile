@@ -36,10 +36,8 @@ public class ListRoteiros extends ActionBarActivity {
         routes = (ArrayList<Route>) dp.getRoutes();
 
         ListView list = (ListView) findViewById(R.id.listView_roteiros);
-
         ListAdapter adapter = new ListAdapter(ListRoteiros.this, routes);
 
-        list.setAdapter(adapter);
 
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -51,9 +49,11 @@ public class ListRoteiros extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        list.setAdapter(adapter);
     }
 
-    private class ListAdapter extends ArrayAdapter<String> {
+    public class ListAdapter extends ArrayAdapter<String> {
 
         private final Activity context;
         private List lista;
@@ -74,7 +74,8 @@ public class ListRoteiros extends ActionBarActivity {
             View rowView= inflater.inflate(R.layout.list_roteiros_elem, null, true);
 
             TextView route_name = (TextView) rowView.findViewById(R.id.listelem_name);
-            route_name.setText(((Route)lista.get(position)).getName());
+            route_name.setText(((Route) lista.get(position)).getName());
+            System.out.println(((Route)lista.get(position)).getName());
 
             return rowView;
         }
