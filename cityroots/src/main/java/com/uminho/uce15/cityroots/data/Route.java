@@ -1,8 +1,9 @@
 package com.uminho.uce15.cityroots.data;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Route {
+public class Route implements Serializable {
 
     private int id;
     private String name;

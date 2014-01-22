@@ -1,6 +1,8 @@
 package com.uminho.uce15.cityroots.data;
 
-public class Photo {
+import java.io.Serializable;
+
+public class Photo implements Serializable {
     private String name;
     private String path;
 

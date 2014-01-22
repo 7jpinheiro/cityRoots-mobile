@@ -1,6 +1,8 @@
 package com.uminho.uce15.cityroots.data;
 
-public class Comment {
+import java.io.Serializable;
+
+public class Comment implements Serializable {
 
     private String comment;
     private String date;
