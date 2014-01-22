@@ -52,7 +52,7 @@ public class DataProvider {
                 res.add(attraction);
         }
 
-        return new ArrayList<Attraction>();
+        return res;
     }
 
     public List<Event> getEvents(){
@@ -81,7 +81,7 @@ public class DataProvider {
     }
 
     public List<Poi> getPontosRoute(int id){
-        return null;
+        return new ArrayList<Poi>();
     }
 
     public List<Service> getServices(){
@@ -133,9 +133,9 @@ public class DataProvider {
 
     }
 
-    public ArrayList<Poi> getAds(){
-        //TODO
-        return new ArrayList<Poi>();
+    public ArrayList<Event> getAds(){
+        ArrayList<Event> res = new ArrayList<Event>();
+        return res;
     }
 
 }

@@ -105,15 +105,21 @@ public class DetalhesPois extends ActionBarActivity {
             switch (poi_type){
                 case 0:
                     poi = dp.getAttraction(id);
-                    lbl_price.setText(((Attraction) poi).getPrice());
+                    String price = "Não tem";
+                    if( poi != null ){
+                        price = ((Attraction) poi).getPrice();
+                    }
+                    lbl_price.setText(price);
                     lin.setVisibility(View.GONE);
                     lin1.setVisibility(View.GONE);
                     break;
                 case 1:
                     poi = dp.getEvent(id);
-                    String price = (((Event) poi).getPrice());
-                    price = price == null? "Não tem":price;
-                    lbl_price.setText(price);
+                    String priceA = "Não tem";
+                    if( poi != null ){
+                        priceA = ((Event) poi).getPrice();
+                    }
+                    lbl_price.setText(priceA);
                     lbl_start.setText(((Event)poi).getStart());
                     lbl_end.setText(((Event)poi).getEnd());
                     lbl_organization.setText(((Event)poi).getOrganization());
