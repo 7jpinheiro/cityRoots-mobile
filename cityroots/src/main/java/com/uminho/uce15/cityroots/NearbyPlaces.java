@@ -1,11 +1,16 @@
 package com.uminho.uce15.cityroots;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +25,8 @@ import com.uminho.uce15.cityroots.data.Attraction;
 import com.uminho.uce15.cityroots.data.Event;
 import com.uminho.uce15.cityroots.data.Poi;
 
+import org.osmdroid.DefaultResourceProxyImpl;
+import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.Marker;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
@@ -38,6 +45,9 @@ public class NearbyPlaces extends ActionBarActivity {
     MyLocationOverlay myLocationOverlay = null;
     ArrayList<Poi> lis = new ArrayList<Poi>();
     ArrayList<Float> dists = new ArrayList<Float>();
+    private ListAdapter adapter;
+
+
     double lat=41.54694103404733;
     double lng=-8.425848484039307;
 
@@ -123,9 +133,6 @@ public class NearbyPlaces extends ActionBarActivity {
         });
 
 
-
-
-
        //updatePlaces();
     }
 
@@ -134,22 +141,23 @@ public class NearbyPlaces extends ActionBarActivity {
         OverlayItem o;
         myOpenMapView.getOverlays().clear();
         myOpenMapView.getOverlays().add(myLocationOverlay);
+
+        Drawable marker = this.getResources().getDrawable(R.drawable.marcador);
+
         while (i< lis.size()){
 
-            anotherOverlayItemArray = new ArrayList<OverlayItem>();
+          //anotherOverlayItemArray = new ArrayList<OverlayItem>();
 
             
                 o =  new OverlayItem(
                     ((Poi)lis.get(i)).getName() , ((Poi)lis.get(i)).getDescription(), new GeoPoint(((Poi)lis.get(i)).getLatitude(), ((Poi)lis.get(i)).getLongitude()));
 
 
-            anotherOverlayItemArray.add(o);
+            MyOwnItemizedOverlay mon= new MyOwnItemizedOverlay(marker,this);
 
-            ItemizedIconOverlay<OverlayItem> anotherItemizedIconOverlay
-                    = new ItemizedIconOverlay<OverlayItem>(
-                    this, anotherOverlayItemArray, null);
-            myOpenMapView.getOverlays().add(anotherItemizedIconOverlay);
+            mon.addItem(o);
 
+            myOpenMapView.getOverlays().add(mon.getOverlay());
             i++;
         }
 
@@ -274,5 +282,72 @@ public class NearbyPlaces extends ActionBarActivity {
      *
      * @return true if Google Play services is available, otherwise false
      */
+
+    public class MyOwnItemizedOverlay {
+        protected ItemizedIconOverlay<OverlayItem> mOverlay;
+        protected Context mContext;
+        protected Drawable mMarker;
+
+        public MyOwnItemizedOverlay(Drawable marker, Context context) {
+            mContext = context;
+            ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
+            ResourceProxy resourceProxy = (ResourceProxy) new DefaultResourceProxyImpl(mContext);
+            mMarker = marker;
+
+            mOverlay = new ItemizedIconOverlay<OverlayItem>(
+                    items, mMarker,
+                    new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                        @Override public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
+
+                            return true;
+                        }
+
+                        @Override public boolean onItemLongPress(final int index, final OverlayItem item) {
+                            return onSingleTapUpHelper(index, item);
+                        }
+                    }, resourceProxy);
+
+        }
+
+        public boolean onSingleTapUpHelper(int i, OverlayItem item) {
+            //Toast.makeText(mContext, "Item " + i + " has been tapped!", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+            dialog.setTitle(item.getTitle());
+            dialog.setIcon(mMarker);
+            dialog.setMessage(item.getSnippet());
+            dialog.show();
+            return true;
+        }
+
+        public void addItem(OverlayItem item){
+            mOverlay.addItem(item);
+        }
+
+        public ItemizedIconOverlay<OverlayItem> getOverlay(){
+            return mOverlay;
+        }
+    }
+
+    private TextWatcher filterTextWatcher = new TextWatcher() {
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            adapter.getFilter().filter(s.toString().toLowerCase());
+            adapter.notifyDataSetChanged();
+
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
 }
 
