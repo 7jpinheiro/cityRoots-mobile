@@ -74,7 +74,7 @@ public class DataProvider {
         ArrayList<String> types = new ArrayList<String>();
         JSONArray listTypes = jObj.getJSONArray("types");
         for( int i=0; i<listTypes.length(); i++){
-            types.add( listTypes.getString(i) );
+            types.add( listTypes.getJSONObject(i).getString("name") );
         }
 
 
@@ -92,7 +92,7 @@ public class DataProvider {
 
 
         ArrayList<Comment> comments = new ArrayList<Comment>();
-        JSONArray listComments = jObj.getJSONArray("comment_" + type + "s");
+        /*JSONArray listComments = jObj.getJSONArray("comment_" + type + "s");
 
 
         for( int i=0; i<listComments.length(); i++){
@@ -105,7 +105,7 @@ public class DataProvider {
             String comment     = joObj.getString("comment");
 
             comments.add( new Comment(comment, u ));
-        }
+        }*/
 
 
 
@@ -140,6 +140,42 @@ public class DataProvider {
                 e.printStackTrace();
             }
         }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+
+    public List<Attraction> getAttractions(String tipo){
+        //get JSON from webserver
+        String poiType = "attraction";
+
+        List<Attraction> res = new ArrayList<Attraction>();
+        String uri = uriBase + poiType + "s.json";
+        JSONArray jsonArray = null;
+        try {
+
+            jsonArray = (new GetContentTask()).execute(uri).get();
+
+            for( int i=0; i<jsonArray.length(); i++){
+                try {
+                    JSONObject jObj = jsonArray.getJSONObject(i);
+                    Poi p = createPoiFromJson(jObj, poiType);
+                    String price = jObj.getJSONArray(poiType + "_translations").getJSONObject(0).getString("price");
+                    boolean b = jObj.getBoolean("reference_point");
+
+                    Attraction a = new Attraction(p,b,price);
+
+                    if(a.getType().contains(tipo))
+                    res.add(a);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -379,7 +415,9 @@ public class DataProvider {
                 HttpClient httpclient = new DefaultHttpClient();
                 try {
                     HttpResponse response = null;
+                    System.out.println(url);
                     response = httpclient.execute(new HttpGet(url));
+                    System.out.println(response);
 
                     StatusLine statusLine = response.getStatusLine();
                     if(statusLine.getStatusCode() == HttpStatus.SC_OK){
@@ -390,6 +428,7 @@ public class DataProvider {
 
 
                         responseString = out.toString();
+                        System.out.println("resp string::"+responseString);
 
                     } else{
 
