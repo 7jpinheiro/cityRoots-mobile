@@ -27,9 +27,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/poi"
                 >
-                <!--<ImageView
+                <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/poi_mv"/>-->
+                    android:src="@drawable/poi_mv"/>
 
                 <TextView
                     style="@style/MenuText"
@@ -44,9 +44,9 @@
                 android:id="@+id/routes"
                 android:onClick="clickListarRotas"
                 >
-                <!--<ImageView
+                <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/rotas_mv"/>-->
+                    android:src="@drawable/rotas_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/routes"/>
@@ -58,9 +58,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/events"
                 >
-                <!--<ImageView
+                <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/rotas_mv"/>-->
+                    android:src="@drawable/rotas_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/events"/>
@@ -72,9 +72,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/tpa"
                 >
-                <!--<ImageView
+                <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/artesanato_mv"/>-->
+                    android:src="@drawable/artesanato_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/TPA"/>
@@ -86,9 +86,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/gastronomy"
                 >
-                <!--<ImageView
+                <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/artesanato_mv"/>-->
+                    android:src="@drawable/artesanato_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/gastronomy"/>
@@ -100,9 +100,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/activities"
                 >
-                <!--<ImageView
+                <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/activity_mv"/>-->
+                    android:src="@drawable/activity_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/activities"/>
@@ -114,9 +114,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/outdoor"
                 >
-               <!-- <ImageView
+                <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/outdoor_mv"/>-->
+                    android:src="@drawable/outdoor_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/outdoor"/>
@@ -128,9 +128,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/nightlife"
                 >
-               <!-- <ImageView
+                <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/nightlife_mv"/>-->
+                    android:src="@drawable/nightlife_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/nightlife"/>
@@ -142,9 +142,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/hotels"
                 >
-                <!--<ImageView
+                <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/nightlife_mv"/>-->
+                    android:src="@drawable/nightlife_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/hotels"/>
@@ -156,9 +156,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/transport1"
                 >
-               <!-- <ImageView
+                <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/transporte_mv"/>-->
+                    android:src="@drawable/transporte_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/transport"/>
@@ -170,9 +170,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/afd"
                 >
-               <!-- <ImageView
+                <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/deficiente_mv"/>-->
+                    android:src="@drawable/deficiente_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/afd"/>
@@ -184,9 +184,9 @@
                 style="@style/MenuRow"
                 android:id="@+id/contacts"
                 >
-                <!--<ImageView
+                <ImageView
                     style="@style/MenuImage"
-                    android:src="@drawable/info_mv"/>-->
+                    android:src="@drawable/info_mv"/>
                 <TextView
                     style="@style/MenuText"
                     android:text="@string/contacts"/>
