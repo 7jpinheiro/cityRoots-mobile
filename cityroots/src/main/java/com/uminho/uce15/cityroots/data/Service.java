@@ -1,32 +1,36 @@
 package com.uminho.uce15.cityroots.data;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Service extends Poi {
-    private boolean is_reference_point;
+
+    private int id;
+    private boolean isReferencePoint;
     private int capacity;
     private String details;
 
-    public Service(String name, String schedule, String language, String description, String transport, String price, String site, String email, String address, double latitude, double longitude, boolean is_active, int timestamp, boolean has_accessibility, ArrayList<String> type, ArrayList<Photo> photos, double rating, ArrayList<Comment> comments, boolean is_reference_point, int capacity, String details) {
-        super(name, schedule, language, description, transport, site, email, address, latitude, longitude, is_active, timestamp, has_accessibility, type, photos, rating, comments);
-        this.is_reference_point = is_reference_point;
+    public Service(String name, String schedule, String description, String transport, String site, String email, String address, double latitude, double longitude, boolean isActive, int timestamp, String phone, boolean hasAccessibility, List<String> type, List<String> photos, double rating, List<Comment> comments, int id, boolean isReferencePoint, int capacity, String details) {
+        super(name, schedule, description, transport, site, email, address, latitude, longitude, isActive, timestamp, phone, hasAccessibility, type, photos, rating, comments);
+        this.id = id;
+        this.isReferencePoint = isReferencePoint;
         this.capacity = capacity;
         this.details = details;
     }
 
-    public Service(Poi p, boolean is_reference_point, int capacity, String details ) {
-        super(p);
-        this.is_reference_point = is_reference_point;
-        this.capacity = capacity;
-        this.details = details;
+    public int getId() {
+        return id;
     }
 
-    public boolean isIs_reference_point() {
-        return is_reference_point;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setIs_reference_point(boolean is_reference_point) {
-        this.is_reference_point = is_reference_point;
+    public boolean isReferencePoint() {
+        return isReferencePoint;
+    }
+
+    public void setReferencePoint(boolean isReferencePoint) {
+        this.isReferencePoint = isReferencePoint;
     }
 
     public int getCapacity() {

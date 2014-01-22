@@ -1,16 +1,19 @@
 package com.uminho.uce15.cityroots.data;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class Event extends Poi{
+public class Event extends Poi {
+
+    private int id;
     private String start;
     private String end;
     private String organization;
     private String program;
     private String price;
 
-    public Event(String name, String schedule, String language, String description, String transport, String price, String site, String email, String address, double latitude, double longitude, boolean is_active, int timestamp, boolean has_accessibility, ArrayList<String> type, ArrayList<Photo> photos, double rating, ArrayList<Comment> comments, String start, String end, String organization, String program) {
-        super(name, schedule, language, description, transport, site, email, address, latitude, longitude, is_active, timestamp, has_accessibility, type, photos, rating, comments);
+    public Event(String name, String schedule, String description, String transport, String site, String email, String address, double latitude, double longitude, boolean isActive, int timestamp, String phone, boolean hasAccessibility, List<String> type, List<String> photos, double rating, List<Comment> comments, int id, String start, String end, String organization, String program, String price) {
+        super(name, schedule, description, transport, site, email, address, latitude, longitude, isActive, timestamp, phone, hasAccessibility, type, photos, rating, comments);
+        this.id = id;
         this.start = start;
         this.end = end;
         this.organization = organization;
@@ -18,13 +21,12 @@ public class Event extends Poi{
         this.price = price;
     }
 
-    public Event(Poi p, String start, String end, String organization, String program, String price) {
-        super(p);
-        this.start = start;
-        this.end = end;
-        this.organization = organization;
-        this.program = program;
-        this.price = price;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStart() {
@@ -59,7 +61,11 @@ public class Event extends Poi{
         this.program = program;
     }
 
-    public String getPrice() {return price;}
+    public String getPrice() {
+        return price;
+    }
 
-    public void setPrice(String price) {this.price = price;}
+    public void setPrice(String price) {
+        this.price = price;
+    }
 }

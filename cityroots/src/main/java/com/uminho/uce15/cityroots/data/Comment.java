@@ -1,12 +1,14 @@
 package com.uminho.uce15.cityroots.data;
 
 public class Comment {
-    private String comment;
-    private User user;
 
-    public Comment(String comment, User user) {
+    private String comment;
+    private String date;
+    private String username;
+
+    public Comment(String comment, String username) {
         this.comment = comment;
-        this.user = user;
+        this.username = username;
     }
 
     public String getComment() {
@@ -17,11 +19,15 @@ public class Comment {
         this.comment = comment;
     }
 
-    public User getUser() {
-        return user;
+    public String getDate() {
+        return date;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

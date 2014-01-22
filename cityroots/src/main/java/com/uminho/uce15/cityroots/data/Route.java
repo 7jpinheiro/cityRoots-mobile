@@ -1,16 +1,31 @@
 package com.uminho.uce15.cityroots.data;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Route {
+
+    private int id;
     private String name;
     private String description;
-    private ArrayList<Poi> pois;
+    private List<Attraction> attractions;
+    private List<Event> events;
+    private List<Service> services;
 
-    public Route(String name, String description, ArrayList<Poi> pois) {
+    public Route(int id, String name, String description, List<Attraction> attractions, List<Event> events, List<Service> services) {
+        this.id = id;
         this.name = name;
         this.description = description;
-        this.pois = pois;
+        this.attractions = attractions;
+        this.events = events;
+        this.services = services;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -29,11 +44,27 @@ public class Route {
         this.description = description;
     }
 
-    public ArrayList<Poi> getPois() {
-        return pois;
+    public List<Attraction> getAttractions() {
+        return attractions;
     }
 
-    public void setPois(ArrayList<Poi> pois) {
-        this.pois = pois;
+    public void setAttractions(List<Attraction> attractions) {
+        this.attractions = attractions;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 }

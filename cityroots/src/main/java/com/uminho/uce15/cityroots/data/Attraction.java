@@ -1,33 +1,41 @@
 package com.uminho.uce15.cityroots.data;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class Attraction extends Poi{
-    private boolean is_reference_point;
+public class Attraction extends Poi {
+
+    private int id;
+    private boolean isReferencePoint;
     private String price;
 
-    public Attraction(String name, String schedule, String language, String description, String transport, String price, String site, String email, String address, double latitude, double longitude, boolean is_active, int timestamp, boolean has_accessibility, ArrayList<String> type, ArrayList<Photo> photos, double rating, ArrayList<Comment> comments, boolean is_reference_point) {
-        super(name, schedule, language, description, transport, site, email, address, latitude, longitude, is_active, timestamp, has_accessibility, type, photos, rating, comments);
-        this.is_reference_point = is_reference_point;
+    public Attraction(String name, String schedule, String description, String transport, String site, String email, String address, double latitude, double longitude, boolean isActive, int timestamp, String phone, boolean hasAccessibility, List<String> type, List<String> photos, double rating, List<Comment> comments, int id, boolean isReferencePoint, String price) {
+        super(name, schedule, description, transport, site, email, address, latitude, longitude, isActive, timestamp, phone, hasAccessibility, type, photos, rating, comments);
+        this.id = id;
+        this.isReferencePoint = isReferencePoint;
         this.price = price;
     }
 
-    public Attraction(Poi p, boolean is_reference_point,String price) {
-        super(p);
-        this.is_reference_point = is_reference_point;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isReferencePoint() {
+        return isReferencePoint;
+    }
+
+    public void setReferencePoint(boolean isReferencePoint) {
+        this.isReferencePoint = isReferencePoint;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
         this.price = price;
     }
-
-
-    public boolean isIs_reference_point() {
-        return is_reference_point;
-    }
-
-    public void setIs_reference_point(boolean is_reference_point) {
-        this.is_reference_point = is_reference_point;
-    }
-
-    public String getPrice() {return price;}
-
-    public void setPrice(String price) {this.price = price;}
 }

@@ -1,11 +1,11 @@
 package com.uminho.uce15.cityroots.data;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Poi {
+
     private String name;
     private String schedule;
-    private String language;
     private String description;
     private String transport;
     private String site;
@@ -13,18 +13,18 @@ public class Poi {
     private String address;
     private double latitude;
     private double longitude;
-    private boolean is_active;
+    private boolean isActive;
     private int timestamp;
-    private boolean has_accessibility;
-    private ArrayList<String> type;
-    private ArrayList<Photo> photos;
+    private String phone;
+    private boolean hasAccessibility;
+    private List<String> type;
+    private List<String> photos;
     private double rating;
-    private ArrayList<Comment> comments;
+    private List<Comment> comments;
 
-    public Poi(String name, String schedule, String language, String description, String transport, String site, String email, String address, double latitude, double longitude, boolean is_active, int timestamp, boolean has_accessibility, ArrayList<String> type, ArrayList<Photo> photos, double rating, ArrayList<Comment> comments) {
+    public Poi(String name, String schedule, String description, String transport, String site, String email, String address, double latitude, double longitude, boolean isActive, int timestamp, String phone, boolean hasAccessibility, List<String> type, List<String> photos, double rating, List<Comment> comments) {
         this.name = name;
         this.schedule = schedule;
-        this.language = language;
         this.description = description;
         this.transport = transport;
         this.site = site;
@@ -32,33 +32,14 @@ public class Poi {
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.is_active = is_active;
+        this.isActive = isActive;
         this.timestamp = timestamp;
-        this.has_accessibility = has_accessibility;
+        this.phone = phone;
+        this.hasAccessibility = hasAccessibility;
         this.type = type;
         this.photos = photos;
         this.rating = rating;
         this.comments = comments;
-    }
-
-    public Poi( Poi p){
-        this.name = p.getName();
-        this.schedule = p.getSchedule();
-        this.language = p.getLanguage();
-        this.description = p.getDescription();
-        this.transport = p.getTransport();
-        this.site = p.getSite();
-        this.email = p.getEmail();
-        this.address = p.getAddress();
-        this.latitude = p.getLatitude();
-        this.longitude = p.getLongitude();
-        this.is_active = p.isIs_active();
-        this.timestamp = p.getTimestamp();
-        this.has_accessibility = p.isHas_accessibility();
-        this.type = p.getType();
-        this.photos = p.getPhotos();
-        this.rating = p.getRating();
-        this.comments = p.getComments();
     }
 
     public String getName() {
@@ -75,14 +56,6 @@ public class Poi {
 
     public void setSchedule(String schedule) {
         this.schedule = schedule;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
     }
 
     public String getDescription() {
@@ -141,12 +114,12 @@ public class Poi {
         this.longitude = longitude;
     }
 
-    public boolean isIs_active() {
-        return is_active;
+    public boolean isActive() {
+        return isActive;
     }
 
-    public void setIs_active(boolean is_active) {
-        this.is_active = is_active;
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public int getTimestamp() {
@@ -157,27 +130,35 @@ public class Poi {
         this.timestamp = timestamp;
     }
 
-    public boolean isHas_accessibility() {
-        return has_accessibility;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setHas_accessibility(boolean has_accessibility) {
-        this.has_accessibility = has_accessibility;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public ArrayList<String> getType() {
+    public boolean hasAccessibility() {
+        return hasAccessibility;
+    }
+
+    public void setHasAccessibility(boolean hasAccessibility) {
+        this.hasAccessibility = hasAccessibility;
+    }
+
+    public List<String> getType() {
         return type;
     }
 
-    public void setType(ArrayList<String> type) {
+    public void setType(List<String> type) {
         this.type = type;
     }
 
-    public ArrayList<Photo> getPhotos() {
+    public List<String> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(ArrayList<Photo> photos) {
+    public void setPhotos(List<String> photos) {
         this.photos = photos;
     }
 
@@ -189,11 +170,11 @@ public class Poi {
         this.rating = rating;
     }
 
-    public ArrayList<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(ArrayList<Comment> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 }
