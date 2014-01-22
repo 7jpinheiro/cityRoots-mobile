@@ -26,7 +26,7 @@
         <!-- chave lucas-->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDigLQy28w1eY_7j_W_5g8WXtXDvhVBJiE" />
+            android:value="AIzaSyDooBm6zcQfeIC1X7dgphhfc0kw5YqlAiE" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
