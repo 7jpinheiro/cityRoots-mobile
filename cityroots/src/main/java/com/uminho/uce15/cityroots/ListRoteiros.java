@@ -46,10 +46,9 @@ public class ListRoteiros extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 //Starting new intent
-                Intent intent = new Intent(ListRoteiros.this, DetalhesRoteiros.class);
+                Intent intent = new Intent(ListRoteiros.this, DrawRoute.class);
                 intent.putExtra("id", ((Route) routes.get(position)).getId());
                 startActivity(intent);
-
             }
         });
     }
@@ -62,7 +61,7 @@ public class ListRoteiros extends ActionBarActivity {
 
         public ListAdapter(Activity context, List lista) {
 
-            super(context, R.layout.list_comment, lista);
+            super(context, R.layout.list_roteiros_elem, lista);
             this.context = context;
 
             this.lista = lista;
@@ -72,12 +71,12 @@ public class ListRoteiros extends ActionBarActivity {
         public View getView(int position, View view, ViewGroup parent) {
 
             LayoutInflater inflater = context.getLayoutInflater();
-            View rowView= inflater.inflate(R.layout.list_comment, null, true);
+            View rowView= inflater.inflate(R.layout.list_roteiros_elem, null, true);
 
-            TextView route_name = (TextView) rowView.findViewById(R.id.user_name);
+            TextView route_name = (TextView) rowView.findViewById(R.id.listelem_name);
             route_name.setText(((Route)lista.get(position)).getName());
 
-            return route_name;
+            return rowView;
         }
     }
 
