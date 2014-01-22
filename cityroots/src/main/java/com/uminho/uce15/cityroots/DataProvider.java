@@ -26,14 +26,20 @@ import java.util.concurrent.TimeoutException;
 public class DataProvider {
     private String uriBase;
 
-    private ArrayList pontos=(ArrayList<Event>)this.getEvents();
-    private Route a= new Route(1,"Rota1","RotaExemplo1",pontos);
-    private Route b= new Route(2,"Rota2","RotaExemplo2",pontos);
-    private Route c= new Route(3,"Rota3","RotaExemplo3",pontos);
+    private List<Route> rotas = new ArrayList<Route>();
 
     public DataProvider() {
         uriBase = "http://193.136.19.202:8080/";
 
+        ArrayList pontos=(ArrayList<Event>)this.getEvents();
+        ArrayList pontos2=(ArrayList<Attraction>)this.getAttractions("Tradicional");
+        Route a= new Route(1,"Rota1","RotaExemplo1",pontos);
+        Route b= new Route(2,"Rota2","RotaExemplo2",pontos2);
+        Route c= new Route(3,"Rota3","RotaExemplo3",pontos);
+
+        rotas.add(a);
+        rotas.add(b);
+        rotas.add(c);
     }
 
 
@@ -232,11 +238,22 @@ public class DataProvider {
 
         //create list and return
 
-        List<Route> res = new ArrayList<Route>();
-        res.add(a);
-        res.add(b);
-        res.add(c);
+        //List<Route> res = new ArrayList<Route>();
+        return rotas;
+    }
 
+    public List<Poi> getPontosRoute(int id){
+
+        ArrayList<Poi> res = new ArrayList<Poi>();
+        //create list and return
+        System.out.println("Tamanho Rotas:"+rotas.size());
+        System.out.println("id:"+id);
+        for(int i=0;i<rotas.size();i++){
+            System.out.println("pos:"+i+"id:"+id);
+            if(rotas.get(i).getId()==id){
+                System.out.println("Tamanho Pontos:"+rotas.get(i).getPois().size());
+                return rotas.get(i).getPois();}
+        }
         return res;
     }
 

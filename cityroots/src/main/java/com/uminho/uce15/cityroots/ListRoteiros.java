@@ -45,7 +45,7 @@ public class ListRoteiros extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 //Starting new intent
                 Intent intent = new Intent(ListRoteiros.this, DrawRoute.class);
-                intent.putExtra("id", ((Route) routes.get(position)).getId());
+                intent.putExtra("id", ""+(routes.get(position)).getId());
                 startActivity(intent);
             }
         });
