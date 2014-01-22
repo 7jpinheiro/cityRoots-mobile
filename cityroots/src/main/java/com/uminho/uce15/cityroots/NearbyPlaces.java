@@ -67,7 +67,7 @@ public class NearbyPlaces extends ActionBarActivity {
     private final int MAX_PLACES = 20;
     private int distNearBy=1;
     private ArrayList pois = new ArrayList() ;
-    DataProvider dp = new DataProvider(getBaseContext());
+    DataProvider dp = new DataProvider(getApplicationContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

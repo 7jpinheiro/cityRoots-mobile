@@ -1,7 +1,9 @@
 package com.uminho.uce15.cityroots.data;
 
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String firstname;
     private String surname;
 

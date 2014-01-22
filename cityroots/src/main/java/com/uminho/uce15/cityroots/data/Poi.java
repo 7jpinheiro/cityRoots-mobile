@@ -1,8 +1,9 @@
 package com.uminho.uce15.cityroots.data;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Poi {
+public class Poi implements Serializable {
 
     private String name;
     private String schedule;

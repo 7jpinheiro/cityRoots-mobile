@@ -99,7 +99,7 @@ public class DetalhesPois extends ActionBarActivity {
             LinearLayout lin1 = (LinearLayout) findViewById(R.id.labels_service);
 
             //finish loading
-            DataProvider dp = new DataProvider(getBaseContext());
+            DataProvider dp = new DataProvider(getApplicationContext());
             Poi poi = null;
 
             switch (poi_type){
