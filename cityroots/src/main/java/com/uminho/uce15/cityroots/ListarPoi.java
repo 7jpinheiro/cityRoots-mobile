@@ -26,11 +26,14 @@ import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.SlidingPaneLayout;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -198,6 +201,8 @@ public class ListarPoi extends ActionBarActivity{
         list=(ListView)findViewById(R.id.list);
         list.setEmptyView(findViewById(android.R.id.empty));
 
+        EditText filterText = (EditText) findViewById(R.id.editText_lispoi);
+        filterText.addTextChangedListener(filterTextWatcher);
 
         if(lista!=null){
             adapter = new ListAdapter(ListarPoi.this,lista);
@@ -419,5 +424,26 @@ public class ListarPoi extends ActionBarActivity{
             return mOverlay;
         }
     }
+
+    private TextWatcher filterTextWatcher = new TextWatcher() {
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            adapter.getFilter().filter(s.toString().toLowerCase());
+            adapter.notifyDataSetChanged();
+
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
 }

@@ -11,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -29,22 +32,43 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListAdapter extends ArrayAdapter<String> {
+public class ListAdapter extends BaseAdapter implements Filterable {
 
     private final Activity context;
     private List lista;
-
+    private List listaOrig;
 
     public ListAdapter(Activity context,List lista) {
 
-        super(context, R.layout.category_listelem, lista);
+
         this.context = context;
 
         this.lista = lista;
     }
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
 
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
+    public int getCount() {
+        return lista.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return lista.get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+
+
+    @Override
+    public View getView(final int position, View view, ViewGroup parent) {
 
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView= inflater.inflate(R.layout.category_listelem, null, true);
@@ -78,5 +102,54 @@ public class ListAdapter extends ArrayAdapter<String> {
         return rowView;
     }
 
+    @Override
+    public Filter getFilter() {
+
+        Filter filter = new Filter() {
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint,
+                                          FilterResults results) {
+
+                lista = (ArrayList<Poi>) results.values;
+                notifyDataSetChanged();
+            }
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                FilterResults results = new FilterResults();
+                ArrayList<Poi> FilteredPois = new ArrayList<Poi>();
+
+                if (listaOrig == null) {
+                    listaOrig  = new ArrayList<Poi>(lista);
+                }
+                if (constraint == null || constraint.length() == 0) {
+                    results.count = listaOrig.size();
+                    results.values = listaOrig;
+                } else {
+                    constraint = constraint.toString().toLowerCase();
+                    for (int i = 0; i < listaOrig.size(); i++) {
+                        Poi poi = (Poi) listaOrig.get(i);
+                        if (poi.getName().toLowerCase()
+                                .contains(constraint.toString())) {
+                            FilteredPois.add(poi);
+                        }
+                    }
+
+                    results.count = FilteredPois.size();
+                    // System.out.println(results.count);
+
+                    results.values = FilteredPois;
+                    // Log.e("VALUES", results.values.toString());
+                }
+
+                return results;
+            }
+        };
+
+        return filter;
+    }
 
 }
