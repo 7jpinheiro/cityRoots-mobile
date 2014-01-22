@@ -22,6 +22,8 @@ public class CityRootsWebInterfaceImpl {
                 .setServer("http://193.136.19.202:8080")
                 .build();
 
+        this.context = context;
+
         this.service = restAdapter.create(CityRootsWebService.class);
     }
 

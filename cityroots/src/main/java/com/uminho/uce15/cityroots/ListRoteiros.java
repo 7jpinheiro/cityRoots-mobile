@@ -18,8 +18,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.uminho.uce15.cityroots.objects.Comment;
-import com.uminho.uce15.cityroots.objects.Route;
+import com.uminho.uce15.cityroots.data.Comment;
+import com.uminho.uce15.cityroots.data.Route;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class ListRoteiros extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_roteiros);
 
-        DataProvider dp = new DataProvider();
+        DataProvider dp = new DataProvider(getBaseContext());
 
         routes = (ArrayList<Route>) dp.getRoutes();
 

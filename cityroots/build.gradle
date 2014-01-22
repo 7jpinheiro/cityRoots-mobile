@@ -33,7 +33,10 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.google.android.gms:play-services:4.0.30'
+    compile 'com.google.code.gson:gson:2.2.4'
     compile project(':libraries:facebook')
     compile files('osmdroid-android-4.0.jar')
     compile files('slf4j-android-1.6.1-RC1.jar')
+    compile files('retrofit-1.3.0.jar')
+    compile files('commons-io-2.4.jar')
 }

@@ -58,11 +58,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.uminho.uce15.cityroots.objects.Attraction;
-import com.uminho.uce15.cityroots.objects.Event;
-import com.uminho.uce15.cityroots.objects.Poi;
-import com.uminho.uce15.cityroots.objects.Route;
-import com.uminho.uce15.cityroots.objects.Service;
+import com.uminho.uce15.cityroots.data.Attraction;
+import com.uminho.uce15.cityroots.data.Event;
+import com.uminho.uce15.cityroots.data.Poi;
+import com.uminho.uce15.cityroots.data.Route;
+import com.uminho.uce15.cityroots.data.Service;
 
 import android.widget.ListView;
 import android.widget.AdapterView;
@@ -123,7 +123,7 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,
         lista = null;
         slidingPaneLayout = (MySlidingPaneLayout)findViewById(R.id.pane);
 
-        DataProvider provider = new DataProvider() ;
+        DataProvider provider = new DataProvider(getBaseContext()) ;
 
 
         Intent intent = getIntent();

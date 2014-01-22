@@ -23,6 +23,7 @@ import com.uminho.uce15.cityroots.data.Event;
 import com.uminho.uce15.cityroots.data.Poi;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListAdapter extends BaseAdapter implements Filterable {
@@ -76,7 +77,7 @@ public class ListAdapter extends BaseAdapter implements Filterable {
         txtTitle.setText(((Poi) lista.get(position)).getName());
 
         try{
-        String photo_path = ((Poi) lista.get(position)).getPhotos().get(0).getPath();
+        String photo_path = ((Poi) lista.get(position)).getPhotos().get(0);
         new DownloadImageTask((ImageView) imageView, (ProgressBar) loadBar ).execute(photo_path);
         }
         catch(Exception e){

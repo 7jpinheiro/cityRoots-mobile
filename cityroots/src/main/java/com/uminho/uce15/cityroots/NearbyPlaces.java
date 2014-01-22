@@ -16,9 +16,9 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.uminho.uce15.cityroots.objects.Attraction;
-import com.uminho.uce15.cityroots.objects.Event;
-import com.uminho.uce15.cityroots.objects.Poi;
+import com.uminho.uce15.cityroots.data.Attraction;
+import com.uminho.uce15.cityroots.data.Event;
+import com.uminho.uce15.cityroots.data.Poi;
 
 import org.osmdroid.api.Marker;
 import org.osmdroid.util.GeoPoint;
@@ -67,7 +67,7 @@ public class NearbyPlaces extends ActionBarActivity {
     private final int MAX_PLACES = 20;
     private int distNearBy=1;
     private ArrayList pois = new ArrayList() ;
-    DataProvider dp = new DataProvider();
+    DataProvider dp = new DataProvider(getBaseContext());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

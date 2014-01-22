@@ -25,11 +25,11 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.uminho.uce15.cityroots.objects.Attraction;
-import com.uminho.uce15.cityroots.objects.Comment;
-import com.uminho.uce15.cityroots.objects.Event;
-import com.uminho.uce15.cityroots.objects.Poi;
-import com.uminho.uce15.cityroots.objects.Service;
+import com.uminho.uce15.cityroots.data.Attraction;
+import com.uminho.uce15.cityroots.data.Comment;
+import com.uminho.uce15.cityroots.data.Event;
+import com.uminho.uce15.cityroots.data.Poi;
+import com.uminho.uce15.cityroots.data.Service;
 
 
 import java.util.List;
@@ -99,7 +99,7 @@ public class DetalhesPois extends ActionBarActivity {
             LinearLayout lin1 = (LinearLayout) findViewById(R.id.labels_service);
 
             //finish loading
-            DataProvider dp = new DataProvider();
+            DataProvider dp = new DataProvider(getBaseContext());
             Poi poi = null;
 
             switch (poi_type){
@@ -177,7 +177,7 @@ public class DetalhesPois extends ActionBarActivity {
             TextView comment = (TextView) rowView.findViewById(R.id.comment);
 
 
-            user_name.setText(((Comment) lista.get(position)).getUser().getFirstname());
+            user_name.setText(((Comment) lista.get(position)).getUsername());
             comment.setText(((Comment)lista.get(position)).getComment());
             avatar.setImageResource(R.drawable.logo);
 
