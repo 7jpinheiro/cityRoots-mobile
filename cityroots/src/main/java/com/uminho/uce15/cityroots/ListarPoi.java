@@ -7,6 +7,7 @@ import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 
+import android.app.AlertDialog;
 import android.content.IntentSender;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
@@ -61,12 +62,15 @@ import com.uminho.uce15.cityroots.objects.Route;
 import com.uminho.uce15.cityroots.objects.Service;
 
 import org.json.JSONObject;
+import org.osmdroid.DefaultResourceProxyImpl;
+import org.osmdroid.ResourceProxy;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.MyLocationOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import android.widget.ListView;
 
@@ -78,7 +82,7 @@ public class ListarPoi extends ActionBarActivity{
     private MapView myOpenMapView;
     private MapController myMapController;
 
-    ArrayList<OverlayItem> anotherOverlayItemArray;
+    ArrayList<MyOwnItemizedOverlay> anotherOverlayItemArray;
     MyLocationOverlay myLocationOverlay = null;
 
     double lat=41.54694103404733;
@@ -153,11 +157,11 @@ public class ListarPoi extends ActionBarActivity{
                 type_poi = 1;
                 break;
             case R.id.tpa:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
+                lista = (ArrayList<Attraction>) provider.getAttractions("Tradicional");
                 type_poi = 0;
                 break;
             case R.id.gastronomy:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
+                lista = (ArrayList<Attraction>) provider.getAttractions("Gastronomia");
                 type_poi = 0;
                 break;
             case R.id.activities:
@@ -165,15 +169,15 @@ public class ListarPoi extends ActionBarActivity{
                 type_poi = 0;
                 break;
             case R.id.outdoor:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
+                lista = (ArrayList<Attraction>) provider.getAttractions("Ar livre");
                 type_poi = 0;
                 break;
             case R.id.nightlife:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
+                lista = (ArrayList<Attraction>) provider.getAttractions("Nightlife");
                 type_poi = 0;
                 break;
             case R.id.hotels:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
+                lista = (ArrayList<Attraction>) provider.getAttractions("Hotel");
                 type_poi = 0;
                 break;
             case R.id.transport:
@@ -181,11 +185,11 @@ public class ListarPoi extends ActionBarActivity{
                 type_poi = 2;
                 break;
             case R.id.afd:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
+                lista = (ArrayList<Attraction>) provider.getAttractions("Divertimento");
                 type_poi = 0;
                 break;
             case R.id.contacts:
-                lista = (ArrayList<Event>) provider.getEvents();
+                lista = (ArrayList<Attraction>) provider.getAttractions("Contacto");
                 type_poi = 1;
                 break;
         }
@@ -217,6 +221,7 @@ public class ListarPoi extends ActionBarActivity{
             //Add MyLocationOverlay
             myLocationOverlay = new MyLocationOverlay(this, myOpenMapView);
             myOpenMapView.getOverlays().add(myLocationOverlay);
+
 
         }
 
@@ -253,18 +258,24 @@ public class ListarPoi extends ActionBarActivity{
 
         while (i< lista.size()){
 
-        anotherOverlayItemArray = new ArrayList<OverlayItem>();
+        //anotherOverlayItemArray = new ArrayList<MyOwnItemizedOverlay>();
 
           o =  new OverlayItem(
                   ((Poi)lista.get(i)).getName() , ((Poi)lista.get(i)).getDescription(), new GeoPoint(((Poi)lista.get(i)).getLatitude(), ((Poi)lista.get(i)).getLongitude()));
             o.setMarker(marker);
 
-        anotherOverlayItemArray.add(o);
 
-        ItemizedIconOverlay<OverlayItem> anotherItemizedIconOverlay
-                = new ItemizedIconOverlay<OverlayItem>(
+            MyOwnItemizedOverlay mon= new MyOwnItemizedOverlay(marker,this);
+
+            mon.addItem(o);
+
+            myOpenMapView.getOverlays().add(mon.getOverlay());
+        //anotherOverlayItemArray.add(o);
+
+       /* ItemizedIconOverlay<OverlayItem> anotherItemizedIconOverlay
+                = new ItemizedIconOverlay<MyOwnItemizedOverlay>(
                 this, anotherOverlayItemArray, null);
-        myOpenMapView.getOverlays().add(anotherItemizedIconOverlay);
+        myOpenMapView.getOverlays().add(anotherItemizedIconOverlay);*/
 
         i++;
         }
@@ -316,8 +327,6 @@ public class ListarPoi extends ActionBarActivity{
     }
 
 
-
-
     /*
      * Called when the Activity is no longer visible at all.
      * Stop updates and disconnect.
@@ -366,6 +375,49 @@ public class ListarPoi extends ActionBarActivity{
      * @return true if Google Play services is available, otherwise false
      */
 
+    public class MyOwnItemizedOverlay {
+        protected ItemizedIconOverlay<OverlayItem> mOverlay;
+        protected Context mContext;
+        protected Drawable mMarker;
 
+        public MyOwnItemizedOverlay(Drawable marker, Context context) {
+            mContext = context;
+            ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
+            ResourceProxy resourceProxy = (ResourceProxy) new DefaultResourceProxyImpl(mContext);
+            mMarker = marker;
+
+            mOverlay = new ItemizedIconOverlay<OverlayItem>(
+                    items, mMarker,
+                    new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                        @Override public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
+
+                            return true;
+                        }
+
+                        @Override public boolean onItemLongPress(final int index, final OverlayItem item) {
+                            return onSingleTapUpHelper(index, item);
+                        }
+                    }, resourceProxy);
+
+        }
+
+        public boolean onSingleTapUpHelper(int i, OverlayItem item) {
+            //Toast.makeText(mContext, "Item " + i + " has been tapped!", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+            dialog.setTitle(item.getTitle());
+            dialog.setIcon(mMarker);
+            dialog.setMessage(item.getSnippet());
+            dialog.show();
+            return true;
+        }
+
+        public void addItem(OverlayItem item){
+            mOverlay.addItem(item);
+        }
+
+        public ItemizedIconOverlay<OverlayItem> getOverlay(){
+            return mOverlay;
+        }
+    }
 
 }
