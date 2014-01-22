@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -50,6 +52,13 @@ public class Login extends Activity implements View.OnClickListener,
         if (state.isOpened()) {
             Log.i(TAG, state.toString());
             requestFbUsername(session);
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            prefs.edit().putString("userid",fbUsername).commit();
+
+            Intent intent = new Intent(this, Home.class);
+            startActivity(intent);
+            finish();
         } else if (state.isClosed()) {
             Log.i(TAG, state.toString());
         }
@@ -119,6 +128,12 @@ public class Login extends Activity implements View.OnClickListener,
         Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
         Log.d("G+Login", "User logged in:" + mPlusClient.getAccountName());
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.edit().putString("userid", mPlusClient.getAccountName()).commit();
+
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+        finish();
     }
 
 
