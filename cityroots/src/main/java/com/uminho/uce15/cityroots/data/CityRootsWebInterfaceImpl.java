@@ -154,13 +154,19 @@ public class CityRootsWebInterfaceImpl {
     }
 
     public Event getEventWithId(int id) throws IOException, ClassNotFoundException {
-        if(isCached("events")){
+        /*if(isCached("events")){
             List<Event> events = (List<Event>)getCache("events");
             for (Event event : events) {
                 if(event.getId() == id)
                     return event;
             }
         }
-        return service.getEventWithId(id);
+        return service.getEventWithId(id);*/
+        List<Event> events = service.getEvents("PT");
+        for (Event event : events) {
+            if(event.getId() == id)
+                return event;
+        }
+        return null;
     }
 }
