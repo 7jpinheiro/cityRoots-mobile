@@ -105,7 +105,7 @@ public class ListarPoi extends ActionBarActivity{
         lista = null;
         slidingPaneLayout = (MySlidingPaneLayout)findViewById(R.id.pane);
 
-        DataProvider provider = new DataProvider(getBaseContext()) ;
+        DataProvider provider = new DataProvider(getApplicationContext()) ;
 
         Bundle b = getIntent().getExtras();
         value = b.getInt("id_category");

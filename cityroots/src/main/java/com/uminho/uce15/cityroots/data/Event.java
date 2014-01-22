@@ -1,8 +1,9 @@
 package com.uminho.uce15.cityroots.data;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Event extends Poi {
+public class Event extends Poi implements Serializable {
 
     private int id;
     private String start;

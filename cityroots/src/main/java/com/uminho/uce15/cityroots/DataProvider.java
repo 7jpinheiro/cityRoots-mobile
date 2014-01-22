@@ -2,6 +2,7 @@ package com.uminho.uce15.cityroots;
 
 import android.content.Context;
 
+import com.facebook.AccessToken;
 import com.uminho.uce15.cityroots.data.Attraction;
 import com.uminho.uce15.cityroots.data.Event;
 import com.uminho.uce15.cityroots.data.Poi;
@@ -36,7 +37,21 @@ public class DataProvider {
 
     public List<Attraction> getAttractions(String tipo){
 
-        //TODO
+        List<Attraction> tmp = new ArrayList<Attraction>();
+        try {
+            tmp = cityRootsWebInterface.getAttractions();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        List<Attraction> res = new ArrayList<Attraction>();
+        for(Attraction attraction : tmp){
+            if( attraction.getType().contains(tipo) )
+                res.add(attraction);
+        }
+
         return new ArrayList<Attraction>();
     }
 

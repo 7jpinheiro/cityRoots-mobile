@@ -31,7 +31,7 @@ public class ListRoteiros extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_roteiros);
 
-        DataProvider dp = new DataProvider(getBaseContext());
+        DataProvider dp = new DataProvider(getApplicationContext());
 
         routes = (ArrayList<Route>) dp.getRoutes();
 

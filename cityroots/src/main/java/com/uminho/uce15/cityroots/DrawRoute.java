@@ -123,7 +123,7 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,
         lista = null;
         slidingPaneLayout = (MySlidingPaneLayout)findViewById(R.id.pane);
 
-        DataProvider provider = new DataProvider(getBaseContext()) ;
+        DataProvider provider = new DataProvider(getApplicationContext()) ;
 
 
         Intent intent = getIntent();
