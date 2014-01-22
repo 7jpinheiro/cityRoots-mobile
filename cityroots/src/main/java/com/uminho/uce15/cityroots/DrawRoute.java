@@ -610,13 +610,13 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,
                     .icon(BitmapDescriptorFactory.fromResource(userIcon))
                     .snippet("Sua última localização"));
 
-            CameraPosition cameraPosition = new CameraPosition.Builder()
+            /*CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(pos)
                     .zoom(12)                   // Sets the zoom
                     .tilt(45)                   // Sets the tilt of the camera to 30 degrees
                     .build();                   // Creates a CameraPosition from the builder
 
-            theMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            theMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));*/
         }
     }
 

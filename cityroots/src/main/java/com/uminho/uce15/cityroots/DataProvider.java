@@ -26,6 +26,11 @@ import java.util.concurrent.TimeoutException;
 public class DataProvider {
     private String uriBase;
 
+    private ArrayList pontos=(ArrayList<Event>)this.getEvents();
+    private Route a= new Route(1,"Rota1","RotaExemplo1",pontos);
+    private Route b= new Route(2,"Rota2","RotaExemplo2",pontos);
+    private Route c= new Route(3,"Rota3","RotaExemplo3",pontos);
+
     public DataProvider() {
         uriBase = "http://193.136.19.202:8080/";
 
@@ -192,7 +197,9 @@ public class DataProvider {
         //create list and return
 
         List<Route> res = new ArrayList<Route>();
-
+        res.add(a);
+        res.add(b);
+        res.add(c);
 
         return res;
     }
