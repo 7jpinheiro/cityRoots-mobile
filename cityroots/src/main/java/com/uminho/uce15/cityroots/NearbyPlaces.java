@@ -36,7 +36,8 @@ public class NearbyPlaces extends ActionBarActivity {
 
     ArrayList<OverlayItem> anotherOverlayItemArray;
     MyLocationOverlay myLocationOverlay = null;
-    ArrayList<Poi> lis = new ArrayList<Poi>();;
+    ArrayList<Poi> lis = new ArrayList<Poi>();
+    ArrayList<Float> dists = new ArrayList<Float>();
     double lat=41.54694103404733;
     double lng=-8.425848484039307;
 
@@ -65,6 +66,8 @@ public class NearbyPlaces extends ActionBarActivity {
     private Marker[] placeMarkers;
     private final int MAX_PLACES = 20;
     private int distNearBy=1;
+    private ArrayList pois = new ArrayList() ;
+    DataProvider dp = new DataProvider();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,22 +75,26 @@ public class NearbyPlaces extends ActionBarActivity {
         setContentView(R.layout.activity_nearby_places);
         SeekBar seekbar = (SeekBar) findViewById(R.id.seekBar);
 
+        pois = (ArrayList<Attraction>) dp.getAttractions();
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            TextView txt = (TextView) findViewById(R.id.txt_dist);
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
                     // change progress text label with current seekbar value
                     distNearBy=i;
+                    txt.setText("Distance: " + distNearBy + "km");
+                    actualizaDist();
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                txt.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                updatePlaces();
+                txt.setVisibility(View.GONE);
             }
         });
 
@@ -125,11 +132,14 @@ public class NearbyPlaces extends ActionBarActivity {
     private void updatePlaces(){
         int i=0;
         OverlayItem o;
+        myOpenMapView.getOverlays().clear();
+        myOpenMapView.getOverlays().add(myLocationOverlay);
         while (i< lis.size()){
 
             anotherOverlayItemArray = new ArrayList<OverlayItem>();
 
-            o =  new OverlayItem(
+            
+                o =  new OverlayItem(
                     ((Poi)lis.get(i)).getName() , ((Poi)lis.get(i)).getDescription(), new GeoPoint(((Poi)lis.get(i)).getLatitude(), ((Poi)lis.get(i)).getLongitude()));
 
 
@@ -219,6 +229,8 @@ public class NearbyPlaces extends ActionBarActivity {
         myLocationOverlay.enableCompass();
         myLocationOverlay.enableFollowLocation();
 
+
+
         GeoPoint myLocation = myLocationOverlay.getMyLocation();
 
         double myLocLat=0.0;
@@ -230,24 +242,31 @@ public class NearbyPlaces extends ActionBarActivity {
         catch(Exception e){
 
         }
-        DataProvider dp = new DataProvider();
-        ArrayList pois = new ArrayList() ;
-        pois = (ArrayList<Event>) dp.getEvents();
-        Poi poi;
 
+
+
+        Poi poi;
+        float  distancia;
         for(int i = 0; i< pois.size();i++){
             poi =(Poi) pois.get(i);
-            System.out.println("Distancia:" + distFrom(myLocLat, myLocLng, poi.getLatitude(), poi.getLongitude()));
-            if(distFrom(myLocLat, myLocLng,  poi.getLatitude(), poi.getLongitude()) < distNearBy)
+            distancia = distFrom(myLocLat, myLocLng,  poi.getLatitude(), poi.getLongitude());
+            dists.add(distancia);
+            if (distancia < (distNearBy*1000))
                 lis.add(poi);
-
-            System.out.println("Buahahahahahahhsdada");
         }
 
         updatePlaces();
-
         //System.out.println("Long:" + myLocLng + " Lat:" + myLocLat);
         //System.out.println("Distancia:" + distFrom(myLocLat,myLocLng,p,lng1));
+    }
+
+   void actualizaDist(){
+       lis.clear();
+       for (int i=0;i<pois.size();i++)
+           if ((dists.get(i))<(distNearBy*1000))
+                lis.add((Poi) pois.get(i));
+
+       updatePlaces();
     }
 
     /**
