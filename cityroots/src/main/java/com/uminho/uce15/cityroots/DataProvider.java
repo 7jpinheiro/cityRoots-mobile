@@ -52,7 +52,7 @@ public class DataProvider {
                 res.add(attraction);
         }
 
-        return new ArrayList<Attraction>();
+        return res;
     }
 
     public List<Event> getEvents(){
