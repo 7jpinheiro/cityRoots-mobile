@@ -75,24 +75,26 @@ public class NearbyPlaces extends ActionBarActivity {
         setContentView(R.layout.activity_nearby_places);
         SeekBar seekbar = (SeekBar) findViewById(R.id.seekBar);
 
-        pois = (ArrayList<Event>) dp.getEvents();
+        pois = (ArrayList<Attraction>) dp.getAttractions();
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            TextView txt = (TextView) findViewById(R.id.txt_dist);
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
                     // change progress text label with current seekbar value
                     distNearBy=i;
+                    txt.setText("Distance: " + distNearBy + "km");
                     actualizaDist();
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                txt.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                txt.setVisibility(View.GONE);
             }
         });
 
