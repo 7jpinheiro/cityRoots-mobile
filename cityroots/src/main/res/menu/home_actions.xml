@@ -3,7 +3,7 @@
       xmlns:cityroots="http://schemas.android.com/apk/res-auto" >
 
     <item android:id="@+id/action_announcement"
-        android:icon="@drawable/abc_ic_search"
+        android:icon="@drawable/abc_ic_menu_moreoverflow_normal_holo_light"
         cityroots:showAsAction="ifRoom"  />
 
 </menu>
