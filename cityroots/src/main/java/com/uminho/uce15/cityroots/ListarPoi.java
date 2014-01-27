@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -99,6 +100,8 @@ public class ListarPoi extends ActionBarActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
+
+
 
         setContentView(R.layout.activity_listar_poi);
 
@@ -202,29 +205,6 @@ public class ListarPoi extends ActionBarActivity{
 
         updatePlaces();
 
-        list.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-              //Starting new intent
-              Intent intent = new Intent(ListarPoi.this, DetalhesPois.class);
-              int poi_id = -1;
-                switch (type_poi){
-                    case 0:
-                        poi_id =((Attraction) lista.get(position)).getId() ;
-                        break;
-                    case 1:
-                        poi_id =((Event) lista.get(position)).getId() ;
-                        break;
-                    case 2:
-                        poi_id =((Service) lista.get(position)).getId() ;
-                        break;
-                }
-              intent.putExtra("id", poi_id);
-              intent.putExtra("type", type_poi);
-              startActivity(intent);
-
-            }
-        });
     }
 
     public void goToList(View view){

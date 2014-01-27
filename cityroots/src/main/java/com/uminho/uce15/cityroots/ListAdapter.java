@@ -4,12 +4,14 @@ package com.uminho.uce15.cityroots;
  * Created by root on 04-01-2014.
  */
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
@@ -19,8 +21,10 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.uminho.uce15.cityroots.data.Attraction;
 import com.uminho.uce15.cityroots.data.Event;
 import com.uminho.uce15.cityroots.data.Poi;
+import com.uminho.uce15.cityroots.data.Service;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -91,8 +95,35 @@ public class ListAdapter extends BaseAdapter implements Filterable {
         }
         else rtbar.setRating((float)((Poi) lista.get(position)).getRating());
 
+        rowView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Starting new intent
+
+                Intent intent = new Intent(context.getApplicationContext(), DetalhesPois.class);
+
+                int poi_id = -1;
+                int type_poi = -1;
+                if(lista.get(position).getClass() == Attraction.class){
+                    poi_id =((Attraction) lista.get(position)).getId();
+                    type_poi = 0;
+                }
+                if(lista.get(position).getClass() == Event.class ){
+                    poi_id =((Event) lista.get(position)).getId();
+                    type_poi = 1;
+                }
+                if(lista.get(position).getClass() == Service.class ){
+                    poi_id =((Service) lista.get(position)).getId();
+                    type_poi = 2;
+                }
 
 
+                intent.putExtra("id", poi_id);
+                intent.putExtra("type", type_poi);
+                context.startActivity(intent);
+            }
+            }
+        );
         return rowView;
     }
 

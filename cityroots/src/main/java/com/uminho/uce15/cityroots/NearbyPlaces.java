@@ -2,6 +2,7 @@ package com.uminho.uce15.cityroots;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.provider.CalendarContract;
@@ -163,6 +164,8 @@ public class NearbyPlaces extends ActionBarActivity {
             i++;
         }
 
+        myOpenMapView.postInvalidate();
+
     }
 
 
@@ -300,12 +303,11 @@ public class NearbyPlaces extends ActionBarActivity {
                     items, mMarker,
                     new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                         @Override public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-
-                            return true;
+                            return onSingleTapUpHelper(index, item);
                         }
 
                         @Override public boolean onItemLongPress(final int index, final OverlayItem item) {
-                            return onSingleTapUpHelper(index, item);
+                            return true;
                         }
                     }, resourceProxy);
 

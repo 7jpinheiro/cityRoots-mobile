@@ -1,6 +1,9 @@
 package com.uminho.uce15.cityroots;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.StrictMode;
+import android.provider.ContactsContract;
 
 import com.facebook.AccessToken;
 import com.uminho.uce15.cityroots.data.Attraction;
@@ -21,6 +24,8 @@ public class DataProvider {
 
     public DataProvider(Context context) {
         cityRootsWebInterface = new CityRootsWebInterfaceImpl(context);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
     }
 
     public List<Attraction> getAttractions(){
@@ -108,9 +113,11 @@ public class DataProvider {
         return res;
     }
 
+
     public Event getEvent (int id){
         Event res = null;
         try {
+
             res = cityRootsWebInterface.getEventWithId(id);
         } catch (IOException e) {
             e.printStackTrace();
