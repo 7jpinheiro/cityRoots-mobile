@@ -45,4 +45,16 @@ public interface CityRootsWebService {
     @GET("/itineraries/{id}.json")
     Route getRouteWithId(@Path("id") int id);
 
+    @GET("/apis.json?registar=1")
+    void signup(@Query("email") String email,
+                @Query("username") String username,
+                @Query("password") String password,
+                @Query("firstname") String firstname,
+                @Query("surname") String surname,
+                @Query("gender") char gender,
+                @Query("dateofbirth") String dateOfBirth);
+
+    @GET("/apis.json?anun=1")
+    List<Event> getAds(@Query("lang") String language);
+
 }

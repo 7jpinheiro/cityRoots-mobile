@@ -10,16 +10,26 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
+import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 
 public class CityRootsWebInterfaceImpl {
 
     private CityRootsWebService service;
     private Context context;
+    //private static final String TOKEN = "";
 
     public CityRootsWebInterfaceImpl(Context context) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setServer("http://193.136.19.202:8080")
+                /* to add when authorization on the server is working
+
+                .setRequestInterceptor(new RequestInterceptor() {
+                    @Override
+                    public void intercept(RequestInterceptor.RequestFacade request) {
+                        request.addQueryParam("Authorization", TOKEN);
+                    }
+                })*/
                 .build();
 
         this.context = context;
@@ -28,15 +38,13 @@ public class CityRootsWebInterfaceImpl {
     }
 
     private boolean isCached(String filename) throws IOException {
-        return false;
-        //TODO FIXME NOTE ERROR
-        //File outputDir = this.context.getCacheDir();
-        //return File.createTempFile(filename,"obj",outputDir).exists();
+        File outputDir = this.context.getCacheDir();
+        return (new File (outputDir, filename)).exists();
     }
 
     private void cache(String filename, Object object) throws IOException {
         File outputDir = this.context.getCacheDir();
-        File file = File.createTempFile(filename, "obj", outputDir);
+        File file = new File(outputDir, filename);
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
         oos.writeObject(object);
         oos.close();
@@ -44,7 +52,7 @@ public class CityRootsWebInterfaceImpl {
 
     private Object getCache(String filename) throws IOException, ClassNotFoundException {
         File outputDir = this.context.getCacheDir();
-        File file = File.createTempFile(filename, "obj", outputDir);
+        File file = new File(outputDir, filename);
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
         Object o = ois.readObject();
         ois.close();
@@ -94,21 +102,21 @@ public class CityRootsWebInterfaceImpl {
     }
 
     public Attraction getAttractionWithId(int id) throws IOException, ClassNotFoundException {
-        /*if(isCached("attraction")){
+        if(isCached("attraction")){
             List<Attraction> attractions = (List<Attraction>)getCache("attractions");
             for (Attraction attraction : attractions) {
                 if(attraction.getId() == id)
                     return attraction;
             }
-        }*/
+        }
 
         List<Attraction> attractions = service.getAttractions("PT");
         for (Attraction attraction : attractions) {
             if(attraction.getId() == id)
                 return attraction;
         }
-        return null;
-        //return service.getAttractionWithId(id);
+
+        return service.getAttractionWithId(id);
     }
 
     public List<Service> getServices() throws IOException, ClassNotFoundException {
@@ -162,5 +170,19 @@ public class CityRootsWebInterfaceImpl {
             }
         }
         return service.getEventWithId(id);
+    }
+
+    public void signup(String email,
+                       String username,
+                       String password,
+                       String firstname,
+                       String surname,
+                       char gender,
+                       String dateOfBirth){
+        service.signup(email, username, password, firstname, surname, gender, dateOfBirth);
+    }
+
+    public List<Event> getAds(){
+        return service.getAds("PT");
     }
 }
