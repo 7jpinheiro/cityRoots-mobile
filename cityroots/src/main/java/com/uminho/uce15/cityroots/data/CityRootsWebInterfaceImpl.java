@@ -182,7 +182,29 @@ public class CityRootsWebInterfaceImpl {
         service.signup(email, username, password, firstname, surname, gender, dateOfBirth);
     }
 
-    public List<Event> getAds(){
+    public List<Event> getAds() throws IOException, ClassNotFoundException {
+        if(isCached("ads")){
+            return (List<Event>)getCache("ads");
+        }
         return service.getAds("PT");
+    }
+
+    public void invalidateCache(){
+        File cacheDir = context.getCacheDir();
+
+        File file = new File(cacheDir, "routes");
+        file.delete();
+
+        file = new File(cacheDir, "attractions");
+        file.delete();
+
+        file = new File(cacheDir, "events");
+        file.delete();
+
+        file = new File(cacheDir, "services");
+        file.delete();
+
+        file = new File(cacheDir, "ads");
+        file.delete();
     }
 }
