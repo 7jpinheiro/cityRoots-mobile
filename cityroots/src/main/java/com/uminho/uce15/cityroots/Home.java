@@ -99,14 +99,7 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         startActivity(intent);
     }
 
-    public void search(View view){
-        TextView textView = (TextView)findViewById(R.id.editText);
 
-        InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        mgr.hideSoftInputFromWindow(findViewById(R.id.editText).getWindowToken(), 0);
-
-        //Log.d("Search", "Text:" + textView.getText());
-    }
 
 
 
@@ -144,10 +137,10 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        if (tab.getPosition() == 2) {
+   /*     if (tab.getPosition() == 2) {
             InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             mgr.hideSoftInputFromWindow(findViewById(R.id.editText).getWindowToken(), 0);
-        }
+        }*/
     }
 
     @Override
@@ -165,6 +158,7 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+            if(position==2) return new AdsListview();
             return PlaceholderFragment.newInstance(position);
         }
 
