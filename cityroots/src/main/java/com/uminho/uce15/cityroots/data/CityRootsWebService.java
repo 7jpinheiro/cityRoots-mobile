@@ -13,37 +13,37 @@ public interface CityRootsWebService {
     List<Attraction> getPagedAttractions(@Query("page") int page);
 
     @GET("/apis.json?att=1")
-    List<Attraction> getAttractions(@Query("lang") String language);
+    void getAttractions(@Query("lang") String language, Callback<List<Attraction>> callback);
 
     @GET("/attractions/{id}.json")
-    Attraction getAttractionWithId(@Path("id") int id);
+    void getAttractionWithId(@Path("id") int id, Callback<Attraction> callback);
 
     @GET("/events.json")
     List<Event> getPagedEvents(@Query("page") int page);
 
     @GET("/apis.json?evt=1")
-    List<Event> getEvents(@Query("lang") String language);
+    void getEvents(@Query("lang") String language, Callback<List<Event>> callback);
 
     @GET("/events/{id}.json")
-    Event getEventWithId(@Path("id") int id);
+    void getEventWithId(@Path("id") int id, Callback<Event> callback);
 
     @GET("/services.json")
     List<Service> getPagedServices(@Query("page") int page);
 
     @GET("/apis.json?ser=1")
-    List<Service> getServices(@Query("lang") String language);
+    void getServices(@Query("lang") String language, Callback<List<Service>> callback);
 
     @GET("/services/{id}.json")
-    Service getServiceWithId(@Path("id") int id);
+    void getServiceWithId(@Path("id") int id, Callback<Service> callback);
 
     @GET("itineraries.json")
     List<Route> getPagedRoutes(@Query("page") int page);
 
     @GET("/apis.json?iti=1")
-    List<Route> getRoutes(@Query("lang") String language);
+    void getRoutes(@Query("lang") String language, Callback<List<Route>> callback);
 
     @GET("/itineraries/{id}.json")
-    Route getRouteWithId(@Path("id") int id);
+    void getRouteWithId(@Path("id") int id, Callback<Route> callback);
 
     @GET("/apis.json?registar=1")
     void signup(@Query("email") String email,
@@ -52,9 +52,10 @@ public interface CityRootsWebService {
                 @Query("firstname") String firstname,
                 @Query("surname") String surname,
                 @Query("gender") char gender,
-                @Query("dateofbirth") String dateOfBirth);
+                @Query("dateofbirth") String dateOfBirth,
+                Callback callback);
 
     @GET("/apis.json?anun=1")
-    List<Event> getAds(@Query("lang") String language);
+    void getAds(@Query("lang") String language, Callback<List<Event>> callback);
 
 }

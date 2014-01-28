@@ -10,10 +10,20 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
+import retrofit.Callback;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class CityRootsWebInterfaceImpl {
+
+    public interface Callback<T> {
+
+        void success(T t);
+
+        void failure();
+    }
 
     private CityRootsWebService service;
     private Context context;
@@ -59,14 +69,27 @@ public class CityRootsWebInterfaceImpl {
         return o;
     }
 
-    public List<Route> getRoutes() throws IOException, ClassNotFoundException {
+    public void getRoutes(final Callback<List<Route>> callback) throws IOException, ClassNotFoundException {
         if(isCached("routes")){
-            return (List<Route>)getCache("routes");
+            callback.success((List<Route>)getCache("routes"));
         }
         else {
-            List<Route> routes = service.getRoutes("PT");
-            cache("routes",routes);
-            return routes;
+            service.getRoutes("PT", new retrofit.Callback<List<Route>>() {
+                @Override
+                public void success(List<Route> routes, Response response) {
+                    try {
+                        cache("routes",routes);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    callback.success(routes);
+                }
+
+                @Override
+                public void failure(RetrofitError retrofitError) {
+
+                }
+            });
         }
 
     }
@@ -75,25 +98,48 @@ public class CityRootsWebInterfaceImpl {
         return service.getPagedRoutes(page);
     }
 
-    public Route getRouteWithId(int id) throws IOException, ClassNotFoundException {
+    public void getRouteWithId(int id, final Callback<Route> callback) throws IOException, ClassNotFoundException {
         if(isCached("routes")){
             List<Route> routes = (List<Route>)getCache("routes");
             for (Route route : routes) {
                 if(route.getId() == id)
-                    return route;
+                    callback.success(route);
             }
         }
-        return service.getRouteWithId(id);
+        service.getRouteWithId(id, new retrofit.Callback<Route>() {
+            @Override
+            public void success(Route route, Response response) {
+                callback.success(route);
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+
+            }
+        });
     }
 
-    public List<Attraction> getAttractions() throws IOException, ClassNotFoundException {
+    public void getAttractions(final Callback<List<Attraction>> callback) throws IOException, ClassNotFoundException {
         if(isCached("attractions")){
-            return (List<Attraction>)getCache("attractions");
+            callback.success((List<Attraction>) getCache("attractions"));
         }
         else {
-            List<Attraction> attractions = service.getAttractions("PT");
-            cache("attractions",attractions);
-            return attractions;
+            service.getAttractions("PT", new retrofit.Callback<List<Attraction>>() {
+                @Override
+                public void success(List<Attraction> attractions, Response response) {
+                    try {
+                        cache("attractions",attractions);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    callback.success(attractions);
+                }
+
+                @Override
+                public void failure(RetrofitError retrofitError) {
+
+                }
+            });
         }
     }
 
@@ -101,32 +147,49 @@ public class CityRootsWebInterfaceImpl {
         return service.getPagedAttractions(page);
     }
 
-    public Attraction getAttractionWithId(int id) throws IOException, ClassNotFoundException {
+    public void getAttractionWithId(final int id, final Callback<Attraction> callback) throws IOException, ClassNotFoundException {
         if(isCached("attraction")){
             List<Attraction> attractions = (List<Attraction>)getCache("attractions");
             for (Attraction attraction : attractions) {
                 if(attraction.getId() == id)
-                    return attraction;
+                    callback.success(attraction);
             }
         }
 
-        List<Attraction> attractions = service.getAttractions("PT");
-        for (Attraction attraction : attractions) {
-            if(attraction.getId() == id)
-                return attraction;
-        }
+        service.getAttractionWithId(id, new retrofit.Callback<Attraction>() {
+            @Override
+            public void success(Attraction attraction, Response response) {
+                callback.success(attraction);
+            }
 
-        return service.getAttractionWithId(id);
+            @Override
+            public void failure(RetrofitError retrofitError) {
+
+            }
+        });
     }
 
-    public List<Service> getServices() throws IOException, ClassNotFoundException {
+    public void getServices(final Callback<List<Service>> callback) throws IOException, ClassNotFoundException {
         if(isCached("services")){
-            return (List<Service>)getCache("services");
+            callback.success((List<Service>)getCache("services"));
         }
         else {
-            List<Service> services = service.getServices("PT");
-            cache("services", services);
-            return services;
+            service.getServices("PT", new retrofit.Callback<List<Service>>() {
+                @Override
+                public void success(List<Service> services, Response response) {
+                    try {
+                        cache("services", services);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    callback.success(services);
+                }
+
+                @Override
+                public void failure(RetrofitError retrofitError) {
+
+                }
+            });
         }
 
     }
@@ -135,25 +198,49 @@ public class CityRootsWebInterfaceImpl {
         return service.getPagedServices(page);
     }
 
-    public Service getServiceWithId(int id) throws IOException, ClassNotFoundException {
+    public void getServiceWithId(int id, final Callback<Service> callback) throws IOException, ClassNotFoundException {
         if(isCached("services")){
             List<Service> services = (List<Service>)getCache("services");
             for (Service service : services) {
                 if(service.getId() == id)
-                    return service;
+                    callback.success(service);
             }
         }
-        return service.getServiceWithId(id);
+        
+        service.getServiceWithId(id, new retrofit.Callback<Service>() {
+            @Override
+            public void success(Service service, Response response) {
+                callback.success(service);
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+
+            }
+        });
     }
 
-    public List<Event> getEvents() throws IOException, ClassNotFoundException {
+    public void getEvents(final Callback<List<Event>> callback) throws IOException, ClassNotFoundException {
         if(isCached("events")){
-            return (List<Event>)getCache("events");
+            callback.success((List<Event>) getCache("events"));
         }
         else {
-            List<Event> events = service.getEvents("PT");
-            cache("events", events);
-            return events;
+            service.getEvents("PT", new retrofit.Callback<List<Event>>() {
+                @Override
+                public void success(List<Event> events, Response response) {
+                    try {
+                        cache("events", events);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    callback.success(events);
+                }
+
+                @Override
+                public void failure(RetrofitError retrofitError) {
+
+                }
+            });
         }
     }
 
@@ -161,15 +248,25 @@ public class CityRootsWebInterfaceImpl {
         return service.getPagedEvents(page);
     }
 
-    public Event getEventWithId(int id) throws IOException, ClassNotFoundException {
+    public void getEventWithId(int id, final Callback<Event> callback) throws IOException, ClassNotFoundException {
         if(isCached("events")){
             List<Event> events = (List<Event>)getCache("events");
             for (Event event : events) {
                 if(event.getId() == id)
-                    return event;
+                    callback.success(event);
             }
         }
-        return service.getEventWithId(id);
+        service.getEventWithId(id, new retrofit.Callback<Event>() {
+            @Override
+            public void success(Event event, Response response) {
+                callback.success(event);
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+
+            }
+        });
     }
 
     public void signup(String email,
@@ -178,15 +275,41 @@ public class CityRootsWebInterfaceImpl {
                        String firstname,
                        String surname,
                        char gender,
-                       String dateOfBirth){
-        service.signup(email, username, password, firstname, surname, gender, dateOfBirth);
+                       String dateOfBirth,
+                       final Callback<Boolean> callback){
+        service.signup(email, username, password, firstname, surname, gender, dateOfBirth, new retrofit.Callback() {
+            @Override
+            public void success(Object o, Response response) {
+                callback.success(true);
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+
+            }
+        });
     }
 
-    public List<Event> getAds() throws IOException, ClassNotFoundException {
+    public void getAds(final Callback<List<Event>> callback) throws IOException, ClassNotFoundException {
         if(isCached("ads")){
-            return (List<Event>)getCache("ads");
+             callback.success((List<Event>)getCache("ads"));
         }
-        return service.getAds("PT");
+        service.getAds("PT", new retrofit.Callback<List<Event>>() {
+            @Override
+            public void success(List<Event> events, Response response) {
+                try {
+                    cache("ads", events);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                callback.success(events);
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+
+            }
+        });
     }
 
     public void invalidateCache(){
