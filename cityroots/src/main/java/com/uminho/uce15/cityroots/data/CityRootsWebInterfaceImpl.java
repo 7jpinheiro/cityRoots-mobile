@@ -186,7 +186,9 @@ public class CityRootsWebInterfaceImpl {
         if(isCached("ads")){
             return (List<Event>)getCache("ads");
         }
-        return service.getAds("PT");
+        List<Event> events = service.getAds("PT");
+        cache("ads", events);
+        return events;
     }
 
     public void invalidateCache(){
