@@ -3,6 +3,7 @@
 package com.uminho.uce15.cityroots;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
@@ -18,12 +19,14 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.uminho.uce15.cityroots.data.Attraction;
@@ -36,11 +39,11 @@ import com.uminho.uce15.cityroots.data.Service;
 import java.util.List;
 
 public class DetalhesPois extends ActionBarActivity {
+    private boolean commentsVisible;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_poi);
-
 
         Intent i = getIntent();
 
@@ -51,8 +54,29 @@ public class DetalhesPois extends ActionBarActivity {
 
         loadD.execute(id);
 
+        commentsVisible = false;
+
+        InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(findViewById(R.id.myComment).getWindowToken(), 0);
+
     }
 
+    public void toggleComments(View view){
+        if (commentsVisible){
+            commentsVisible = false;
+            ((Button)findViewById(R.id.viewComments)).setText("View Comments");
+            ((ScrollView)findViewById(R.id.myScrollView)).setVisibility(View.VISIBLE);
+            ((LinearLayout)findViewById(R.id.commentLayout)).setVisibility(View.GONE);
+            ((ListView)findViewById(R.id.commentList)).setVisibility(View.GONE);
+        }
+        else {
+            commentsVisible = true;
+            ((Button)findViewById(R.id.viewComments)).setText("Hide Comments");
+            ((ScrollView)findViewById(R.id.myScrollView)).setVisibility(View.GONE);
+            ((LinearLayout)findViewById(R.id.commentLayout)).setVisibility(View.VISIBLE);
+            ((ListView)findViewById(R.id.commentList)).setVisibility(View.VISIBLE);
+        }
+    }
 
     class LoadDetails extends AsyncTask<Integer, Integer, Integer> {
 
@@ -151,7 +175,7 @@ public class DetalhesPois extends ActionBarActivity {
 
 
             CommentAdapter ca = new CommentAdapter(activity,poi.getComments());
-            ListView list = (ListView) findViewById(R.id.comments);
+            ListView list = (ListView) findViewById(R.id.commentList);
             list.setAdapter(ca);
         }
 
