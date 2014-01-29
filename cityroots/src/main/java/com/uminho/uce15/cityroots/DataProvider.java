@@ -88,6 +88,8 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+            noInternetConnectionError.printStackTrace();
         }
 
         List<Event> res = new ArrayList<Event>();
@@ -121,6 +123,8 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+            noInternetConnectionError.printStackTrace();
         }
 
         ArrayList<Attraction> list = new ArrayList();
@@ -153,6 +157,8 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+            noInternetConnectionError.printStackTrace();
         }
 
         List<Service> res = new ArrayList<Service>();
