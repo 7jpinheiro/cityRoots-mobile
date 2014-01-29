@@ -177,7 +177,7 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
                 case 1:
                     return getString(R.string.tab_home).toUpperCase(l);
                 case 2:
-                    return getString(R.string.Search).toUpperCase(l);
+                    return getString(R.string.deals).toUpperCase(l);
             }
             return null;
         }
