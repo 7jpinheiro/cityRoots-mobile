@@ -99,7 +99,7 @@ public class DetalhesPois extends ActionBarActivity {
 
             Log.d("Comment", "PoI " + poi_id + " - "+userid + "@"+service+": " + comment);
 
-
+            ((TextView) findViewById(R.id.myComment)).setText("");
         }
     }
 
