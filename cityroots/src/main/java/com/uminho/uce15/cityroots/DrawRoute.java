@@ -129,7 +129,7 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,
         Intent intent = getIntent();
         Integer id= Integer.valueOf(intent.getStringExtra("id"));
 
-        lista=(ArrayList<Poi>)provider.getPontosRoute((int)id);
+        lista=(ArrayList<Attraction>)provider.getPontosRoute((int)id);
         //lista = (ArrayList<Event>) provider.getEvents();
 
         /*Bundle b = getIntent().getExtras();

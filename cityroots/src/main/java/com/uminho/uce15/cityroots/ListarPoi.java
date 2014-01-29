@@ -152,15 +152,15 @@ public class ListarPoi extends ActionBarActivity{
                 type_poi = 0;
                 break;
             case R.id.transport:
-                lista = (ArrayList<Service>) provider.getServices();
+                lista = (ArrayList<Service>) provider.getServices("Transporte");
                 type_poi = 2;
                 break;
             case R.id.afd:
-                lista = (ArrayList<Attraction>) provider.getAttractions("Divertimento");
+                lista = (ArrayList<Service>) provider.getServices("Acessibilidade");
                 type_poi = 0;
                 break;
             case R.id.contacts:
-                lista = (ArrayList<Attraction>) provider.getAttractions("Contacto");
+                lista = (ArrayList<Service>) provider.getServices("Contacto Util");
                 type_poi = 1;
                 break;
         }
