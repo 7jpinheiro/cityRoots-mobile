@@ -11,6 +11,7 @@ import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -104,6 +105,10 @@ public class ListarPoi extends ActionBarActivity{
 
 
         setContentView(R.layout.activity_listar_poi);
+
+        InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(findViewById(R.id.editText_lispoi).getWindowToken(), 0);
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         lista = null;
@@ -265,12 +270,6 @@ public class ListarPoi extends ActionBarActivity{
         return super.onOptionsItemSelected(item);
     }
 
-
-    public void search(View view){
-        //TextView textView = (TextView)findViewById(R.id.editText);
-
-        //Log.d("Search", "Text:" + textView.getText());
-    }
 
     /**
      * A placeholder fragment containing a simple view.
