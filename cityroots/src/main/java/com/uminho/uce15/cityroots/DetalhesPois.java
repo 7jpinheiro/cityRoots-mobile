@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -50,20 +51,25 @@ public class DetalhesPois extends ActionBarActivity {
         int id = i.getIntExtra("id",0);
         int poi_type = i.getIntExtra("type", 0);
 
+        InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(findViewById(R.id.myComment).getWindowToken(), 0);
+
         LoadDetails loadD = new LoadDetails(DetalhesPois.this,poi_type);
 
         loadD.execute(id);
 
         commentsVisible = false;
 
-        InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        mgr.hideSoftInputFromWindow(findViewById(R.id.myComment).getWindowToken(), 0);
 
     }
 
     public void toggleComments(View view){
         if (commentsVisible){
             commentsVisible = false;
+
+            InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            mgr.hideSoftInputFromWindow(findViewById(R.id.myComment).getWindowToken(), 0);
+
             ((Button)findViewById(R.id.viewComments)).setText("View Comments");
             ((ScrollView)findViewById(R.id.myScrollView)).setVisibility(View.VISIBLE);
             ((LinearLayout)findViewById(R.id.commentLayout)).setVisibility(View.GONE);
@@ -163,6 +169,9 @@ public class DetalhesPois extends ActionBarActivity {
                     lin.setVisibility(View.GONE);
                     break;
             }
+
+            String photoPath = poi.getPhotos().get(0);
+            new DownloadImageTask((ImageView)findViewById(R.id.listelem_img), (ProgressBar)findViewById(R.id.loadingImg)).execute(photoPath);
 
             lbl_name.setText(poi.getName());
             lbl_description.setText(poi.getDescription());
