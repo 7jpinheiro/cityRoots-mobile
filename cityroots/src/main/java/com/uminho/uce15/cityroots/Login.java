@@ -55,6 +55,7 @@ public class Login extends Activity implements View.OnClickListener,
 
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             prefs.edit().putString("userid",fbUsername).commit();
+            prefs.edit().putString("service", "facebook").commit();
 
             Intent intent = new Intent(this, Home.class);
             startActivity(intent);
@@ -130,6 +131,7 @@ public class Login extends Activity implements View.OnClickListener,
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.edit().putString("userid", mPlusClient.getAccountName()).commit();
+        prefs.edit().putString("service", "google").commit();
 
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
