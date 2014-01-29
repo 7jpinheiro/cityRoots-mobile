@@ -104,7 +104,8 @@ public class ListarPoi extends ActionBarActivity{
 
 
         setContentView(R.layout.activity_listar_poi);
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         lista = null;
         slidingPaneLayout = (MySlidingPaneLayout)findViewById(R.id.pane);
 
@@ -266,7 +267,7 @@ public class ListarPoi extends ActionBarActivity{
 
 
     public void search(View view){
-        TextView textView = (TextView)findViewById(R.id.editText);
+        //TextView textView = (TextView)findViewById(R.id.editText);
 
         //Log.d("Search", "Text:" + textView.getText());
     }
