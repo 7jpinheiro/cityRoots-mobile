@@ -370,6 +370,7 @@
             android:layout_gravity="center_vertical"
             android:layout_width="0dp"
             android:layout_height="60dp"
+            android:background="@drawable/comment"
             android:layout_weight=".2"
             />
 
