@@ -12,30 +12,24 @@ import java.util.List;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 
 public class CityRootsWebInterfaceImpl {
 
     private CityRootsWebService service;
     private Context context;
-    //private static final String TOKEN = "";
 
     public CityRootsWebInterfaceImpl(Context context) {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setServer("http://193.136.19.202:8080")
-                /* to add when authorization on the server is working
-
-                .setRequestInterceptor(new RequestInterceptor() {
-                    @Override
-                    public void intercept(RequestInterceptor.RequestFacade request) {
-                        request.addQueryParam("Authorization", TOKEN);
-                    }
-                })*/
                 .build();
 
         this.context = context;
 
         this.service = restAdapter.create(CityRootsWebService.class);
     }
+
+    public class NoInternetConnectionError extends Throwable{};
 
     private boolean isCached(String filename) throws IOException {
         File outputDir = this.context.getCacheDir();
@@ -59,23 +53,37 @@ public class CityRootsWebInterfaceImpl {
         return o;
     }
 
-    public List<Route> getRoutes() throws IOException, ClassNotFoundException {
+    public List<Route> getRoutes() throws IOException, ClassNotFoundException, NoInternetConnectionError {
         if(isCached("routes")){
             return (List<Route>)getCache("routes");
         }
         else {
-            List<Route> routes = service.getRoutes("PT");
-            cache("routes",routes);
-            return routes;
+            try {
+                List<Route> routes = service.getRoutes("PT");
+                cache("routes",routes);
+                return routes;
+            } catch(RetrofitError e){
+                if (e.isNetworkError())
+                    throw new NoInternetConnectionError();
+                else
+                    throw e;
+            }
         }
 
     }
 
-    public List<Route> getPagedRoutes(int page) {
-        return service.getPagedRoutes(page);
+    public List<Route> getPagedRoutes(int page) throws NoInternetConnectionError {
+        try {
+            return service.getPagedRoutes(page);
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
+        }
     }
 
-    public Route getRouteWithId(int id) throws IOException, ClassNotFoundException {
+    public Route getRouteWithId(int id) throws IOException, ClassNotFoundException, NoInternetConnectionError {
         if(isCached("routes")){
             List<Route> routes = (List<Route>)getCache("routes");
             for (Route route : routes) {
@@ -83,25 +91,47 @@ public class CityRootsWebInterfaceImpl {
                     return route;
             }
         }
-        return service.getRouteWithId(id);
+        try{
+            return service.getRouteWithId(id);
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
+        }
+
     }
 
-    public List<Attraction> getAttractions() throws IOException, ClassNotFoundException {
+    public List<Attraction> getAttractions() throws IOException, ClassNotFoundException, NoInternetConnectionError {
         if(isCached("attractions")){
             return (List<Attraction>)getCache("attractions");
         }
         else {
-            List<Attraction> attractions = service.getAttractions("PT");
-            cache("attractions",attractions);
-            return attractions;
+            try {
+                List<Attraction> attractions = service.getAttractions("PT");
+                cache("attractions",attractions);
+                return attractions;
+            } catch(RetrofitError e){
+                if (e.isNetworkError())
+                    throw new NoInternetConnectionError();
+                else
+                    throw e;
+            }
         }
     }
 
-    public List<Attraction> getPagedAttractions(int page) {
-        return service.getPagedAttractions(page);
+    public List<Attraction> getPagedAttractions(int page) throws NoInternetConnectionError {
+        try {
+            return service.getPagedAttractions(page);
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
+        }
     }
 
-    public Attraction getAttractionWithId(int id) throws IOException, ClassNotFoundException {
+    public Attraction getAttractionWithId(int id) throws IOException, ClassNotFoundException, NoInternetConnectionError {
         if(isCached("attraction")){
             List<Attraction> attractions = (List<Attraction>)getCache("attractions");
             for (Attraction attraction : attractions) {
@@ -109,33 +139,47 @@ public class CityRootsWebInterfaceImpl {
                     return attraction;
             }
         }
-
-        List<Attraction> attractions = service.getAttractions("PT");
-        for (Attraction attraction : attractions) {
-            if(attraction.getId() == id)
-                return attraction;
+        try {
+            return service.getAttractionWithId(id);
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
         }
-
-        return service.getAttractionWithId(id);
     }
 
-    public List<Service> getServices() throws IOException, ClassNotFoundException {
+    public List<Service> getServices() throws IOException, ClassNotFoundException, NoInternetConnectionError {
         if(isCached("services")){
             return (List<Service>)getCache("services");
         }
         else {
-            List<Service> services = service.getServices("PT");
-            cache("services", services);
-            return services;
+            try {
+                List<Service> services = service.getServices("PT");
+                cache("services", services);
+                return services;
+            } catch(RetrofitError e){
+                if (e.isNetworkError())
+                    throw new NoInternetConnectionError();
+                else
+                    throw e;
+            }
         }
 
     }
 
-    public List<Service> getPagedServices(int page){
-        return service.getPagedServices(page);
+    public List<Service> getPagedServices(int page) throws NoInternetConnectionError {
+        try {
+            return service.getPagedServices(page);
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
+        }
     }
 
-    public Service getServiceWithId(int id) throws IOException, ClassNotFoundException {
+    public Service getServiceWithId(int id) throws IOException, ClassNotFoundException, NoInternetConnectionError {
         if(isCached("services")){
             List<Service> services = (List<Service>)getCache("services");
             for (Service service : services) {
@@ -143,25 +187,46 @@ public class CityRootsWebInterfaceImpl {
                     return service;
             }
         }
-        return service.getServiceWithId(id);
+        try{
+            return service.getServiceWithId(id);
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
+        }
     }
 
-    public List<Event> getEvents() throws IOException, ClassNotFoundException {
+    public List<Event> getEvents() throws IOException, ClassNotFoundException, NoInternetConnectionError {
         if(isCached("events")){
             return (List<Event>)getCache("events");
         }
         else {
-            List<Event> events = service.getEvents("PT");
-            cache("events", events);
-            return events;
+            try {
+                List<Event> events = service.getEvents("PT");
+                cache("events", events);
+                return events;
+            } catch(RetrofitError e){
+                if (e.isNetworkError())
+                    throw new NoInternetConnectionError();
+                else
+                    throw e;
+            }
         }
     }
 
-    public List<Event> getPagedEvents(int page){
-        return service.getPagedEvents(page);
+    public List<Event> getPagedEvents(int page) throws NoInternetConnectionError {
+        try {
+            return service.getPagedEvents(page);
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
+        }
     }
 
-    public Event getEventWithId(int id) throws IOException, ClassNotFoundException {
+    public Event getEventWithId(int id) throws IOException, ClassNotFoundException, NoInternetConnectionError {
         if(isCached("events")){
             List<Event> events = (List<Event>)getCache("events");
             for (Event event : events) {
@@ -169,7 +234,14 @@ public class CityRootsWebInterfaceImpl {
                     return event;
             }
         }
-        return service.getEventWithId(id);
+        try {
+            return service.getEventWithId(id);
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
+        }
     }
 
     public void signup(String email,
@@ -178,17 +250,31 @@ public class CityRootsWebInterfaceImpl {
                        String firstname,
                        String surname,
                        char gender,
-                       String dateOfBirth){
-        service.signup(email, username, password, firstname, surname, gender, dateOfBirth);
+                       String dateOfBirth) throws NoInternetConnectionError {
+        try {
+            service.signup(email, username, password, firstname, surname, gender, dateOfBirth);
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
+        }
     }
 
-    public List<Event> getAds() throws IOException, ClassNotFoundException {
+    public List<Event> getAds() throws IOException, ClassNotFoundException, NoInternetConnectionError {
         if(isCached("ads")){
             return (List<Event>)getCache("ads");
         }
-        List<Event> events = service.getAds("PT");
-        cache("ads", events);
-        return events;
+        try {
+            List<Event> events = service.getAds("PT");
+            cache("ads", events);
+            return events;
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
+        }
     }
 
     public void invalidateCache(){
