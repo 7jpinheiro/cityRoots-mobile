@@ -29,6 +29,7 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.uminho.uce15.cityroots.data.Attraction;
 import com.uminho.uce15.cityroots.data.Comment;
@@ -81,6 +82,13 @@ public class DetalhesPois extends ActionBarActivity {
             ((ScrollView)findViewById(R.id.myScrollView)).setVisibility(View.GONE);
             ((LinearLayout)findViewById(R.id.commentLayout)).setVisibility(View.VISIBLE);
             ((ListView)findViewById(R.id.commentList)).setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void doComment(View view){
+        String comment = ((TextView) findViewById(R.id.myComment)).getText().toString();
+        if( !comment.equals("") ){
+
         }
     }
 
