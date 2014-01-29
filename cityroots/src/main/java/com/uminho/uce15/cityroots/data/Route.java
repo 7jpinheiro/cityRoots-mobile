@@ -8,11 +8,16 @@ public class Route implements Serializable {
     private int id;
     private String name;
     private String description;
-    private List<Attraction> attractions;
-    private List<Event> events;
-    private List<Service> services;
+    private List<RouteAttraction> attractions;
+    private List<RouteEvent> events;
+    private List<RouteService> services;
 
-    public Route(int id, String name, String description, List<Attraction> attractions, List<Event> events, List<Service> services) {
+    public Route(int id,
+                 String name,
+                 String description,
+                 List<RouteAttraction> attractions,
+                 List<RouteEvent> events,
+                 List<RouteService> services) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -45,27 +50,27 @@ public class Route implements Serializable {
         this.description = description;
     }
 
-    public List<Attraction> getAttractions() {
+    public List<RouteAttraction> getAttractions() {
         return attractions;
     }
 
-    public void setAttractions(List<Attraction> attractions) {
+    public void setAttractions(List<RouteAttraction> attractions) {
         this.attractions = attractions;
     }
 
-    public List<Event> getEvents() {
+    public List<RouteEvent> getEvents() {
         return events;
     }
 
-    public void setEvents(List<Event> events) {
+    public void setEvents(List<RouteEvent> events) {
         this.events = events;
     }
 
-    public List<Service> getServices() {
+    public List<RouteService> getServices() {
         return services;
     }
 
-    public void setServices(List<Service> services) {
+    public void setServices(List<RouteService> services) {
         this.services = services;
     }
 }

@@ -10,6 +10,7 @@ import com.uminho.uce15.cityroots.data.Attraction;
 import com.uminho.uce15.cityroots.data.Event;
 import com.uminho.uce15.cityroots.data.Poi;
 import com.uminho.uce15.cityroots.data.Route;
+import com.uminho.uce15.cityroots.data.RouteAttraction;
 import com.uminho.uce15.cityroots.data.Service;
 
 import java.io.IOException;
@@ -127,11 +128,11 @@ public class DataProvider {
             noInternetConnectionError.printStackTrace();
         }
 
-        ArrayList<Attraction> list = new ArrayList();
-        list =(ArrayList<Attraction>) res.getAttractions();
+        ArrayList<RouteAttraction> list = new ArrayList();
+        list =(ArrayList<RouteAttraction>) res.getAttractions();
 
 
-        return list;
+        return null;
     }
 
     public List<Service> getServices(){
