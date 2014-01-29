@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.uminho.uce15.cityroots.data.Event;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lgomes on 28-01-2014.
@@ -28,10 +29,10 @@ public class AdsListview extends Fragment {
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
-            Event event = new Event("Braga",null,null,null,null,null,null,0,0,true,0,null,true,null,null,0,null,0,null,null,null,null,null);
+            DataProvider provider = new DataProvider(getActivity().getApplicationContext()) ;
 
-            ArrayList lista = new ArrayList();
-            lista.add(event);
+            List<Event> lista = new ArrayList<Event>();
+            lista = provider.getEvents("Anuncio");
             ListAdapter adapter = new ListAdapter(getActivity(), lista);
             list.setAdapter(adapter);
             list.invalidate();
@@ -40,9 +41,10 @@ public class AdsListview extends Fragment {
         @Override
         public void onResume() {
             super.onResume();
-            ArrayList lista = new ArrayList();
-            Event event = new Event("Braga",null,null,null,null,null,null,0,0,true,0,null,true,null,null,0,null,0,null,null,null,null,null);
-            lista.add(event);
+            DataProvider provider = new DataProvider(getActivity().getApplicationContext()) ;
+
+            List<Event> lista = new ArrayList<Event>();
+            lista = provider.getEvents("Anuncio");
             ListAdapter adapter = new ListAdapter(getActivity(), lista);
             list.setAdapter(adapter);
             list.invalidate();

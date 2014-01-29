@@ -36,6 +36,8 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+            noInternetConnectionError.printStackTrace();
         }
         return res;
     }
@@ -49,6 +51,8 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+            noInternetConnectionError.printStackTrace();
         }
 
         List<Attraction> res = new ArrayList<Attraction>();
@@ -69,7 +73,29 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+            noInternetConnectionError.printStackTrace();
         }
+        return res;
+    }
+
+    public List<Event> getEvents(String tipo){
+
+        List<Event> tmp = new ArrayList<Event>();
+        try {
+            tmp = cityRootsWebInterface.getEvents();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        List<Event> res = new ArrayList<Event>();
+        for(Event event : tmp){
+            if( event.getType().contains(tipo) )
+                res.add(event);
+        }
+
         return res;
     }
 
@@ -81,12 +107,27 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+            noInternetConnectionError.printStackTrace();
         }
         return res;
     }
 
-    public List<Poi> getPontosRoute(int id){
-        return new ArrayList<Poi>();
+    public ArrayList<Attraction> getPontosRoute(int id){
+        Route res = null;
+        try {
+            res = cityRootsWebInterface.getRouteWithId(id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Attraction> list = new ArrayList();
+        list =(ArrayList<Attraction>) res.getAttractions();
+
+
+        return list;
     }
 
     public List<Service> getServices(){
@@ -97,7 +138,29 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+            noInternetConnectionError.printStackTrace();
         }
+        return res;
+    }
+
+    public List<Service> getServices(String tipo){
+
+        List<Service> tmp = new ArrayList<Service>();
+        try {
+            tmp = cityRootsWebInterface.getServices();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        List<Service> res = new ArrayList<Service>();
+        for(Service service : tmp){
+            if( service.getType().contains(tipo) )
+                res.add(service);
+        }
+
         return res;
     }
 
@@ -109,6 +172,8 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+            noInternetConnectionError.printStackTrace();
         }
         return res;
     }
@@ -123,6 +188,8 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+            noInternetConnectionError.printStackTrace();
         }
         return res;
     }
@@ -135,6 +202,8 @@ public class DataProvider {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+            noInternetConnectionError.printStackTrace();
         }
         return res;
 
