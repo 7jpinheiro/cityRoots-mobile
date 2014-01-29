@@ -57,7 +57,7 @@
     <string name="comment">Comentar</string>
     <string name="search_label">Search</string>
     <string name="title_activity_search">Search</string>
-    <string name="Search">Search</string>
+    <string name="deals">Deals</string>
     <string name="title_activity_list_roteiros">ListRoteiros</string>
 
 </resources>
