@@ -4,7 +4,9 @@ package com.uminho.uce15.cityroots;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -31,6 +33,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.SharedPreferencesTokenCachingStrategy;
 import com.uminho.uce15.cityroots.data.Attraction;
 import com.uminho.uce15.cityroots.data.Comment;
 import com.uminho.uce15.cityroots.data.Event;
@@ -42,6 +45,7 @@ import java.util.List;
 
 public class DetalhesPois extends ActionBarActivity {
     private boolean commentsVisible;
+    int poi_id = -1;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +54,7 @@ public class DetalhesPois extends ActionBarActivity {
         Intent i = getIntent();
 
         int id = i.getIntExtra("id",0);
+        poi_id = id;
         int poi_type = i.getIntExtra("type", 0);
 
         InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -88,7 +93,13 @@ public class DetalhesPois extends ActionBarActivity {
     public void doComment(View view){
         String comment = ((TextView) findViewById(R.id.myComment)).getText().toString();
         if( !comment.equals("") ){
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            String userid = prefs.getString("userid", "visitor");
+            String service = prefs.getString("service", "google");
 
+            Log.d("Comment", "PoI " + poi_id + " - "+userid + "@"+service+": " + comment);
+
+            ((TextView) findViewById(R.id.myComment)).setText("");
         }
     }
 
@@ -178,8 +189,19 @@ public class DetalhesPois extends ActionBarActivity {
                     break;
             }
 
-            String photoPath = poi.getPhotos().get(0);
-            new DownloadImageTask((ImageView)findViewById(R.id.listelem_img), (ProgressBar)findViewById(R.id.loadingImg)).execute(photoPath);
+            ImageView imageView = (ImageView)findViewById(R.id.listelem_img);
+            ProgressBar loadBar = (ProgressBar)findViewById(R.id.loadingImg);
+
+            try{
+                String photo_path = poi.getPhotos().get(0);
+                new DownloadImageTask(imageView, loadBar).execute(photo_path);
+            }
+            catch(Exception e){
+                imageView.setImageResource(R.drawable.abc_ab_bottom_solid_dark_holo);
+            }
+
+            //String photoPath = poi.getPhotos().get(0);
+            //new DownloadImageTask((ImageView)findViewById(R.id.listelem_img), (ProgressBar)findViewById(R.id.loadingImg)).execute(photoPath);
 
             lbl_name.setText(poi.getName());
             lbl_description.setText(poi.getDescription());
