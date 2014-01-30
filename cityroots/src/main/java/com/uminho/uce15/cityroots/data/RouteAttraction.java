@@ -1,6 +1,8 @@
 package com.uminho.uce15.cityroots.data;
 
-public class RouteAttraction {
+import java.io.Serializable;
+
+public class RouteAttraction implements Serializable {
 
     private int order;
     private Attraction attraction;

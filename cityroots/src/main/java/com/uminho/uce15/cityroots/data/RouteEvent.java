@@ -1,6 +1,8 @@
 package com.uminho.uce15.cityroots.data;
 
-public class RouteEvent {
+import java.io.Serializable;
+
+public class RouteEvent implements Serializable {
 
     private int order;
     private Event event;

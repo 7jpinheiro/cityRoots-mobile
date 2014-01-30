@@ -1,6 +1,8 @@
 package com.uminho.uce15.cityroots.data;
 
-public class RouteService {
+import java.io.Serializable;
+
+public class RouteService implements Serializable {
 
     private int order;
     private Service service;

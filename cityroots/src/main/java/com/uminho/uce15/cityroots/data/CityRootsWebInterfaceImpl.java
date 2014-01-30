@@ -41,6 +41,7 @@ public class CityRootsWebInterfaceImpl {
         File file = new File(outputDir, filename);
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
         oos.writeObject(object);
+        oos.flush();
         oos.close();
     }
 
