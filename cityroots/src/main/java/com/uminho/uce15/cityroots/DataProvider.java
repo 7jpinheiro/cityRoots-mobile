@@ -131,8 +131,14 @@ public class DataProvider {
         ArrayList<RouteAttraction> list = new ArrayList();
         list =(ArrayList<RouteAttraction>) res.getAttractions();
 
+        ArrayList<Attraction> list_result = new ArrayList<Attraction>();
 
-        return null;
+        for(RouteAttraction rattraction : list)
+            list_result.add(rattraction.getAttraction());
+
+
+
+        return list_result;
     }
 
     public List<Service> getServices(){

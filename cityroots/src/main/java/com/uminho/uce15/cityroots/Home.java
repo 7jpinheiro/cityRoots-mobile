@@ -2,6 +2,8 @@ package com.uminho.uce15.cityroots;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
@@ -19,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -87,8 +90,10 @@ public class Home extends ActionBarActivity implements ActionBar.TabListener {
     }
 
     public void clickListarRotas(View view){
-        Intent intent = new Intent(this, ListRoteiros.class);
-        startActivity(intent);
+
+            Intent intent = new Intent(this, ListRoteiros.class);
+            startActivity(intent);
+
     }
 
     public void clickCategory(View view){

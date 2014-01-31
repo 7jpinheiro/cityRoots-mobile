@@ -41,6 +41,7 @@ import com.uminho.uce15.cityroots.data.Poi;
 import com.uminho.uce15.cityroots.data.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DetalhesPois extends ActionBarActivity {
@@ -166,9 +167,11 @@ public class DetalhesPois extends ActionBarActivity {
                     break;
                 case 1:
                     poi = dp.getEvent(id);
-                    String priceA = "Não tem";
-                    if( poi != null ){
+                    String priceA= "-";
+                    if( poi != null){
                         priceA = ((Event) poi).getPrice();
+                        if(priceA == null || priceA.equals(""))
+                            priceA ="-";
                     }
                     lbl_price.setText(priceA);
                     lbl_start.setText(((Event)poi).getStart());
@@ -212,10 +215,13 @@ public class DetalhesPois extends ActionBarActivity {
             lbl_transport.setText(poi.getTransport());
 
 
-
-            CommentAdapter ca = new CommentAdapter(activity,poi.getComments());
-            ListView list = (ListView) findViewById(R.id.commentList);
-            list.setAdapter(ca);
+            ArrayList<Comment> list_comments = new ArrayList<Comment>();
+            list_comments = (ArrayList<Comment>) poi.getComments();
+            if(list_comments!=null){
+                CommentAdapter ca = new CommentAdapter(activity,list_comments);
+                ListView list = (ListView) findViewById(R.id.commentList);
+            }
+            else Toast.makeText(activity,"Não existem comentarios",10);
         }
 
     }

@@ -133,7 +133,7 @@ public class CityRootsWebInterfaceImpl {
     }
 
     public Attraction getAttractionWithId(int id) throws IOException, ClassNotFoundException, NoInternetConnectionError {
-        if(isCached("attraction")){
+        if(isCached("attractions")){
             List<Attraction> attractions = (List<Attraction>)getCache("attractions");
             for (Attraction attraction : attractions) {
                 if(attraction.getId() == id)
