@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.facebook.SharedPreferencesTokenCachingStrategy;
 import com.uminho.uce15.cityroots.data.Attraction;
+import com.uminho.uce15.cityroots.data.CityRootsWebInterfaceImpl;
 import com.uminho.uce15.cityroots.data.Comment;
 import com.uminho.uce15.cityroots.data.Event;
 import com.uminho.uce15.cityroots.data.Poi;
@@ -47,6 +48,7 @@ import java.util.List;
 public class DetalhesPois extends ActionBarActivity {
     private boolean commentsVisible;
     int poi_id = -1;
+    int poi_type =-1;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,7 @@ public class DetalhesPois extends ActionBarActivity {
 
         int id = i.getIntExtra("id",0);
         poi_id = id;
-        int poi_type = i.getIntExtra("type", 0);
+        poi_type = i.getIntExtra("type", 0);
 
         InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mgr.hideSoftInputFromWindow(findViewById(R.id.myComment).getWindowToken(), 0);
@@ -98,8 +100,14 @@ public class DetalhesPois extends ActionBarActivity {
             String userid = prefs.getString("userid", "visitor");
             String service = prefs.getString("service", "google");
 
-            Log.d("Comment", "PoI " + poi_id + " - "+userid + "@"+service+": " + comment);
-
+            //Log.d("Comment", "PoI " + poi_id + " - "+userid + "@"+service+": " + comment);
+            DataProvider dp = new DataProvider(getApplicationContext());
+            try {
+                dp.sendComment(""+poi_id,userid,comment,5,poi_type);
+            } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+                noInternetConnectionError.printStackTrace();
+                Toast.makeText(getApplicationContext(),"No Internet Connection", Toast.LENGTH_LONG).show();
+            }
             ((TextView) findViewById(R.id.myComment)).setText("");
         }
     }
@@ -215,13 +223,13 @@ public class DetalhesPois extends ActionBarActivity {
             lbl_transport.setText(poi.getTransport());
 
 
-            ArrayList<Comment> list_comments = new ArrayList<Comment>();
-            list_comments = (ArrayList<Comment>) poi.getComments();
-            if(list_comments!=null){
-                CommentAdapter ca = new CommentAdapter(activity,list_comments);
-                ListView list = (ListView) findViewById(R.id.commentList);
-            }
-            else Toast.makeText(activity,"Não existem comentarios",10);
+
+
+
+            CommentAdapter ca = new CommentAdapter(activity,poi.getComments());
+            ListView list = (ListView) findViewById(R.id.commentList);
+            list.setAdapter(ca);
+
         }
 
     }

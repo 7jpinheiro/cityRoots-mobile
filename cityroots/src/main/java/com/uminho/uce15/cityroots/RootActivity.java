@@ -25,7 +25,7 @@ public class RootActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(RootActivity.this);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String user = prefs.getString("userid", "");
         Intent intent;
         if(checkNetworkState(getApplicationContext())){

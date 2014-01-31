@@ -236,4 +236,18 @@ public class DataProvider {
         return res;
     }
 
+    public void sendComment(String poi_id, String user_id, String comment, int rating,int poi_type) throws CityRootsWebInterfaceImpl.NoInternetConnectionError {
+        switch (poi_type){
+            case 0:
+                cityRootsWebInterface.commentAttraction(poi_id,user_id,comment,rating);
+            break;
+            case 1:
+                cityRootsWebInterface.commentEvent(poi_id,user_id,comment,rating);
+            break;
+            case 2:
+                cityRootsWebInterface.commentService(poi_id, user_id, comment, rating);
+            break;
+        }
+    }
+
 }
