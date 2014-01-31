@@ -2,71 +2,55 @@ package com.uminho.uce15.cityroots;
 /**
  * Created by John on 21-01-2014.
  */
-import org.w3c.dom.Document;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.graphics.Color;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.Toast;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
-
-import android.content.IntentSender;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.StrictMode;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.widget.SlidingPaneLayout;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.ViewGroup;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.uminho.uce15.cityroots.data.Attraction;
-import com.uminho.uce15.cityroots.data.Event;
 import com.uminho.uce15.cityroots.data.Poi;
-import com.uminho.uce15.cityroots.data.Route;
-import com.uminho.uce15.cityroots.data.Service;
 
-import android.widget.ListView;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import org.w3c.dom.Document;
+
+import java.util.ArrayList;
 
 public class DrawRoute extends ActionBarActivity implements LocationListener,
         GooglePlayServicesClient.ConnectionCallbacks,GooglePlayServicesClient.OnConnectionFailedListener{
@@ -130,50 +114,6 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,
         Integer id= Integer.valueOf(intent.getStringExtra("id"));
 
         lista=(ArrayList<Attraction>)provider.getPontosRoute((int)id);
-        //lista = (ArrayList<Event>) provider.getEvents();
-
-        /*Bundle b = getIntent().getExtras();
-        int value = b.getInt("id_category");
-
-        switch (value){
-            case R.id.poi:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
-                break;
-            case R.id.routes:
-                lista = (ArrayList<Route>) provider.getRoutes();
-                break;
-            case R.id.events:
-                lista =(ArrayList<Event>) provider.getEvents();
-                break;
-            case R.id.tpa:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
-                break;
-            case R.id.gastronomy:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
-                break;
-            case R.id.activities:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
-                break;
-            case R.id.outdoor:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
-                break;
-            case R.id.nightlife:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
-                break;
-            case R.id.hotels:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
-                break;
-            case R.id.transport:
-                lista = (ArrayList<Service>) provider.getServices();
-                break;
-            case R.id.afd:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
-                break;
-            case R.id.contacts:
-                lista = (ArrayList<Event>) provider.getEvents();
-                break;
-        }
-        */
 
         list=(ListView)findViewById(R.id.list);
         list.setEmptyView(findViewById(android.R.id.empty));
@@ -223,7 +163,10 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,
         if(theMap != null){
             //ok - proceed
             theMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            updatePlaces();
+            if(checkNetworkState(DrawRoute.this)){
+                updatePlaces();
+            }
+            else Toast.makeText(DrawRoute.this,"No Connection",Toast.LENGTH_LONG).show();
         }
 
         gps = new GPSTracker(this);
@@ -687,5 +630,15 @@ public class DrawRoute extends ActionBarActivity implements LocationListener,
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return mDialog;
         }
+    }
+
+    public static boolean checkNetworkState(Context context) {
+        ConnectivityManager conMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo infos[] = conMgr.getAllNetworkInfo();
+        for (NetworkInfo info : infos) {
+            if (info.getState() == NetworkInfo.State.CONNECTED)
+                return true;
+        }
+        return false;
     }
 }

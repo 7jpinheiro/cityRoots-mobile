@@ -75,7 +75,7 @@ public class ListRoteiros extends ActionBarActivity {
 
             TextView route_name = (TextView) rowView.findViewById(R.id.listelem_name);
             route_name.setText(((Route) lista.get(position)).getName());
-            System.out.println(((Route)lista.get(position)).getName());
+
 
             return rowView;
         }
