@@ -44,7 +44,7 @@ public class AdsListview extends Fragment {
             DataProvider provider = new DataProvider(getActivity().getApplicationContext()) ;
 
             List<Event> lista = new ArrayList<Event>();
-            lista = provider.getEvents("Anuncio");
+            lista = provider.getAds();
             ListAdapter adapter = new ListAdapter(getActivity(), lista);
             list.setAdapter(adapter);
             list.invalidate();

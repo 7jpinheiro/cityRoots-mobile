@@ -222,8 +222,17 @@ public class DataProvider {
 
     }
 
-    public ArrayList<Event> getAds(){
-        ArrayList<Event> res = new ArrayList<Event>();
+    public List<Event> getAds(){
+        List<Event> res = null;
+        try {
+            res = cityRootsWebInterface.getAds();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+            noInternetConnectionError.printStackTrace();
+        }
         return res;
     }
 

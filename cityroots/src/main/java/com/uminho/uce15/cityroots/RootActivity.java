@@ -1,7 +1,10 @@
 package com.uminho.uce15.cityroots;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -14,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
+import com.uminho.uce15.cityroots.data.CityRootsWebInterfaceImpl;
+
 public class RootActivity extends ActionBarActivity {
 
     @Override
@@ -23,7 +28,16 @@ public class RootActivity extends ActionBarActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(RootActivity.this);
         String user = prefs.getString("userid", "");
         Intent intent;
-
+        if(checkNetworkState(getApplicationContext())){
+            DataProvider dp = new DataProvider(getApplicationContext());
+            CityRootsWebInterfaceImpl cityRootsWebInterface = new CityRootsWebInterfaceImpl(getApplicationContext());
+            cityRootsWebInterface.invalidateCache();
+            dp.getAttractions();
+            dp.getServices();
+            dp.getEvents();
+            dp.getRoutes();
+            dp.getAds();
+        }
         if( user.equals("") ){
             intent = new Intent(this, Login.class);
         }else{
@@ -32,5 +46,15 @@ public class RootActivity extends ActionBarActivity {
 
         startActivity(intent);
         finish();
+    }
+
+    public static boolean checkNetworkState(Context context) {
+        ConnectivityManager conMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo infos[] = conMgr.getAllNetworkInfo();
+        for (NetworkInfo info : infos) {
+            if (info.getState() == NetworkInfo.State.CONNECTED)
+                return true;
+        }
+        return false;
     }
 }
