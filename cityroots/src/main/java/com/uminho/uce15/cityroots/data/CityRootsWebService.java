@@ -46,15 +46,36 @@ public interface CityRootsWebService {
     Route getRouteWithId(@Path("id") int id);
 
     @GET("/apis.json?registar=1")
-    void signup(@Query("email") String email,
-                @Query("username") String username,
-                @Query("password") String password,
-                @Query("firstname") String firstname,
-                @Query("surname") String surname,
-                @Query("gender") char gender,
-                @Query("dateofbirth") String dateOfBirth);
+    Identification signup(@Query("email") String email,
+               @Query("username") String username,
+               @Query("firstname") String firstname,
+               @Query("surname") String surname);
 
     @GET("/apis.json?anun=1")
     List<Event> getAds(@Query("lang") String language);
+
+    @GET("/apis.json?co=1&attr=1")
+    void commentAttraction(@Query("user") String user,
+                           @Query("id") String id,
+                           @Query("comentario") String comment,
+                           @Query("rating") int rating);
+
+    @GET("/apis.json?co=1&event=1")
+    void commentEvent(@Query("user") String user,
+                      @Query("id") String id,
+                      @Query("comentario") String comment,
+                      @Query("rating") int rating);
+
+    @GET("/apis.json?co=1&serv=1")
+    void commentService(@Query("user") String user,
+                        @Query("id") String id,
+                        @Query("comentario") String comment,
+                        @Query("rating") int rating);
+
+    @GET("/apis.json?co=1&itin=1")
+    void commentRoute(@Query("user") String user,
+                      @Query("id") String id,
+                      @Query("comentario") String comment,
+                      @Query("rating") int rating);
 
 }

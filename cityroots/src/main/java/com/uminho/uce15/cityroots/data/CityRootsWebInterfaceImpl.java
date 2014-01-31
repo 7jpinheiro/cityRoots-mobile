@@ -245,15 +245,13 @@ public class CityRootsWebInterfaceImpl {
         }
     }
 
-    public void signup(String email,
-                       String username,
-                       String password,
-                       String firstname,
-                       String surname,
-                       char gender,
-                       String dateOfBirth) throws NoInternetConnectionError {
+    public int signup(String email,
+                      String service_id,
+                      String firstname,
+                      String surname) throws NoInternetConnectionError {
         try {
-            service.signup(email, username, password, firstname, surname, gender, dateOfBirth);
+            Identification result =  service.signup(email, service_id, firstname, surname);
+            return result.getId();
         } catch(RetrofitError e){
             if (e.isNetworkError())
                 throw new NoInternetConnectionError();
@@ -270,6 +268,50 @@ public class CityRootsWebInterfaceImpl {
             List<Event> events = service.getAds("PT");
             cache("ads", events);
             return events;
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
+        }
+    }
+
+    public void commentAttraction(String attraction_id, String user_id, String comment, int rating) throws NoInternetConnectionError {
+        try {
+            service.commentAttraction(user_id, attraction_id, comment, rating);
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
+        }
+    }
+
+    public void commentEvent(String event_id, String user_id, String comment, int rating) throws NoInternetConnectionError {
+        try {
+            service.commentEvent(user_id, event_id, comment, rating);
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
+        }
+    }
+
+    public void commentService(String service_id, String user_id, String comment, int rating) throws NoInternetConnectionError {
+        try {
+            service.commentService(user_id, service_id, comment, rating);
+        } catch(RetrofitError e){
+            if (e.isNetworkError())
+                throw new NoInternetConnectionError();
+            else
+                throw e;
+        }
+    }
+
+    public void commentRoute(String route_id, String user_id, String comment, int rating) throws NoInternetConnectionError {
+        try {
+            service.commentRoute(user_id, route_id, comment, rating);
         } catch(RetrofitError e){
             if (e.isNetworkError())
                 throw new NoInternetConnectionError();
