@@ -250,4 +250,10 @@ public class DataProvider {
         }
     }
 
+    public int signup(String email,String service_id,String firstname,String surname) throws CityRootsWebInterfaceImpl.NoInternetConnectionError {
+
+        return cityRootsWebInterface.signup(email,service_id,firstname,surname);
+
+    }
+
 }
