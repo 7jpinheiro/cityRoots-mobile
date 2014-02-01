@@ -55,27 +55,27 @@ public interface CityRootsWebService {
     List<Event> getAds(@Query("lang") String language);
 
     @GET("/apis.json?co=1&attr=1")
-    void commentAttraction(@Query("user") String user,
+    CommentResponse commentAttraction(@Query("user") String user,
                            @Query("id") String id,
                            @Query("comentario") String comment,
                            @Query("rating") int rating);
 
-    @GET("/apis.json?co=1&event=1")
-    void commentEvent(@Query("user") String user,
-                      @Query("id") String id,
-                      @Query("comentario") String comment,
-                      @Query("rating") int rating);
+    @GET("/apis.json?co=1&even=1")
+    CommentResponse commentEvent(@Query("user") String user,
+                                 @Query("id") String id,
+                                 @Query("comentario") String comment,
+                                 @Query("rating") int rating);
 
     @GET("/apis.json?co=1&serv=1")
-    void commentService(@Query("user") String user,
-                        @Query("id") String id,
-                        @Query("comentario") String comment,
-                        @Query("rating") int rating);
+    CommentResponse commentService(@Query("user") String user,
+                                   @Query("id") String id,
+                                   @Query("comentario") String comment,
+                                   @Query("rating") int rating);
 
     @GET("/apis.json?co=1&itin=1")
-    void commentRoute(@Query("user") String user,
-                      @Query("id") String id,
-                      @Query("comentario") String comment,
-                      @Query("rating") int rating);
+    CommentResponse commentRoute(@Query("user") String user,
+                                 @Query("id") String id,
+                                 @Query("comentario") String comment,
+                                 @Query("rating") int rating);
 
 }

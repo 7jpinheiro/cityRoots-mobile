@@ -97,7 +97,7 @@ public class DetalhesPois extends ActionBarActivity {
         String comment = ((TextView) findViewById(R.id.myComment)).getText().toString();
         if( !comment.equals("") ){
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            String userid = prefs.getString("userid", "visitor");
+            String userid = prefs.getString("userid", "jprophet");
             String service = prefs.getString("service", "google");
 
             //Log.d("Comment", "PoI " + poi_id + " - "+userid + "@"+service+": " + comment);
