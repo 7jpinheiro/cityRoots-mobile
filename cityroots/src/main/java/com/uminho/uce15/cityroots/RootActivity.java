@@ -61,13 +61,23 @@ public class RootActivity extends ActionBarActivity {
 
             this.user = user;
             this.context = context;
-            ((TextView)findViewById(R.id.textView)).setText("Internet Connection Detected!");
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    ((TextView)findViewById(R.id.textView)).setText("Internet Connection Detected!");
+                }
+            });
+
 
         }
 
         protected String doInBackground(String... urls) {
             if(checkNetworkState(getApplicationContext())){
-                ((TextView)findViewById(R.id.textView2)).setText("Loading Data ...");
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        ((TextView)findViewById(R.id.textView2)).setText("Loading Data ...");
+                    }
+                });
+
                 DataProvider dp = new DataProvider(getApplicationContext());
                 CityRootsWebInterfaceImpl cityRootsWebInterface = new CityRootsWebInterfaceImpl(getApplicationContext());
                 cityRootsWebInterface.invalidateCache();
@@ -83,7 +93,12 @@ public class RootActivity extends ActionBarActivity {
 
         protected void onPostExecute(String result) {
             Intent intent;
-            ((TextView)findViewById(R.id.textView3)).setText("Done");
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    ((TextView)findViewById(R.id.textView3)).setText("Done");
+                }
+            });
+
             if( user.equals("") ){
                 intent = new Intent(context, Login.class);
             }else{
