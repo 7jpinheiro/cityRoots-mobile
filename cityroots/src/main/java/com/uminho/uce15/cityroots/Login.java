@@ -59,7 +59,7 @@ public class Login extends Activity implements View.OnClickListener,
             String user_id = "";
             DataProvider dp = new DataProvider(getApplicationContext());
             try {
-                user_id=""+dp.signup(fbUsername,"facebook",fbFirstname,fbLastname);
+                dp.signup(fbUsername,fbUsername,fbFirstname,fbLastname);
                 user_id = fbUsername;
             } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
                 noInternetConnectionError.printStackTrace();
@@ -150,11 +150,12 @@ public class Login extends Activity implements View.OnClickListener,
         String user_id = "";
         DataProvider dp = new DataProvider(getApplicationContext());
         try {
-            user_id=""+dp.signup(email,"google",first_name,last_name);
+            dp.signup(email,email,first_name,last_name);
             user_id = email;
         } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
             noInternetConnectionError.printStackTrace();
         }
+
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.edit().putString("userid", user_id).commit();
