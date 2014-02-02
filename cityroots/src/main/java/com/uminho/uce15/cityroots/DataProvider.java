@@ -11,6 +11,8 @@ import com.uminho.uce15.cityroots.data.Event;
 import com.uminho.uce15.cityroots.data.Poi;
 import com.uminho.uce15.cityroots.data.Route;
 import com.uminho.uce15.cityroots.data.RouteAttraction;
+import com.uminho.uce15.cityroots.data.RouteEvent;
+import com.uminho.uce15.cityroots.data.RouteService;
 import com.uminho.uce15.cityroots.data.Service;
 
 import java.io.IOException;
@@ -116,7 +118,7 @@ public class DataProvider {
         return res;
     }
 
-    public ArrayList<Attraction> getPontosRoute(int id){
+    public ArrayList<Poi> getPontosRoute(int id){
         Route res = null;
         try {
             res = cityRootsWebInterface.getRouteWithId(id);
@@ -128,16 +130,24 @@ public class DataProvider {
             noInternetConnectionError.printStackTrace();
         }
 
-        ArrayList<RouteAttraction> list = new ArrayList();
-        list =(ArrayList<RouteAttraction>) res.getAttractions();
+        List<RouteAttraction> list_attractions = new ArrayList();
+        List<RouteEvent> list_events = new ArrayList();
+        List<RouteService> list_services = new ArrayList();
 
-        ArrayList<Attraction> list_result = new ArrayList<Attraction>();
+        list_attractions =(ArrayList<RouteAttraction>) res.getAttractions();
+        list_events =(ArrayList<RouteEvent>) res.getEvents();
+        list_services =(ArrayList<RouteService>) res.getServices();
 
-        for(RouteAttraction rattraction : list)
+        ArrayList<Poi> list_result = new ArrayList<Poi>();
+
+
+        for(RouteAttraction rattraction : list_attractions)
             list_result.add(rattraction.getAttraction());
-
-
-
+        for(RouteEvent revent : list_events)
+            list_result.add(revent.getEvent());
+        for(RouteService rservice : list_services)
+            list_result.add(rservice.getService());
+       
         return list_result;
     }
 

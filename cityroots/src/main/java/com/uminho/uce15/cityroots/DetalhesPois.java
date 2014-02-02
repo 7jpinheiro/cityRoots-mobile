@@ -3,7 +3,9 @@
 package com.uminho.uce15.cityroots;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
@@ -63,13 +65,108 @@ public class DetalhesPois extends ActionBarActivity {
         InputMethodManager mgr = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mgr.hideSoftInputFromWindow(findViewById(R.id.myComment).getWindowToken(), 0);
 
-        LoadDetails loadD = new LoadDetails(DetalhesPois.this,poi_type);
 
-        loadD.execute(id);
-
+        ((RatingBar)findViewById(R.id.comment_ratingBar)).setVisibility(View.GONE);
         commentsVisible = false;
 
+        RatingBar ratBar = (RatingBar) findViewById(R.id.ratingBar1);
 
+        // Poi Labels
+
+        TextView lbl_description = (TextView) findViewById(R.id.description);
+        TextView lbl_schedule = (TextView) findViewById(R.id.schedule);
+        TextView lbl_address = (TextView) findViewById(R.id.address);
+        TextView lbl_price = (TextView) findViewById(R.id.price);
+        TextView lbl_site = (TextView) findViewById(R.id.website);
+        TextView lbl_email = (TextView) findViewById(R.id.email);
+        TextView lbl_transport = (TextView) findViewById(R.id.transport);
+        //Event Labels
+        TextView lbl_start = (TextView) findViewById(R.id.event_start);
+        TextView lbl_end = (TextView) findViewById(R.id.event_end);
+        TextView lbl_organization = (TextView) findViewById(R.id.org);
+        TextView lbl_program = (TextView) findViewById(R.id.event_program);
+
+
+        //Service Label
+        TextView lbl_capacity = (TextView) findViewById(R.id.serv_capacity);
+        TextView lbl_details = (TextView) findViewById(R.id.serv_details);
+
+        LinearLayout lin = (LinearLayout) findViewById(R.id.labels_event);
+        LinearLayout lin1 = (LinearLayout) findViewById(R.id.labels_service);
+
+        //finish loading
+        DataProvider dp = new DataProvider(getApplicationContext());
+        Poi poi = null;
+
+        switch (poi_type){
+            case 0:
+                poi = dp.getAttraction(id);
+                String price = "Não tem";
+                if( poi != null ){
+                    price = ((Attraction) poi).getPrice();
+                }
+                lbl_price.setText(price);
+                lin.setVisibility(View.GONE);
+                lin1.setVisibility(View.GONE);
+                break;
+            case 1:
+                poi = dp.getEvent(id);
+                String priceA= "-";
+                if( poi != null){
+                    priceA = ((Event) poi).getPrice();
+                    if(priceA == null || priceA.equals(""))
+                        priceA ="-";
+                }
+                lbl_price.setText(priceA);
+                lbl_start.setText(((Event)poi).getStart());
+                lbl_end.setText(((Event)poi).getEnd());
+                lbl_organization.setText(((Event)poi).getOrganization());
+                lbl_program.setText(((Event)poi).getProgram());
+
+                ratBar.setVisibility(View.GONE);
+                lin1.setVisibility(View.GONE);
+                break;
+            case 2:
+                poi = dp.getService(id);
+                lbl_capacity.setText(Integer.toString(((Service)poi).getCapacity()));
+                lbl_details.setText(Integer.toString(((Service)poi).getCapacity()));
+
+
+                lbl_price.setVisibility(View.GONE);
+                lin.setVisibility(View.GONE);
+                break;
+        }
+
+
+
+        //String photoPath = poi.getPhotos().get(0);
+        //new DownloadImageTask((ImageView)findViewById(R.id.listelem_img), (ProgressBar)findViewById(R.id.loadingImg)).execute(photoPath);
+
+        //lbl_name.setText(poi.getName());
+        setTitle(poi.getName());
+        lbl_description.setText(poi.getDescription());
+        lbl_schedule.setText(poi.getSchedule());
+        lbl_address.setText(poi.getAddress());
+        lbl_site.setText(poi.getSite());
+        lbl_email.setText(poi.getEmail());
+        lbl_transport.setText(poi.getTransport());
+        ratBar.setRating((float)poi.getRating());
+
+
+        CommentAdapter ca = new CommentAdapter(DetalhesPois.this,poi.getComments());
+        ListView list = (ListView) findViewById(R.id.commentList);
+        list.setAdapter(ca);
+
+        ImageView imageView = (ImageView)findViewById(R.id.listelem_img);
+        ProgressBar loadBar = (ProgressBar)findViewById(R.id.loadingImg);
+
+        try{
+            String photo_path = poi.getPhotos().get(0);
+            new DownloadImageTask(imageView, loadBar).execute(photo_path);
+        }
+        catch(Exception e){
+            imageView.setImageResource(R.drawable.abc_ab_bottom_solid_dark_holo);
+        }
     }
 
     public void toggleComments(View view){
@@ -83,6 +180,7 @@ public class DetalhesPois extends ActionBarActivity {
             ((ScrollView)findViewById(R.id.myScrollView)).setVisibility(View.VISIBLE);
             ((LinearLayout)findViewById(R.id.commentLayout)).setVisibility(View.GONE);
             ((ListView)findViewById(R.id.commentList)).setVisibility(View.GONE);
+            ((RatingBar)findViewById(R.id.comment_ratingBar)).setVisibility(View.GONE);
         }
         else {
             commentsVisible = true;
@@ -90,7 +188,10 @@ public class DetalhesPois extends ActionBarActivity {
             ((ScrollView)findViewById(R.id.myScrollView)).setVisibility(View.GONE);
             ((LinearLayout)findViewById(R.id.commentLayout)).setVisibility(View.VISIBLE);
             ((ListView)findViewById(R.id.commentList)).setVisibility(View.VISIBLE);
+            ((RatingBar)findViewById(R.id.comment_ratingBar)).setVisibility(View.VISIBLE);
         }
+
+
     }
 
     public void doComment(View view){
@@ -105,135 +206,38 @@ public class DetalhesPois extends ActionBarActivity {
             try {
                 dp.sendComment(""+poi_id,userid,comment,5,poi_type);
             } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
-                noInternetConnectionError.printStackTrace();
-                Toast.makeText(getApplicationContext(),"No Internet Connection", Toast.LENGTH_LONG).show();
+               // noInternetConnectionError.printStackTrace();
+                dialogAlert(DetalhesPois.this);
             }
             ((TextView) findViewById(R.id.myComment)).setText("");
         }
     }
 
-    class LoadDetails extends AsyncTask<Integer, Integer, Integer> {
+    public void dialogAlert(Context context){
 
-        Activity activity;
-        int poi_type;
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                context);
 
-        protected LoadDetails(Activity activity,int poi_type){
-            this.activity = activity;
-            this.poi_type = poi_type;
-        }
+        // set title
+        alertDialogBuilder.setTitle("No Internet Connection");
 
-        @Override
-        protected void onPreExecute(){
-            //start loading
-        }
-        @Override
-        protected Integer doInBackground(Integer... id) {
-            return id[0];
-        }
-        @Override
-        protected void onPostExecute(Integer id){
-
-            RatingBar ratBar = (RatingBar) findViewById(R.id.ratingBar1);
-
-            // Poi Labels
-            TextView lbl_name = (TextView) findViewById(R.id.name);
-            TextView lbl_description = (TextView) findViewById(R.id.description);
-            TextView lbl_schedule = (TextView) findViewById(R.id.schedule);
-            TextView lbl_address = (TextView) findViewById(R.id.address);
-            TextView lbl_price = (TextView) findViewById(R.id.price);
-            TextView lbl_site = (TextView) findViewById(R.id.website);
-            TextView lbl_email = (TextView) findViewById(R.id.email);
-            TextView lbl_transport = (TextView) findViewById(R.id.transport);
-            //Event Labels
-            TextView lbl_start = (TextView) findViewById(R.id.event_start);
-            TextView lbl_end = (TextView) findViewById(R.id.event_end);
-            TextView lbl_organization = (TextView) findViewById(R.id.org);
-            TextView lbl_program = (TextView) findViewById(R.id.event_program);
-
-
-            //Service Label
-            TextView lbl_capacity = (TextView) findViewById(R.id.serv_capacity);
-            TextView lbl_details = (TextView) findViewById(R.id.serv_details);
-
-            LinearLayout lin = (LinearLayout) findViewById(R.id.labels_event);
-            LinearLayout lin1 = (LinearLayout) findViewById(R.id.labels_service);
-
-            //finish loading
-            DataProvider dp = new DataProvider(getApplicationContext());
-            Poi poi = null;
-
-            switch (poi_type){
-                case 0:
-                    poi = dp.getAttraction(id);
-                    String price = "Não tem";
-                    if( poi != null ){
-                        price = ((Attraction) poi).getPrice();
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("To comment you need to have an Internet Connection!")
+                .setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        
                     }
-                    lbl_price.setText(price);
-                    lin.setVisibility(View.GONE);
-                    lin1.setVisibility(View.GONE);
-                    break;
-                case 1:
-                    poi = dp.getEvent(id);
-                    String priceA= "-";
-                    if( poi != null){
-                        priceA = ((Event) poi).getPrice();
-                        if(priceA == null || priceA.equals(""))
-                            priceA ="-";
-                    }
-                    lbl_price.setText(priceA);
-                    lbl_start.setText(((Event)poi).getStart());
-                    lbl_end.setText(((Event)poi).getEnd());
-                    lbl_organization.setText(((Event)poi).getOrganization());
-                    lbl_program.setText(((Event)poi).getProgram());
+                });
 
-                    ratBar.setVisibility(View.GONE);
-                    lin1.setVisibility(View.GONE);
-                    break;
-                case 2:
-                    poi = dp.getService(id);
-                    lbl_capacity.setText(Integer.toString(((Service)poi).getCapacity()));
-                    lbl_details.setText(Integer.toString(((Service)poi).getCapacity()));
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
 
-                    lbl_price.setVisibility(View.GONE);
-                    lin.setVisibility(View.GONE);
-                    break;
-            }
-
-            ImageView imageView = (ImageView)findViewById(R.id.listelem_img);
-            ProgressBar loadBar = (ProgressBar)findViewById(R.id.loadingImg);
-
-            try{
-                String photo_path = poi.getPhotos().get(0);
-                new DownloadImageTask(imageView, loadBar).execute(photo_path);
-            }
-            catch(Exception e){
-                imageView.setImageResource(R.drawable.abc_ab_bottom_solid_dark_holo);
-            }
-
-            //String photoPath = poi.getPhotos().get(0);
-            //new DownloadImageTask((ImageView)findViewById(R.id.listelem_img), (ProgressBar)findViewById(R.id.loadingImg)).execute(photoPath);
-
-            lbl_name.setText(poi.getName());
-            lbl_description.setText(poi.getDescription());
-            lbl_schedule.setText(poi.getSchedule());
-            lbl_address.setText(poi.getAddress());
-            lbl_site.setText(poi.getSite());
-            lbl_email.setText(poi.getEmail());
-            lbl_transport.setText(poi.getTransport());
-
-
-
-
-
-            CommentAdapter ca = new CommentAdapter(activity,poi.getComments());
-            ListView list = (ListView) findViewById(R.id.commentList);
-            list.setAdapter(ca);
-
-        }
-
-    }
-
+        // show it
+        alertDialog.show();
+    }  
 
 //Fill Comment List
 
@@ -264,7 +268,7 @@ public class DetalhesPois extends ActionBarActivity {
 
             user_name.setText(((Comment) lista.get(position)).getUsername());
             comment.setText(((Comment)lista.get(position)).getComment());
-            avatar.setImageResource(R.drawable.logo);
+            avatar.setImageResource(R.drawable.avatar);
 
             return rowView;
         }

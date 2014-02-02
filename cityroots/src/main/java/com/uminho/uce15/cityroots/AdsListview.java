@@ -32,10 +32,12 @@ public class AdsListview extends Fragment {
             DataProvider provider = new DataProvider(getActivity().getApplicationContext()) ;
 
             List<Event> lista = new ArrayList<Event>();
-            lista = provider.getEvents("Anuncio");
-            ListAdapter adapter = new ListAdapter(getActivity(), lista);
-            list.setAdapter(adapter);
-            list.invalidate();
+            lista = provider.getAds();
+            if(lista!=null){
+                ListAdapter adapter = new ListAdapter(getActivity(), lista);
+                list.setAdapter(adapter);
+                list.invalidate();
+            }
         }
 
         @Override
@@ -45,9 +47,11 @@ public class AdsListview extends Fragment {
 
             List<Event> lista = new ArrayList<Event>();
             lista = provider.getAds();
-            ListAdapter adapter = new ListAdapter(getActivity(), lista);
-            list.setAdapter(adapter);
-            list.invalidate();
+            if(lista!=null){
+                ListAdapter adapter = new ListAdapter(getActivity(), lista);
+                list.setAdapter(adapter);
+                list.invalidate();
+            }
         }
 
 }
