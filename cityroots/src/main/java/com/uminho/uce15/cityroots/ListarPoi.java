@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
@@ -121,52 +122,70 @@ public class ListarPoi extends ActionBarActivity{
 
         switch (value){
             case R.id.poi:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
-                type_poi = 0;
+                lista = new ArrayList<Attraction>();
+                lista =(ArrayList<Attraction>) provider.getAttractions();
+
                 break;
             case R.id.routes:
+                lista = new ArrayList<Route>();
                 lista = (ArrayList<Route>) provider.getRoutes();
-                type_poi = -1;
                 break;
             case R.id.events:
                 lista =(ArrayList<Event>) provider.getEvents();
-                type_poi = 1;
                 break;
             case R.id.tpa:
-                lista = (ArrayList<Attraction>) provider.getAttractions("Tradicional");
-                type_poi = 0;
+                lista = new ArrayList<Poi>();
+                lista.addAll((ArrayList<Attraction>) provider.getAttractions("Tradicional"));
+                lista.addAll((ArrayList<Event>)provider.getEvents("Tradicional"));
+                lista.addAll((ArrayList<Service>)provider.getServices("Tradicional"));
                 break;
             case R.id.gastronomy:
-                lista = (ArrayList<Attraction>) provider.getAttractions("Gastronomia");
-                type_poi = 0;
+                lista = new ArrayList<Poi>();
+                lista.addAll((ArrayList<Attraction>)provider.getAttractions("Gastronomia"));
+                lista.addAll((ArrayList<Event>)provider.getEvents("Gastronomia"));
+                lista.addAll((ArrayList<Service>)provider.getServices("Gastronomia"));
                 break;
             case R.id.activities:
-                lista = (ArrayList<Attraction>) provider.getAttractions();
-                type_poi = 0;
+                lista = new ArrayList<Poi>();
+                lista.addAll((ArrayList<Attraction>)provider.getAttractions("Divertimento"));
+                lista.addAll((ArrayList<Event>)provider.getEvents("Divertimento"));
+                lista.addAll((ArrayList<Service>)provider.getServices("Divertimento"));
                 break;
             case R.id.outdoor:
-                lista = (ArrayList<Attraction>) provider.getAttractions("Ar livre");
-                type_poi = 0;
+                lista = new ArrayList<Poi>();
+                lista.addAll((ArrayList<Attraction>)provider.getAttractions("Ar livre"));
+                lista.addAll((ArrayList<Event>)provider.getEvents("Ar livre"));
+                lista.addAll((ArrayList<Service>)provider.getServices("Ar livre"));
                 break;
             case R.id.nightlife:
-                lista = (ArrayList<Attraction>) provider.getAttractions("Nightlife");
-                type_poi = 0;
+                lista = new ArrayList<Poi>();
+                lista.addAll((ArrayList<Attraction>)provider.getAttractions("Nightlife"));
+                lista.addAll((ArrayList<Event>)provider.getEvents("Nightlife"));
+                lista.addAll((ArrayList<Service>)provider.getServices("Nightlife"));
                 break;
             case R.id.hotels:
-                lista = (ArrayList<Attraction>) provider.getAttractions("Hotel");
-                type_poi = 0;
+                lista = new ArrayList<Poi>();
+                lista.addAll((ArrayList<Attraction>)provider.getAttractions("Hotel"));
+                lista.addAll((ArrayList<Event>)provider.getEvents("Hotel"));
+                lista.addAll((ArrayList<Service>)provider.getServices("Hotel"));
                 break;
-            case R.id.transport:
-                lista = (ArrayList<Service>) provider.getServices("Transporte");
-                type_poi = 2;
+            case R.id.transport1:
+                lista = new ArrayList<Poi>();
+                lista.addAll((ArrayList<Attraction>)provider.getAttractions("Transporte"));
+                lista.addAll((ArrayList<Event>)provider.getEvents("Transporte"));
+                lista.addAll((ArrayList<Service>)provider.getServices("Transporte"));
                 break;
             case R.id.afd:
-                lista = (ArrayList<Service>) provider.getServices("Acessibilidade");
-                type_poi = 0;
+                lista = new ArrayList<Poi>();
+                lista.addAll((ArrayList<Attraction>)provider.getAttractions("Acessibilidade"));
+                lista.addAll((ArrayList<Event>)provider.getEvents("Acessibilidade"));
+                lista.addAll((ArrayList<Service>)provider.getServices("Acessibilidade")); 
                 break;
             case R.id.contacts:
-                lista = (ArrayList<Service>) provider.getServices("Contacto Util");
-                type_poi = 1;
+                lista = new ArrayList<Poi>();
+                lista.addAll((ArrayList<Attraction>)provider.getAttractions("Contacto Util"));
+                lista.addAll((ArrayList<Event>)provider.getEvents("Contacto Util"));
+                lista.addAll((ArrayList<Service>)provider.getServices("Contacto Util"));
                 break;
         }
 

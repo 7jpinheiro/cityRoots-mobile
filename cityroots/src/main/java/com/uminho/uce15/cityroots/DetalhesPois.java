@@ -199,17 +199,19 @@ public class DetalhesPois extends ActionBarActivity {
         if( !comment.equals("") ){
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             String userid = prefs.getString("userid", "jprophet");
-            String service = prefs.getString("service", "google");
+            //String service = prefs.getString("service", "google");
+            int rating = Math.round(((RatingBar)findViewById(R.id.comment_ratingBar)).getRating());
 
             //Log.d("Comment", "PoI " + poi_id + " - "+userid + "@"+service+": " + comment);
             DataProvider dp = new DataProvider(getApplicationContext());
             try {
-                dp.sendComment(""+poi_id,userid,comment,5,poi_type);
+                dp.sendComment(""+poi_id,userid,comment,rating,poi_type);
             } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
                // noInternetConnectionError.printStackTrace();
                 dialogAlert(DetalhesPois.this);
             }
             ((TextView) findViewById(R.id.myComment)).setText("");
+            Toast.makeText(getApplicationContext(),"Comment Sent!",Toast.LENGTH_LONG);
         }
     }
 

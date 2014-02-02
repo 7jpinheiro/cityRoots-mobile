@@ -23,6 +23,7 @@ import com.facebook.model.GraphUser;
 import com.google.android.gms.common.*;
 import com.google.android.gms.common.GooglePlayServicesClient.*;
 import com.google.android.gms.plus.PlusClient;
+import com.uminho.uce15.cityroots.data.CityRootsWebInterfaceImpl;
 
 public class Login extends Activity implements View.OnClickListener,
         ConnectionCallbacks, OnConnectionFailedListener {
@@ -36,7 +37,8 @@ public class Login extends Activity implements View.OnClickListener,
     private ConnectionResult mConnectionResult;
 
     private String fbUsername;
-
+    private String fbFirstname;
+    private String fbLastname;
 
     //Facebook
     private UiLifecycleHelper uiHelper;
@@ -53,8 +55,17 @@ public class Login extends Activity implements View.OnClickListener,
             Log.i(TAG, state.toString());
             requestFbUsername(session);
 
+
+            String user_id = "";
+            DataProvider dp = new DataProvider(getApplicationContext());
+            try {
+                user_id=""+dp.signup(fbUsername,"facebook",fbFirstname,fbLastname);
+            } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+                noInternetConnectionError.printStackTrace();
+            }
+
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            prefs.edit().putString("userid",fbUsername).commit();
+            prefs.edit().putString("userid",user_id).commit();
             prefs.edit().putString("service", "facebook").commit();
 
             Intent intent = new Intent(this, Home.class);
@@ -77,6 +88,8 @@ public class Login extends Activity implements View.OnClickListener,
                             if (user != null) {
                                 // Set the Textview's text to the user's name.
                                 fbUsername = user.getUsername();
+                                fbFirstname = user.getFirstName();
+                                fbLastname = user.getLastName();
                                 Log.d(TAG, "Username:" + fbUsername);
                             }
                         }
@@ -129,8 +142,20 @@ public class Login extends Activity implements View.OnClickListener,
         //Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
         Log.d("G+Login", "User logged in:" + mPlusClient.getAccountName());
 
+        String email = mPlusClient.getAccountName();
+        String first_name = mPlusClient.getCurrentPerson().getName().getGivenName();
+        String last_name = mPlusClient.getCurrentPerson().getName().getFamilyName();
+
+        String user_id = "";
+        DataProvider dp = new DataProvider(getApplicationContext());
+        try {
+            user_id=""+dp.signup(email,"google",first_name,last_name);
+        } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+            noInternetConnectionError.printStackTrace();
+        }
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.edit().putString("userid", mPlusClient.getAccountName()).commit();
+        prefs.edit().putString("userid", user_id).commit();
         prefs.edit().putString("service", "google").commit();
 
         Intent intent = new Intent(this, Home.class);
