@@ -199,6 +199,7 @@ public class DetalhesPois extends ActionBarActivity {
         if( !comment.equals("") ){
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             String userid = prefs.getString("userid", "jprophet");
+            Log.d("comentar", "userid:" + userid);
             //String service = prefs.getString("service", "google");
             int rating = Math.round(((RatingBar)findViewById(R.id.comment_ratingBar)).getRating());
 
