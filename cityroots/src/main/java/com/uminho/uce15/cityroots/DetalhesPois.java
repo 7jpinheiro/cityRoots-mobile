@@ -211,7 +211,7 @@ public class DetalhesPois extends ActionBarActivity {
                 dialogAlert(DetalhesPois.this);
             }
             ((TextView) findViewById(R.id.myComment)).setText("");
-            Toast.makeText(getApplicationContext(),"Comment Sent!",Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(),"Comment Sent!",Toast.LENGTH_LONG).show();
         }
     }
 
