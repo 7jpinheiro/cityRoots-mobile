@@ -188,7 +188,8 @@ public class DetalhesPois extends ActionBarActivity {
             ((ScrollView)findViewById(R.id.myScrollView)).setVisibility(View.GONE);
             ((LinearLayout)findViewById(R.id.commentLayout)).setVisibility(View.VISIBLE);
             ((ListView)findViewById(R.id.commentList)).setVisibility(View.VISIBLE);
-            ((RatingBar)findViewById(R.id.comment_ratingBar)).setVisibility(View.VISIBLE);
+            if(poi_type!=1)
+                ((RatingBar)findViewById(R.id.comment_ratingBar)).setVisibility(View.VISIBLE);
         }
 
 
@@ -204,6 +205,7 @@ public class DetalhesPois extends ActionBarActivity {
 
             DataProvider dp = new DataProvider(getApplicationContext());
             try {
+
                 dp.sendComment(""+poi_id,userid,comment,rating,poi_type);
             } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
                // noInternetConnectionError.printStackTrace();

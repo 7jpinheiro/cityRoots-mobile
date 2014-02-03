@@ -55,10 +55,10 @@ public class Login extends Activity implements View.OnClickListener,
             Log.i(TAG, state.toString());
             requestFbUsername(session);
 
-
+            String email = fbUsername+"@facebook.com";
             DataProvider dp = new DataProvider(getApplicationContext());
             try {
-                dp.signup(fbUsername,fbUsername,fbFirstname,fbLastname);
+                dp.signup(email,fbUsername,fbFirstname,fbLastname);
 
             } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
                 noInternetConnectionError.printStackTrace();
@@ -143,10 +143,12 @@ public class Login extends Activity implements View.OnClickListener,
         Log.d("G+Login", "User logged in:" + mPlusClient.getAccountName());
 
         String email = mPlusClient.getAccountName();
+        if(!email.endsWith("@gmail.com"))
+            email = email +"@gmail.com";
         String first_name = mPlusClient.getCurrentPerson().getName().getGivenName();
         String last_name = mPlusClient.getCurrentPerson().getName().getFamilyName();
-
         String user_id = email;
+
         DataProvider dp = new DataProvider(getApplicationContext());
         try {
             dp.signup(email,email,first_name,last_name);
@@ -265,9 +267,9 @@ public class Login extends Activity implements View.OnClickListener,
     }
 
 
-    public void skipLogin(View view){
+ /* public void skipLogin(View view){
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
         finish();
-    }
+    }*/
 }
