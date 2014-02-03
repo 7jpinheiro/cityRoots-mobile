@@ -53,30 +53,14 @@ public class Login extends Activity implements View.OnClickListener,
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         if (state.isOpened()) {
             Log.i(TAG, state.toString());
-            requestFbUsername(session);
+            requestFbUsername(this, session);
 
-            String email = fbUsername+"@facebook.com";
-            DataProvider dp = new DataProvider(getApplicationContext());
-            try {
-                dp.signup(email,fbUsername,fbFirstname,fbLastname);
-
-            } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
-                noInternetConnectionError.printStackTrace();
-            }
-
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            prefs.edit().putString("userid",fbUsername).commit();
-            prefs.edit().putString("service", "facebook").commit();
-
-            Intent intent = new Intent(this, Home.class);
-            startActivity(intent);
-            finish();
         } else if (state.isClosed()) {
             Log.i(TAG, state.toString());
         }
     }
 
-    private void requestFbUsername(final Session session) {
+    private void requestFbUsername(final Activity parent, final Session session) {
         // Make an API call to get user data and define a
         // new callback to handle the response.
         Request request = Request.newMeRequest(session,
@@ -91,6 +75,31 @@ public class Login extends Activity implements View.OnClickListener,
                                 fbFirstname = user.getFirstName();
                                 fbLastname = user.getLastName();
                                 Log.d(TAG, "Username:" + fbUsername);
+
+
+                                String email = fbUsername+"@facebook.com";
+                                DataProvider dp = new DataProvider(getApplicationContext());
+                                try {
+                                    Log.d("SignUp", "email: " + email + "; fbUsername: " + fbUsername +"; "+
+                                            "fbFirstname " + fbFirstname + "; fbLastname " + fbLastname );
+
+                                    if( fbUsername != null && !fbUsername.equals("null") ){
+                                        Log.d("Signup!", email);
+                                        dp.signup(email,fbUsername,fbFirstname,fbLastname);
+                                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(parent);
+                                        prefs.edit().putString("userid",fbUsername).commit();
+                                        prefs.edit().putString("service", "facebook").commit();
+
+
+                                    }
+
+                                } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
+                                    noInternetConnectionError.printStackTrace();
+                                }
+
+                                Intent intent = new Intent(parent, Home.class);
+                                startActivity(intent);
+                                finish();
                             }
                         }
                         if (response.getError() != null) {
@@ -151,19 +160,29 @@ public class Login extends Activity implements View.OnClickListener,
 
         DataProvider dp = new DataProvider(getApplicationContext());
         try {
-            dp.signup(email,email,first_name,last_name);
+            Log.d("SignUp", "email: " + email + "; gmail: " + email +"; "+
+                    "first_name " + first_name + "; last_name " + last_name );
+
+
+            if( first_name != null && !first_name.equals("null") ){
+                Log.d("Signup!", email);
+                dp.signup(email,email,first_name,last_name);
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                prefs.edit().putString("userid",user_id).commit();
+                prefs.edit().putString("service", "google").commit();
+
+
+            }
+
+
         } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
             noInternetConnectionError.printStackTrace();
         }
 
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.edit().putString("userid",user_id).commit();
-        prefs.edit().putString("service", "google").commit();
-
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
         finish();
+
     }
 
 

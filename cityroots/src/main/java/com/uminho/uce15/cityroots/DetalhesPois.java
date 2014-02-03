@@ -205,7 +205,6 @@ public class DetalhesPois extends ActionBarActivity {
 
             DataProvider dp = new DataProvider(getApplicationContext());
             try {
-
                 dp.sendComment(""+poi_id,userid,comment,rating,poi_type);
             } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
                // noInternetConnectionError.printStackTrace();
