@@ -267,10 +267,6 @@ public class Login extends Activity implements View.OnClickListener,
 
     public void skipLogin(View view){
         Intent intent = new Intent(this, Home.class);
-
-        //DataProvider dp = new DataProvider(getApplicationContext());
-        //dp.signup(email,email,first_name,last_name);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         startActivity(intent);
         finish();
     }
