@@ -28,7 +28,7 @@ import com.uminho.uce15.cityroots.data.CityRootsWebInterfaceImpl;
 import java.io.InputStream;
 
 public class RootActivity extends ActionBarActivity {
-
+    LoadData ldata;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,7 @@ public class RootActivity extends ActionBarActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String user = prefs.getString("userid", "");
 
-        LoadData ldata = new LoadData(this,user);
+        ldata = new LoadData(this,user);
         ldata.execute();
 
     }
@@ -110,5 +110,13 @@ public class RootActivity extends ActionBarActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    @Override
+    public void onStop() {
+
+        super.onStop();
+        ldata.cancel(true);
+        finish();
     }
 }

@@ -56,17 +56,16 @@ public class Login extends Activity implements View.OnClickListener,
             requestFbUsername(session);
 
 
-            String user_id = "";
             DataProvider dp = new DataProvider(getApplicationContext());
             try {
                 dp.signup(fbUsername,fbUsername,fbFirstname,fbLastname);
-                user_id = fbUsername;
+
             } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
                 noInternetConnectionError.printStackTrace();
             }
 
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            prefs.edit().putString("userid",user_id).commit();
+            prefs.edit().putString("userid",fbUsername).commit();
             prefs.edit().putString("service", "facebook").commit();
 
             Intent intent = new Intent(this, Home.class);
@@ -147,18 +146,17 @@ public class Login extends Activity implements View.OnClickListener,
         String first_name = mPlusClient.getCurrentPerson().getName().getGivenName();
         String last_name = mPlusClient.getCurrentPerson().getName().getFamilyName();
 
-        String user_id = "";
+        String user_id = email;
         DataProvider dp = new DataProvider(getApplicationContext());
         try {
             dp.signup(email,email,first_name,last_name);
-            user_id = email;
         } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
             noInternetConnectionError.printStackTrace();
         }
 
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.edit().putString("userid", user_id).commit();
+        prefs.edit().putString("userid",user_id).commit();
         prefs.edit().putString("service", "google").commit();
 
         Intent intent = new Intent(this, Home.class);
@@ -269,6 +267,10 @@ public class Login extends Activity implements View.OnClickListener,
 
     public void skipLogin(View view){
         Intent intent = new Intent(this, Home.class);
+
+        //DataProvider dp = new DataProvider(getApplicationContext());
+        //dp.signup(email,email,first_name,last_name);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         startActivity(intent);
         finish();
     }
