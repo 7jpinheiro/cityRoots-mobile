@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.uminho.uce15.cityroots"
-    android:versionCode="101"
-    android:versionName="1.0.1">
+    package="com.uminho.uce15.cityroots">
 
     <application
         android:allowBackup="true"
@@ -15,19 +13,20 @@
             android:value="@integer/google_play_services_version" />
 
         <!-- chave marco -->
-        <!--<meta-data
+        <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyA1zGN0pbdggubT0-S1oKtkkz8u8_KnqLY" />
-        -->
+
         <!-- chave fabio
            <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDooBm6zcQfeIC1X7dgphhfc0kw5YqlAiE" />
         -->
-        <!-- chave lucas-->
+        <!-- chave lucas
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDooBm6zcQfeIC1X7dgphhfc0kw5YqlAiE" />
+            -->
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
