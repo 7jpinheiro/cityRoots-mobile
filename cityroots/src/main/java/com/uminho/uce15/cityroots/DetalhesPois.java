@@ -202,6 +202,8 @@ public class DetalhesPois extends ActionBarActivity {
             String userid = prefs.getString("userid", "jprophet");
 
             int rating = Math.round(((RatingBar)findViewById(R.id.comment_ratingBar)).getRating());
+            if( rating < 1 || rating > 5 )
+                rating = 1;
 
             DataProvider dp = new DataProvider(getApplicationContext());
             try {
