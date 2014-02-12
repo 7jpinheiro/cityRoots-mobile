@@ -26,7 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
-import com.google.android.gms.maps.model.Marker;
+
 import com.uminho.uce15.cityroots.data.Attraction;
 import com.uminho.uce15.cityroots.data.Event;
 import com.uminho.uce15.cityroots.data.Poi;
@@ -35,6 +35,8 @@ import com.uminho.uce15.cityroots.data.Service;
 
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.BoundingBoxE6;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
@@ -79,8 +81,7 @@ public class ListarPoi extends ActionBarActivity{
     boolean mUpdatesRequested = true;
 
 
-    private Marker userMarker;
-    private Marker[] placeMarkers;
+
     private final int MAX_PLACES = 20;
 
 
@@ -210,11 +211,21 @@ public class ListarPoi extends ActionBarActivity{
             myOpenMapView = (MapView)findViewById(R.id.openmapview);
             myOpenMapView.setBuiltInZoomControls(false);
             myOpenMapView.setMultiTouchControls(true);
+
+            double north = 41.5742;
+            double east  = -8.3769;
+            double south = 41.5178;
+            double west  =  -8.4484;
+            BoundingBoxE6 bBox = new BoundingBoxE6(north, east, south, west);
+
+            myOpenMapView.setScrollableAreaLimit(bBox);
+
             myMapController = (MapController) myOpenMapView.getController();
             myMapController.setZoom(15);
 
             myMapController.setCenter(geo);
-
+            myOpenMapView.setMaxZoomLevel(17);
+            myOpenMapView.setMinZoomLevel(14);
             //Add MyLocationOverlay
             myLocationOverlay = new MyLocationOverlay(this, myOpenMapView);
             myOpenMapView.getOverlays().add(myLocationOverlay);
