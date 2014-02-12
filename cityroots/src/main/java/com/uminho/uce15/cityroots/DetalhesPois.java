@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -157,16 +158,16 @@ public class DetalhesPois extends ActionBarActivity {
         ListView list = (ListView) findViewById(R.id.commentList);
         list.setAdapter(ca);
 
-        ImageView imageView = (ImageView)findViewById(R.id.listelem_img);
-        ProgressBar loadBar = (ProgressBar)findViewById(R.id.loadingImg);
+        LinearLayout myGallery = (LinearLayout)findViewById(R.id.mygallery);
 
-        try{
-            String photo_path = poi.getPhotos().get(0);
-            new DownloadImageTask(imageView, loadBar).execute(photo_path);
+
+        for(String path:poi.getPhotos()){
+
+            myGallery.addView(insertPhoto(path));
+
         }
-        catch(Exception e){
-            imageView.setImageResource(R.drawable.abc_ab_bottom_solid_dark_holo);
-        }
+
+
     }
 
     public void toggleComments(View view){
@@ -276,6 +277,29 @@ public class DetalhesPois extends ActionBarActivity {
 
             return rowView;
         }
+    }
+
+    View insertPhoto(String path){
+
+        LinearLayout layout = new LinearLayout(getApplicationContext());
+        layout.setLayoutParams(new ViewGroup.LayoutParams(250, 250));
+        layout.setGravity(Gravity.CENTER);
+
+        ImageView imageView = new ImageView(getApplicationContext());
+        imageView.setLayoutParams(new ViewGroup.LayoutParams(220, 220));
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        ProgressBar loadBar = (ProgressBar)findViewById(R.id.loadingImg);
+
+        try{
+            new DownloadImageTask(imageView, loadBar).execute(path);
+        }
+        catch(Exception e){
+            imageView.setImageResource(R.drawable.abc_ab_bottom_solid_dark_holo);
+        }
+
+        layout.addView(imageView);
+
+        return layout;
     }
 }
 

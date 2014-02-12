@@ -23,21 +23,28 @@
 
 
             <RelativeLayout
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 style="@style/GenericProgressBackground"
                 android:id="@+id/loadingPanel"
                 >
-                <ImageView
-                    android:id="@+id/listelem_img"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    />
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+                    <LinearLayout
+                        android:id="@+id/mygallery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        />
+                </HorizontalScrollView>
                 <ProgressBar
                     style="@style/GenericProgressIndicator"
                     android:id="@+id/loadingImg"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"/>
             </RelativeLayout>
             <!--LinearLayout
                 android:layout_width="fill_parent"
