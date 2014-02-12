@@ -21,7 +21,7 @@ public class CityRootsWebInterfaceImpl {
 
     public CityRootsWebInterfaceImpl(Context context) {
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setServer("http://193.136.19.202:8080")
+                .setServer("http://www.cityrootsapp.com:80")
                 .build();
 
         this.context = context;
