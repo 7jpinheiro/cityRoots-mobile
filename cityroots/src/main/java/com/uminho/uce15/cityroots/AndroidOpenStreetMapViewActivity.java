@@ -8,6 +8,7 @@ package com.uminho.uce15.cityroots;
 import java.util.ArrayList;
 
 import org.osmdroid.ResourceProxy;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 
 import org.osmdroid.views.MapController;
@@ -44,8 +45,11 @@ public class AndroidOpenStreetMapViewActivity extends Activity{
 
 
         myOpenMapView = (MapView)findViewById(R.id.openmapview);
+      //  myOpenMapView.setTileSource(TileSourceFactory.MAPQUESTOSM);
+        myOpenMapView.setUseDataConnection(false);
         myOpenMapView.setBuiltInZoomControls(true);
         myOpenMapView.setMultiTouchControls(true);
+
         myMapController = (MapController) myOpenMapView.getController();
         myMapController.setZoom(15);
 
