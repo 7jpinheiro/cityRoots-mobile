@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -18,6 +19,7 @@ public class CityRootsWebInterfaceImpl {
 
     private CityRootsWebService service;
     private Context context;
+    private String lang;
 
     public CityRootsWebInterfaceImpl(Context context) {
         RestAdapter restAdapter = new RestAdapter.Builder()
@@ -25,6 +27,11 @@ public class CityRootsWebInterfaceImpl {
                 .build();
 
         this.context = context;
+        lang = Locale.getDefault().getDisplayLanguage();
+
+
+        if(lang.equals("português")) lang = "PT";
+        else lang = "EN";
 
         this.service = restAdapter.create(CityRootsWebService.class);
     }
@@ -109,7 +116,7 @@ public class CityRootsWebInterfaceImpl {
         }
         else {
             try {
-                List<Attraction> attractions = service.getAttractions("PT");
+                List<Attraction> attractions = service.getAttractions(lang);
                 cache("attractions",attractions);
                 return attractions;
             } catch(RetrofitError e){
@@ -156,7 +163,7 @@ public class CityRootsWebInterfaceImpl {
         }
         else {
             try {
-                List<Service> services = service.getServices("PT");
+                List<Service> services = service.getServices(lang);
                 cache("services", services);
                 return services;
             } catch(RetrofitError e){
@@ -204,7 +211,7 @@ public class CityRootsWebInterfaceImpl {
         }
         else {
             try {
-                List<Event> events = service.getEvents("PT");
+                List<Event> events = service.getEvents(lang);
                 cache("events", events);
                 return events;
             } catch(RetrofitError e){
@@ -265,7 +272,7 @@ public class CityRootsWebInterfaceImpl {
             return (List<Event>)getCache("ads");
         }
         try {
-            List<Event> events = service.getAds("PT");
+            List<Event> events = service.getAds(lang);
             cache("ads", events);
             return events;
         } catch(RetrofitError e){
