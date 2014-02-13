@@ -7,11 +7,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -280,13 +282,16 @@ public class DetalhesPois extends ActionBarActivity {
     }
 
     View insertPhoto(String path){
+        Display display = getWindowManager().getDefaultDisplay();
+        int width = display.getWidth();  // deprecated
+        int height = display.getHeight();  // deprecated
 
         LinearLayout layout = new LinearLayout(getApplicationContext());
-        layout.setLayoutParams(new ViewGroup.LayoutParams(250, 250));
+        layout.setLayoutParams(new ViewGroup.LayoutParams(width/3, height/3));
         layout.setGravity(Gravity.CENTER);
 
         ImageView imageView = new ImageView(getApplicationContext());
-        imageView.setLayoutParams(new ViewGroup.LayoutParams(220, 220));
+        imageView.setLayoutParams(new ViewGroup.LayoutParams(width/3, (height/3)-30));
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         ProgressBar loadBar = (ProgressBar)findViewById(R.id.loadingImg);
 
