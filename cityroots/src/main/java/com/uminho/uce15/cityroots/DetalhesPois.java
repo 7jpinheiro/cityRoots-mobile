@@ -287,11 +287,11 @@ public class DetalhesPois extends ActionBarActivity {
         int height = display.getHeight();  // deprecated
 
         LinearLayout layout = new LinearLayout(getApplicationContext());
-        layout.setLayoutParams(new ViewGroup.LayoutParams(width/3, height/3));
+        layout.setLayoutParams(new ViewGroup.LayoutParams(height/3, height/3));
         layout.setGravity(Gravity.CENTER);
 
         ImageView imageView = new ImageView(getApplicationContext());
-        imageView.setLayoutParams(new ViewGroup.LayoutParams(width/3, (height/3)-30));
+        imageView.setLayoutParams(new ViewGroup.LayoutParams(height/3, (height/3)-30));
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         ProgressBar loadBar = (ProgressBar)findViewById(R.id.loadingImg);
 
