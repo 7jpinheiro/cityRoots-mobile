@@ -4,10 +4,12 @@ package com.uminho.uce15.cityroots;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
@@ -18,6 +20,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -165,7 +168,7 @@ public class DetalhesPois extends ActionBarActivity {
 
         for(String path:poi.getPhotos()){
 
-            myGallery.addView(insertPhoto(path));
+            myGallery.addView(insertPhoto(path,this));
 
         }
 
@@ -281,19 +284,42 @@ public class DetalhesPois extends ActionBarActivity {
         }
     }
 
-    View insertPhoto(String path){
+    View insertPhoto(final String path, final Context context){
         Display display = getWindowManager().getDefaultDisplay();
-        int width = display.getWidth();  // deprecated
-        int height = display.getHeight();  // deprecated
-
+        final int width = display.getWidth();  // deprecated
+        final int height = display.getHeight();  // deprecated
+        final ProgressBar loadBar = (ProgressBar)findViewById(R.id.loadingImg);
         LinearLayout layout = new LinearLayout(getApplicationContext());
         layout.setLayoutParams(new ViewGroup.LayoutParams(height/3, height/3));
         layout.setGravity(Gravity.CENTER);
 
-        ImageView imageView = new ImageView(getApplicationContext());
+        final ImageView imageView = new ImageView(getApplicationContext());
         imageView.setLayoutParams(new ViewGroup.LayoutParams(height/3, (height/3)-30));
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        ProgressBar loadBar = (ProgressBar)findViewById(R.id.loadingImg);
+        imageView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+               // Toast.makeText(getApplicationContext(),path,Toast.LENGTH_LONG).show();
+
+                LinearLayout layout = new LinearLayout(context);
+                layout.setLayoutParams(new ViewGroup.LayoutParams(width, height/2));
+
+                ImageView img = new ImageView(context);
+                img.setLayoutParams(new ViewGroup.LayoutParams(width, height/2));
+                new DownloadImageTask(img, loadBar).execute(path);
+
+                layout.addView(img);
+
+                Dialog dialog = new Dialog(context);
+                dialog.setContentView(layout);
+                dialog.getWindow().getAttributes().width = ViewGroup.LayoutParams.FILL_PARENT;
+                dialog.getWindow().getAttributes().width = ViewGroup.LayoutParams.FILL_PARENT;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog.setCanceledOnTouchOutside(true);
+
+                dialog.show();
+            }});
+
 
         try{
             new DownloadImageTask(imageView, loadBar).execute(path);
