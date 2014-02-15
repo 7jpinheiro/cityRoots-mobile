@@ -48,7 +48,7 @@
 
     <string name="name">Nome:</string>
     <string name="description">Description:</string>
-    <string name="adress">Adress:</string>
+    <string name="adress">Address:</string>
     <string name="scheudle">Schedule:</string>
     <string name="price">Price:</string>
     <string name="site">Site:</string>
