@@ -41,14 +41,15 @@
             class="com.google.android.gms.maps.SupportMapFragment"
             />
         <ImageView
-            android:id="@android:id/empty"
+            android:id="@+id/arrow"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/arrow"
             android:onClick="goToList"
             android:layout_centerVertical="true"
             android:background="#33FFFFFF"
-           />
+            android:visibility="gone"
+            />
 
     </RelativeLayout>
 </com.uminho.uce15.cityroots.MySlidingPaneLayout>
