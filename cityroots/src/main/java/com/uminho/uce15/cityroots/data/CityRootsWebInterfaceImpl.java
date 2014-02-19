@@ -1,6 +1,7 @@
 package com.uminho.uce15.cityroots.data;
 
 import android.content.Context;
+import android.os.Environment;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,7 +9,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.util.List;
+import org.apache.commons.io.FileUtils;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -16,12 +22,15 @@ import retrofit.RetrofitError;
 
 public class CityRootsWebInterfaceImpl {
 
+    private static final String MAP_NAME = "Mapnikpeq.zip";
+    private static final String SERVER_NAME = "http://www.cityrootsapp.com:80";
+
     private CityRootsWebService service;
     private Context context;
 
     public CityRootsWebInterfaceImpl(Context context) {
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setServer("http://www.cityrootsapp.com:80")
+                .setServer(SERVER_NAME)
                 .build();
 
         this.context = context;
@@ -317,6 +326,21 @@ public class CityRootsWebInterfaceImpl {
                 throw new NoInternetConnectionError();
             else
                 throw e;
+        }
+    }
+
+    public void getOfflineMap() {
+        try {
+            String path = Environment.getExternalStorageDirectory() + File.separator + "OSMDroid";
+            File dir = new File(path);
+            if (!dir.exists())
+                dir.mkdir();
+            File file = new File(path, "maps.zip");
+            FileUtils.copyURLToFile(new URL(CityRootsWebInterfaceImpl.SERVER_NAME + "/uploads/" + MAP_NAME), file);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

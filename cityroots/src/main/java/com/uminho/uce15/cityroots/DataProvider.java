@@ -266,4 +266,8 @@ public class DataProvider {
 
     }
 
+    public void getOfflineMap() {
+        cityRootsWebInterface.getOfflineMap();
+    }
+
 }

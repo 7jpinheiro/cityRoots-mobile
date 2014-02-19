@@ -86,6 +86,7 @@ public class RootActivity extends ActionBarActivity {
                 dp.getEvents();
                 dp.getRoutes();
                 dp.getAds();
+                dp.getOfflineMap();
             }
 
             return null;

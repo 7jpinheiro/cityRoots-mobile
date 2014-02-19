@@ -77,5 +77,4 @@ public interface CityRootsWebService {
                                  @Query("id") String id,
                                  @Query("comentario") String comment,
                                  @Query("rating") int rating);
-
 }
