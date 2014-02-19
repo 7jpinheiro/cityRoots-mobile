@@ -60,7 +60,8 @@
         </activity>
         <activity
             android:name="com.uminho.uce15.cityroots.ListarPoi"
-            android:label="@string/title_activity_listar_eventos" >
+            android:label="@string/title_activity_listar_eventos"
+            android:hardwareAccelerated="false">
         </activity>
         <activity
             android:name="com.uminho.uce15.cityroots.DrawRoute"

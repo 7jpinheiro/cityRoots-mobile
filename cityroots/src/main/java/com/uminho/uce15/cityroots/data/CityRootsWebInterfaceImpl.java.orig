@@ -14,8 +14,11 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.List;
-import java.util.Locale;
+<<<<<<< HEAD
 import org.apache.commons.io.FileUtils;
+=======
+import java.util.Locale;
+>>>>>>> a5332f5c164e55712515e4b8018e9b9167619f2a
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;

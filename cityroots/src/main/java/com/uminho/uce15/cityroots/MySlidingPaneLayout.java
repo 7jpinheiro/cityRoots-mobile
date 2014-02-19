@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 
 /**
  * Created by lgomes on 17-01-2014.
@@ -16,6 +17,22 @@ public class MySlidingPaneLayout  extends SlidingPaneLayout {
         isSlideable=true;
         this.openPane();
 
+
+        this.setPanelSlideListener(new PanelSlideListener() {
+            @Override
+            public void onPanelSlide(View view, float v) {
+            }
+
+            @Override
+            public void onPanelOpened(View view) {
+                findViewById(R.id.arrow).setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onPanelClosed(View view) {
+                findViewById(R.id.arrow).setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
