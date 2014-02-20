@@ -39,9 +39,9 @@ public class CityRootsWebInterfaceImpl {
         lang = Locale.getDefault().getDisplayLanguage();
 
 
-        if(lang.equals("português")) lang = "PT";
-        else lang = "EN";
-
+        //if(lang.equals("português")) lang = "PT";
+        //else lang = "EN";
+        lang = "PT";
         this.service = restAdapter.create(CityRootsWebService.class);
     }
 
