@@ -88,6 +88,7 @@ public class Login extends Activity implements View.OnClickListener,
                                         dp.signup(email,fbUsername,fbFirstname,fbLastname);
                                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(parent);
                                         prefs.edit().putString("userid",fbUsername).commit();
+                                        prefs.edit().putString("userName",fbFirstname+" "+fbLastname).commit();
                                         prefs.edit().putString("service", "facebook").commit();
 
 
@@ -169,9 +170,8 @@ public class Login extends Activity implements View.OnClickListener,
                 dp.signup(email,email,first_name,last_name);
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 prefs.edit().putString("userid",user_id).commit();
+                prefs.edit().putString("userName",first_name+" "+last_name).commit();
                 prefs.edit().putString("service", "google").commit();
-
-
             }
 
 

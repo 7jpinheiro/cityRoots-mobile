@@ -18,13 +18,13 @@
     <string name="routes">Roteiros</string>
     <string name="events">Eventos</string>
     <string name="TPA">Produtos Tradicionais e Arte</string>
-    <string name="gastronomy">Comida</string>
-    <string name="activities">Actividades e Devertimento</string>
+    <string name="gastronomy">Gastronomia</string>
+    <string name="activities">Actividades e Divertimento</string>
     <string name="outdoor">Actividades ao ar livre</string>
     <string name="nightlife">Vida Nocturna</string>
     <string name="hotels">Hoteis</string>
     <string name="transport">Transportes</string>
-    <string name="afd">Acesso a incapacitados</string>
+    <string name="afd">Mobilidade e Acessibilidade</string>
     <string name="contacts">Contactos Úteis</string>
 
     <!-- ********************** -->
@@ -36,7 +36,7 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_simple_map">Simple map</string>
     <string name="loadinglist">Loading list</string>
-    <string name="title_activity_nearby_places">NearbyPlaces</string>
+    <string name="title_activity_nearby_places">Locais Próximos</string>
     <string name="title_activity_category">Category</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_listar_eventos">Eventos</string>
@@ -58,6 +58,6 @@
     <string name="search_label">Search</string>
     <string name="title_activity_search">Search</string>
     <string name="deals">Anúncios</string>
-    <string name="title_activity_list_roteiros">ListRoteiros</string>
-
+    <string name="title_activity_list_roteiros">Roteiros</string>
+    <string name="nearby">Locais Próximos</string>
 </resources>

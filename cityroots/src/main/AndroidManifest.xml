@@ -3,6 +3,7 @@
     package="com.uminho.uce15.cityroots">
 
     <application
+        android:debuggable="false"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -35,7 +36,8 @@
         </activity>
         <activity
             android:name="com.uminho.uce15.cityroots.RootActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

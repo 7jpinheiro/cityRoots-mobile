@@ -292,9 +292,17 @@ public class CityRootsWebInterfaceImpl {
         }
     }
 
-    public void commentAttraction(String attraction_id, String user_id, String comment, int rating) throws NoInternetConnectionError {
+    public void commentAttraction(String attraction_id, String user_id,String userName, String comment, int rating) throws NoInternetConnectionError, IOException, ClassNotFoundException {
         try {
             service.commentAttraction(user_id, attraction_id, comment, rating);
+            if(isCached("attractions")){
+                List<Attraction> attractions = (List<Attraction>)getCache("attractions");
+                for (Attraction attraction : attractions) {
+                    if(attraction.getId() == Integer.parseInt(attraction_id))
+                        attraction.addComment(new Comment(comment,userName,"-"));
+                }
+                cache("attractions",attractions);
+            }
         } catch(RetrofitError e){
             if (e.isNetworkError())
                 throw new NoInternetConnectionError();
@@ -303,9 +311,17 @@ public class CityRootsWebInterfaceImpl {
         }
     }
 
-    public void commentEvent(String event_id, String user_id, String comment, int rating) throws NoInternetConnectionError {
+    public void commentEvent(String event_id, String user_id,String userName, String comment, int rating) throws NoInternetConnectionError, IOException, ClassNotFoundException {
         try {
             service.commentEvent(user_id, event_id, comment, rating);
+            if(isCached("events")){
+                List<Event> events = (List<Event>)getCache("events");
+                for (Event event : events) {
+                    if(event.getId() == Integer.parseInt(event_id))
+                        event.addComment(new Comment(comment,userName,"-"));
+                }
+                cache("events",events);
+            }
         } catch(RetrofitError e){
             if (e.isNetworkError())
                 throw new NoInternetConnectionError();
@@ -314,9 +330,17 @@ public class CityRootsWebInterfaceImpl {
         }
     }
 
-    public void commentService(String service_id, String user_id, String comment, int rating) throws NoInternetConnectionError {
+    public void commentService(String service_id, String user_id,String userName, String comment, int rating) throws NoInternetConnectionError, IOException, ClassNotFoundException {
         try {
             service.commentService(user_id, service_id, comment, rating);
+            if(isCached("services")){
+                List<Service> services = (List<Service>)getCache("services");
+                for (Service service : services) {
+                    if(service.getId() == Integer.parseInt(service_id))
+                        service.addComment(new Comment(comment,userName,"-"));
+                }
+                cache("services",services);
+            }
         } catch(RetrofitError e){
             if (e.isNetworkError())
                 throw new NoInternetConnectionError();

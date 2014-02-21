@@ -20,7 +20,7 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:text="Find nearby locations"
+                android:text="@string/nearby"
                 android:onClick="clickNearbyLocations"/>
 
             <LinearLayout

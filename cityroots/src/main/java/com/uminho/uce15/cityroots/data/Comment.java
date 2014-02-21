@@ -8,9 +8,10 @@ public class Comment implements Serializable {
     private String date;
     private String username;
 
-    public Comment(String comment, String username) {
+    public Comment(String comment, String username,String date) {
         this.comment = comment;
         this.username = username;
+        this.date = date;
     }
 
     public String getComment() {

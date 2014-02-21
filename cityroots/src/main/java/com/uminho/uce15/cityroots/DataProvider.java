@@ -246,17 +246,35 @@ public class DataProvider {
         return res;
     }
 
-    public void sendComment(String poi_id, String user_id, String comment, int rating,int poi_type) throws CityRootsWebInterfaceImpl.NoInternetConnectionError {
+    public void sendComment(String poi_id, String user_id,String userName, String comment, int rating,int poi_type) throws CityRootsWebInterfaceImpl.NoInternetConnectionError {
         switch (poi_type){
             case 0:
-                cityRootsWebInterface.commentAttraction(poi_id,user_id,comment,rating);
-            break;
+                try {
+                    cityRootsWebInterface.commentAttraction(poi_id,user_id,userName,comment,rating);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
             case 1:
-                cityRootsWebInterface.commentEvent(poi_id,user_id,comment,rating);
-            break;
+                try {
+                    cityRootsWebInterface.commentEvent(poi_id,user_id,userName,comment,rating);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
             case 2:
-                cityRootsWebInterface.commentService(poi_id, user_id, comment, rating);
-            break;
+                try {
+                    cityRootsWebInterface.commentService(poi_id, user_id,userName, comment, rating);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
     }
 

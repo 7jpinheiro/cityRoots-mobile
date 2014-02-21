@@ -86,7 +86,14 @@ public class RootActivity extends ActionBarActivity {
                 dp.getEvents();
                 dp.getRoutes();
                 dp.getAds();
-                dp.getOfflineMap();
+                if( user.equals("") ){
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            ((TextView)findViewById(R.id.textView2)).setText("Downloading Map...");
+                        }
+                    });
+                    dp.getOfflineMap();
+                }
             }
 
             return null;

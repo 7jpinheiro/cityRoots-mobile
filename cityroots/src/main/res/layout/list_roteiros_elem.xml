@@ -14,5 +14,8 @@
         android:layout_height="100dp"
         android:gravity="center"
     />
+    <View
+        style="@style/MenuLine"
+        />
 
 </TableLayout>

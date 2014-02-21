@@ -29,7 +29,15 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:gravity="bottom"
+                    android:gravity="left"
+                    />
+                <TextView
+                    android:id="@+id/date"
+                    android:textColor="@android:color/primary_text_dark"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
                     />
             </TableRow>
             <TableRow>

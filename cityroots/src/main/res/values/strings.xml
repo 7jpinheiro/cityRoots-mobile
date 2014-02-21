@@ -36,13 +36,13 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_simple_map">Simple map</string>
     <string name="loadinglist">Loading list</string>
-    <string name="title_activity_nearby_places">NearbyPlaces</string>
+    <string name="title_activity_nearby_places">Nearby Places</string>
     <string name="title_activity_category">Category</string>
     <string name="title_activity_login">Login</string>
-    <string name="title_activity_listar_eventos">Eventos</string>
+    <string name="title_activity_listar_eventos">Events</string>
     <string name="title_activity_detalhes_eventos">Detalhes</string>
     <string name="title_activity_detalhes_roteiros">DetalhesRoteiros</string>
-    <string name="title_activity_desenho_roteiro">Roteiro</string>
+    <string name="title_activity_desenho_roteiro">Route</string>
 
     <!-- POI Description -->
 
@@ -58,6 +58,7 @@
     <string name="search_label">Search</string>
     <string name="title_activity_search">Search</string>
     <string name="deals">Deals</string>
-    <string name="title_activity_list_roteiros">ListRoteiros</string>
+    <string name="title_activity_list_roteiros">Routes</string>
+    <string name="nearby">Find Nearby Places</string>
 
 </resources>

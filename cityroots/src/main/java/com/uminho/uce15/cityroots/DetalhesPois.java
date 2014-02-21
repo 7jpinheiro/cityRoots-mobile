@@ -57,7 +57,7 @@ public class DetalhesPois extends ActionBarActivity {
     private boolean commentsVisible;
     int poi_id = -1;
     int poi_type =-1;
-
+    CommentAdapter ca;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_poi);
@@ -159,7 +159,7 @@ public class DetalhesPois extends ActionBarActivity {
         ratBar.setRating((float)poi.getRating());
 
 
-        CommentAdapter ca = new CommentAdapter(DetalhesPois.this,poi.getComments());
+        ca = new CommentAdapter(DetalhesPois.this,poi.getComments());
         ListView list = (ListView) findViewById(R.id.commentList);
         list.setAdapter(ca);
 
@@ -206,14 +206,18 @@ public class DetalhesPois extends ActionBarActivity {
         if( !comment.equals("") ){
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             String userid = prefs.getString("userid", "jprophet");
-
+            String userName = prefs.getString("userName", "jprophet");
             int rating = Math.round(((RatingBar)findViewById(R.id.comment_ratingBar)).getRating());
             if( rating < 1 || rating > 5 )
                 rating = 1;
 
             DataProvider dp = new DataProvider(getApplicationContext());
             try {
-                dp.sendComment(""+poi_id,userid,comment,rating,poi_type);
+                dp.sendComment(""+poi_id,userid,userName,comment,rating,poi_type);
+                Comment aux= new Comment(comment,userName,"Agora");
+                ca.addComment(aux);
+                ca.notifyDataSetChanged();
+
             } catch (CityRootsWebInterfaceImpl.NoInternetConnectionError noInternetConnectionError) {
                // noInternetConnectionError.printStackTrace();
                 dialogAlert(DetalhesPois.this);
@@ -265,19 +269,24 @@ public class DetalhesPois extends ActionBarActivity {
             this.lista = lista;
         }
 
+        public void addComment(Comment comment){
+            this.lista.add(comment);
+        }
+
         @Override
         public View getView(int position, View view, ViewGroup parent) {
-
+            int pos = super.getCount() -position-1;
             LayoutInflater inflater = context.getLayoutInflater();
             View rowView= inflater.inflate(R.layout.list_comment, null, true);
 
             ImageView avatar = (ImageView) rowView.findViewById(R.id.avatar);
             TextView user_name = (TextView) rowView.findViewById(R.id.user_name);
+            TextView date = (TextView) rowView.findViewById(R.id.date);
             TextView comment = (TextView) rowView.findViewById(R.id.comment);
 
-
-            user_name.setText(((Comment) lista.get(position)).getUsername());
-            comment.setText(((Comment)lista.get(position)).getComment());
+            date.setText(((Comment) lista.get(pos)).getDate());;
+            user_name.setText(((Comment) lista.get(pos)).getUsername());
+            comment.setText(((Comment)lista.get(pos)).getComment());
             avatar.setImageResource(R.drawable.avatar);
 
             return rowView;
